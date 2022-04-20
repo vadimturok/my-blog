@@ -1,0 +1,16 @@
+.postList{
+  flex-basis: 55%;
+  margin-top: 20px;
+  margin-right: 20px;
+
+  .noPosts{
+    font-size: 25px;
+    color: gray;
+    text-align: center;
+  }
+}
+
+.listLoader{
+  position: absolute;
+  top: 50%;
+}

@@ -1,0 +1,139 @@
+.postWrapper{
+  display: flex;
+
+  .postInner{
+    flex-basis: 75%;
+    margin: 20px 20px 20px 0;
+
+
+    .postDescription{
+      background-color: white;
+      border: 1px solid lightgray;
+      border-radius: 5px;
+      width: 100%;
+
+      .back{
+        margin: 20px 0 20px 50px;
+        background: none;
+        border: 1px solid #7451f8;
+        padding: 0 10px 0 10px;
+        border-radius: 5px;
+        cursor: pointer;
+        display: flex;
+        align-items: center;
+        gap: 6px;
+        font-size: 18px;
+        transition: 0.2s;
+        color: #7451f8;
+
+        &:hover{
+          background-color: rgba(236, 232, 255, 0.63);
+        }
+
+        .backIcon{
+          font-size: 30px;
+        }
+      }
+
+      img{
+        width: inherit;
+        border-top-right-radius: 5px;
+        border-top-left-radius: 5px;
+        height: 300px;
+        object-fit: cover;
+      }
+
+      .postInfo{
+        padding: 0 50px 20px 50px;
+
+
+        .author{
+          display: flex;
+          gap: 10px;
+          margin-bottom: 10px;
+
+          img{
+            width: 50px;
+            height: 50px;
+            border-radius: 50%;
+          }
+
+          .authorDetails{
+            display: flex;
+            flex-direction: column;
+
+            .name{
+              font-size: 14px;
+              font-weight: 600;
+            }
+
+            .date{
+              font-size: 13px;
+              color: #7c7b7b;
+            }
+          }
+        }
+
+        h1{
+          word-break: break-word;
+          font-size: 40px;
+          font-weight: 800;
+        }
+      }
+
+      .postText{
+        padding: 0 50px 20px 50px;
+      }
+
+      .postLike{
+        padding: 0 50px 50px 50px;
+        display: flex;
+        align-items: center;
+        gap: 10px;
+
+        .likeIcon{
+          cursor: pointer;
+          padding: 5px;
+          border-radius: 50%;
+          transition: 0.1s;
+
+          &.liked{
+            background-color: rgba(255, 0, 0, 0.18);
+            color: red;
+          }
+
+          &:hover{
+            background-color: rgba(255, 0, 0, 0.18);
+            color: red;
+          }
+        }
+      }
+    }
+
+    .postComments{
+      margin: 20px 0 0 0;
+      background-color: white;
+      border-radius: 5px;
+      border: 1px solid lightgray;
+      padding: 20px 50px 50px 50px;
+
+      h2{
+        margin-bottom: 20px;
+      }
+
+      .commentsList{
+        margin-top: 30px;
+        display: flex;
+        flex-direction: column;
+        gap: 30px;
+
+        .noComments{
+          font-size: 20px;
+          color: lightgray;
+          text-align: center;
+        }
+      }
+    }
+  }
+
+}

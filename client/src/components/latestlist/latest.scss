@@ -1,0 +1,45 @@
+.latestList{
+  flex-basis: 25%;
+  height: fit-content;
+  margin-top: 20px;
+  background-color: #fdfdfd;
+  border-radius: 5px;
+  border: 1px solid rgba(211, 211, 211, 0.51);
+
+  .latestTitle{
+    padding: 10px;
+    border-bottom: 1px solid lightgray;
+    color: gray;
+  }
+
+  .latestItems{
+
+    ul{
+      list-style: none;
+
+      li{
+        border-bottom: 1px solid lightgray;
+        padding: 10px;
+
+        &:last-child{
+          border-bottom: none;
+        }
+
+        h5{
+          cursor: pointer;
+          font-size: 15px;
+          transition: 0.2s;
+
+          &:hover{
+            color: #7451f8;
+          }
+
+          span{
+            font-size: 13px;
+            color: gray;
+          }
+        }
+      }
+    }
+  }
+}

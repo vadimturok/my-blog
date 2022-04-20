@@ -1,0 +1,79 @@
+.postItem{
+  width: 100%;
+  background-color: white;
+  border: 1px solid lightgray;
+  border-radius: 5px;
+  margin-bottom: 20px;
+
+  img{
+    width: inherit;
+    border-top-right-radius: 5px;
+    border-top-left-radius: 5px;
+    height: 200px;
+    object-fit: cover;
+  }
+
+  .previewInfo{
+    display: flex;
+    flex-direction: column;
+    gap: 7px;
+    padding: 20px 20px 0 20px;
+
+    .authorInfo{
+      display: flex;
+      gap: 10px;
+      img{
+        width: 50px;
+        height: 50px;
+        border-radius: 50%;
+      }
+
+      .authorDescription{
+        display: flex;
+        flex-direction: column;
+
+        .authorName{
+          font-size: 14px;
+          font-weight: 600;
+        }
+
+        .postDate{
+          font-size: 13px;
+          color: #7c7b7b;
+        }
+      }
+    }
+
+    .postInfoTitle{
+      word-break: break-word;
+      h2{
+        cursor: pointer;
+        transition: 0.2s;
+        &:hover{
+          color: #7451f8;
+        }
+      }
+    }
+
+  }
+
+  .postReactions{
+    padding: 0 20px 20px 20px;
+    display: flex;
+    margin-top: 10px;
+    gap: 30px;
+    font-size: 13px;
+    color: gray;
+
+    .postReactionsInfo{
+      display: flex;
+      align-items: center;
+      gap: 5px;
+
+      .postReactionsIcon{
+        font-size: 17px;
+        color: black;
+      }
+    }
+  }
+}

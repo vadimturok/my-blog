@@ -1,0 +1,36 @@
+.modalWindow{
+  background-color: white;
+  width: 400px;
+  height: 300px;
+  position: absolute;
+  left: 50%;
+  top: 50%;
+  transform: translate(-50%, -50%);
+  border-radius: 20px;
+
+  .modalWindowTitle{
+    border-bottom: 1px solid #c5c4c4;
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    padding: 15px;
+
+    span{
+      padding: 2px 5px 0 5px;
+      cursor: pointer;
+      border-radius: 5px;
+      transition: 0.2s;
+
+      &:hover{
+        background-color: rgba(236, 232, 255, 0.63);
+      }
+    }
+  }
+
+  .modalButton{
+    padding: 60px 30px 30px 30px;
+    display: flex;
+    flex-direction: column;
+    gap: 20px;
+  }
+}

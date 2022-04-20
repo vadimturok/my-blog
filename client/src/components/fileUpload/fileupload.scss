@@ -1,0 +1,39 @@
+.imageUpload{
+  text-align: center;
+
+  .uploadFile{
+    display: flex;
+    align-items: center;
+    gap: 5px;
+    justify-content: center;
+    margin-bottom: 20px;
+
+    .uploadFileIcon{
+      font-size: 30px;
+    }
+
+    button{
+      padding: 5px;
+      background: none;
+      border: 1px solid #7451f8;
+      border-radius: 5px;
+      color: #7451f8;
+      font-weight: 500;
+      cursor: pointer;
+      transition: 0.2s;
+
+      &:hover{
+        background-color: rgba(236, 232, 255, 0.63);
+      }
+    }
+  }
+  .imagePreview{
+    margin-bottom: 20px;
+    img{
+      width: 100%;
+      height: auto;
+      box-shadow: 0 4px 8px 0 rgba(0, 0, 0, 0.2), 0 6px 20px 0 rgba(0, 0, 0, 0.19);
+    }
+
+  }
+}

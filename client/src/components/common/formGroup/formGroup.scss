@@ -1,0 +1,38 @@
+.formGroup{
+    display: flex;
+    flex-direction: column;
+    margin-bottom: 20px;
+
+  .formGroupInfo{
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    gap: 10px;
+
+
+    label{
+      font-weight: 600;
+      font-size: 17px;
+      margin-bottom: 5px;
+    }
+
+    p{
+      font-size: 12px;
+      background-color: rgba(255, 0, 0, 0.18);
+      padding: 3px 6px 3px 6px;
+      border-radius: 5px;
+      margin-bottom: 5px;
+      color: rgba(255, 0, 0, 0.71);
+    }
+  }
+  input{
+    padding: 10px;
+    border-radius: 5px;
+    border: 1px solid lightgray;
+
+    &:focus{
+      outline: 2px solid #7451f8;
+    }
+  }
+
+}

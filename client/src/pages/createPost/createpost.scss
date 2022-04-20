@@ -1,0 +1,50 @@
+.createPost{
+    padding-bottom: 20px;
+    .postInner{
+      margin-top: 20px;
+      background-color: white;
+      border-radius: 5px;
+      border: 1px solid lightgray;
+      padding: 40px;
+      h2{
+        text-align: center;
+        margin-bottom: 20px;
+      }
+
+      .editor{
+        .toolbarClassName{
+          border-radius: 5px;
+          border: 1px solid lightgray;
+        }
+
+        .editorClassName{
+          border-radius: 5px;
+          border: 1px solid lightgray;
+          padding: 0 10px 0 10px;
+          resize: block;
+          font-size: 15px;
+        }
+      }
+
+      .createButton{
+        width: 100px;
+        margin-top: 20px;
+      }
+
+      .alert{
+        background-color: rgba(0, 128, 0, 0.11);
+        color: green;
+        padding: 15px;
+        font-size: 15px;
+        margin-top: 20px;
+        border-radius: 5px;
+        transition: 0.3s;
+
+        &.danger{
+          background-color: rgba(255, 0, 0, 0.1);
+          color: red;
+        }
+      }
+    }
+}
+

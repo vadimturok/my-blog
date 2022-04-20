@@ -1,0 +1,38 @@
+.formButton{
+  width: 100%;
+  border: none;
+  padding: 10px;
+  border-radius: 5px;
+  background-color: #7451f8;
+  color: white;
+  font-size: 15px;
+  font-weight: 600;
+  cursor: pointer;
+  transition: 0.2s;
+  display: flex;
+  align-items: center;
+  gap: 5px;
+  justify-content: center;
+
+  &:disabled{
+    cursor: default;
+    background-color: rgba(116, 81, 248, 0.48);
+    &:hover{
+      background-color: rgba(116, 81, 248, 0.48);;
+    }
+  }
+
+  &.outlined{
+    background: none;
+    color: gray;
+    font-size: 15px;
+
+    &:hover{
+      background-color: rgba(236, 232, 255, 0.63);
+    }
+  }
+
+  &:hover{
+    background-color: #603ee3;
+  }
+}
