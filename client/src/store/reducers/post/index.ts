@@ -5,7 +5,8 @@ const initialState: PostState = {
     isLoading: false,
     posts: [],
     sortType: PostSortActions.SORT_BY_TIME,
-    status: 'idle'
+    status: 'idle',
+    todayPosts: []
 }
 
 export default function postsReducer(state = initialState, action: PostsAction): PostState{
@@ -27,6 +28,8 @@ export default function postsReducer(state = initialState, action: PostsAction):
             return {...state, sortType: PostSortActions.SORT_BY_LIKES ,posts: state.posts.sort((a,b) => b.likes - a.likes)}
         case PostSortActions.SORT_BY_COMMENTS:
             return {...state, sortType: PostSortActions.SORT_BY_COMMENTS, posts: state.posts.sort((a, b) => b.comments.length - a.comments.length)}
+        case PostActionsEnum.SET_TODAY_POSTS:
+            return {...state, todayPosts: action.payload}
         default:
             return state
     }

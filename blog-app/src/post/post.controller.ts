@@ -5,7 +5,7 @@ import {
     HttpStatus,
     Param,
     ParseIntPipe,
-    Post,
+    Post, Query,
     UploadedFiles,
     UseGuards,
     UseInterceptors,
@@ -46,6 +46,11 @@ export class PostController{
     @Get()
     getAllPosts(){
         return this.postService.getAllPosts()
+    }
+
+    @Get('/today?')
+    getTodayPosts(@Query('quantity') quantity: number){
+        return this.postService.getTodayPosts(quantity)
     }
 
     @Get('/:userId')

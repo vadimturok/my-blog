@@ -7,6 +7,7 @@ import {
     SetIsLoading,
     SetPosts,
     SetStatus,
+    SetTodayPosts,
 } from "./types";
 import {IPost} from "../../../types/post-type";
 import {AppDispatch} from "../../index";
@@ -20,6 +21,10 @@ export const setSort = (sortType: PostSortActions): PostsAction => {
         return {type: PostSortActions.SORT_BY_COMMENTS}
     else
         return {type: PostSortActions.SORT_BY_TIME}
+}
+
+export const setTodayPosts = (posts: IPost[]): SetTodayPosts => {
+    return {type: PostActionsEnum.SET_TODAY_POSTS, payload: posts}
 }
 
 export const setError = (error: string): SetError => {
@@ -38,6 +43,11 @@ export const setStatus = (status: 'idle' | 'loading' | 'succeeded' | 'failed'): 
     return {type: PostActionsEnum.SET_STATUS, payload: status}
 }
 
+export const setAddPost = (post: IPost): SetAddPost => {
+    return {type: PostActionsEnum.ADD_POST, payload: post}
+}
+
+
 export const fetchAllPosts = (sortType: PostSortActions) => async(dispatch: AppDispatch) => {
     dispatch(setStatus('loading'))
     try{
@@ -51,6 +61,14 @@ export const fetchAllPosts = (sortType: PostSortActions) => async(dispatch: AppD
     }
 }
 
-export const setAddPost = (post: IPost): SetAddPost => {
-    return {type: PostActionsEnum.ADD_POST, payload: post}
+export const fetchTodayPosts = (quantity: number) => async(dispatch: AppDispatch) => {
+    try{
+        const posts = await PostService.getTodayPosts(quantity)
+        dispatch(setTodayPosts(posts.data))
+    }catch(e: any){
+        console.log(e.response)
+    }
 }
+
+
+

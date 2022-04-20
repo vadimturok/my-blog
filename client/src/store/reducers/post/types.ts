@@ -4,15 +4,16 @@ export interface PostState{
     isLoading: boolean;
     error: string;
     posts: IPost[];
-    sortType: PostSortActions,
-    status: 'idle' | 'loading' | 'succeeded' | 'failed'
+    sortType: PostSortActions;
+    status: 'idle' | 'loading' | 'succeeded' | 'failed';
+    todayPosts: IPost[]
 }
 
 
 export enum PostSortActions{
     SORT_BY_TIME = 'SORT_BY_TIME',
     SORT_BY_LIKES = 'SORT_BY_LIKES',
-    SORT_BY_COMMENTS = 'SORT_BY_COMMENTS'
+    SORT_BY_COMMENTS = 'SORT_BY_COMMENTS',
 }
 
 export enum PostActionsEnum{
@@ -20,7 +21,13 @@ export enum PostActionsEnum{
     SET_ERROR = 'SET_ERROR',
     SET_POSTS = 'SET_POSTS',
     ADD_POST = 'ADD_POST',
-    SET_STATUS = 'SET_STATUS'
+    SET_STATUS = 'SET_STATUS',
+    SET_TODAY_POSTS = 'SET_TODAY_POSTS'
+}
+
+export interface SetTodayPosts{
+    type: PostActionsEnum.SET_TODAY_POSTS,
+    payload: IPost[]
 }
 
 export interface SetStatus{
@@ -50,4 +57,4 @@ export interface SetPosts{
     payload: IPost[]
 }
 
-export type PostsAction = SetIsLoading | SetError | SetPosts | SetSort | SetAddPost | SetStatus
+export type PostsAction = SetIsLoading | SetError | SetPosts | SetSort | SetAddPost | SetStatus | SetTodayPosts

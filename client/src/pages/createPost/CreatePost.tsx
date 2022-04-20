@@ -12,7 +12,7 @@ import {RootState} from "../../store";
 import {useForm} from "react-hook-form";
 import PostService from "../../services/post-service";
 import {useNavigate} from "react-router-dom";
-import {setAddPost} from "../../store/reducers/post/action-creators";
+import {fetchTodayPosts, setAddPost} from "../../store/reducers/post/action-creators";
 
 
 
@@ -30,6 +30,7 @@ const CreatePost: FC = () => {
         const stringFromHtml = draftToHtml(convertToRaw(editorState.getCurrentContent()))
         PostService.createPost(file, data['Title'], stringFromHtml, user.id).then(response => {
             dispatch(setAddPost(response.data))
+            dispatch(fetchTodayPosts(5))
             navigate(`/posts/${response.data.id}`)
         }, (e: any) => {
             const response = e.response.data.message

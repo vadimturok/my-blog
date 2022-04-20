@@ -8,9 +8,10 @@
 
   .latestTitle{
     padding: 10px;
-    border-bottom: 1px solid lightgray;
+    //border-bottom: 1px solid lightgray;
     color: gray;
   }
+
 
   .latestItems{
 
@@ -18,26 +19,40 @@
       list-style: none;
 
       li{
-        border-bottom: 1px solid lightgray;
-        padding: 10px;
+        display: flex;
+        align-items: center;
+        gap: 2px;
+        justify-content: space-between;
+        border-top: 1px solid lightgray;
+        padding: 10px 7px 10px 7px;
+
+        span{
+          flex: 1;
+          font-size: 12px;
+          color: gray;
+        }
 
         &:last-child{
           border-bottom: none;
         }
 
-        h5{
-          cursor: pointer;
-          font-size: 15px;
-          transition: 0.2s;
+        .latestLink{
+          text-decoration: none;
+          color: inherit;
+          flex: 4;
 
-          &:hover{
-            color: #7451f8;
-          }
-
-          span{
+          h5{
+            word-break: break-word;
+            cursor: pointer;
             font-size: 13px;
-            color: gray;
+            transition: 0.2s;
+
+            &:hover{
+              color: #7451f8;
+            }
           }
+
+
         }
       }
     }

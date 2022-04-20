@@ -1,7 +1,7 @@
 import {Injectable} from "@nestjs/common";
 import {InjectRepository} from "@nestjs/typeorm";
 import {Post} from "./post.entity";
-import {Repository} from "typeorm";
+import {createQueryBuilder, Repository} from "typeorm";
 import {PostDto} from "./dto/post.dto";
 import {UserService} from "../user/user.service";
 import {FileService} from "../file/file.service";
@@ -52,5 +52,12 @@ export class PostService{
     async likePost(postId: number){
         const result = await this.postRepository.increment({id: postId}, 'likes', 1);
         return result
+    }
+
+    async getTodayPosts(quantity: number) {
+        return this.postRepository.find({
+            order: {dateAndTimePublish: 'DESC'},
+            take: quantity
+        })
     }
 }

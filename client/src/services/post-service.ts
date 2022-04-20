@@ -23,4 +23,8 @@ export default class PostService{
     static async createComment(text: string, postId: number, userId: number): Promise<AxiosResponse<IComment>> {
         return api.post<IComment>('/comments', {text, postId, userId})
     }
+
+    static async getTodayPosts(quantity: number): Promise<AxiosResponse<IPost[]>>{
+        return api.get<IPost[]>(`/posts/today?quantity=${quantity}`)
+    }
 }
