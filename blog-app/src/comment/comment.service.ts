@@ -19,7 +19,7 @@ export class CommentService{
         comment.dateAndTimePublish = new Date()
         const newComment = await this.commentRepository.save(comment)
         return this.commentRepository.findOne({id: newComment.id},{
-            relations: ['user']
+            relations: ['user', 'post']
         })
     }
 

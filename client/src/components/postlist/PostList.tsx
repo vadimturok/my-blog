@@ -12,7 +12,7 @@ const PostList: FC = () => {
     return (
         <div className={'postList'}>
             {status !== 'succeeded' ? <Loader/> : posts.length === 0 ? <div className={'noPosts'}>No posts yet</div> :
-                posts.map(post => <PostItem key={post.id} post={post}/>)
+                posts.map(post => <PostItem displayImage={true} key={post.id} post={post}/>)
             }
         </div>
     );

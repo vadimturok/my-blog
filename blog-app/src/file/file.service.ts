@@ -7,6 +7,7 @@ import {storageRef} from "../main";
 @Injectable()
 export class FileService{
     async createFile(file): Promise<string>{
+        console.log(file)
         try{
             const fileExtension = file.originalname.split('.').pop()
             //something.jpg

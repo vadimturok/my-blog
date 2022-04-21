@@ -5,13 +5,20 @@ export interface AuthState{
     isAuth: boolean;
     isLoading: boolean;
     error: string;
+    isSuccess: 'default' | 'success'
 }
 
 export enum AuthActionsEnum{
     SET_USER = "SET_USER",
     SET_IS_AUTH = 'SET_IS_AUTH',
     SET_IS_LOADING = "SET_IS_LOADING",
-    SET_ERROR = 'SET_ERROR'
+    SET_ERROR = 'SET_ERROR',
+    SET_IS_SUCCESS = 'SET_IS_SUCCESS'
+}
+
+export interface SetIsSuccess{
+    type: AuthActionsEnum.SET_IS_SUCCESS;
+    payload: 'default' | 'success'
 }
 
 export interface SetError{
@@ -34,4 +41,4 @@ export interface SetIsLoading{
     payload: boolean;
 }
 
-export type AuthAction = SetUserAction | SetIsAuth | SetIsLoading | SetError
+export type AuthAction = SetUserAction | SetIsAuth | SetIsLoading | SetError | SetIsSuccess

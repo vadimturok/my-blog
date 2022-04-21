@@ -1,14 +1,11 @@
-import React, {FC, useEffect, useState} from 'react';
+import React, {FC} from 'react';
 import './latest.scss'
 import {useAppSelector} from "../../hooks";
-import {IPost} from "../../types/post-type";
-import {formatDate, formatTime} from "../../helpers";
-import PostService from "../../services/post-service";
+import {formatTime} from "../../helpers";
 import {Link} from "react-router-dom";
 
 const LatestList: FC = () => {
     const {todayPosts} = useAppSelector(state => state.posts)
-
 
     return (
         <div className={'latestList'}>
@@ -27,18 +24,6 @@ const LatestList: FC = () => {
                     ))
                     }
                 </ul>
-                        {/*<li>*/}
-                        {/*    <h5>How to use JSX <span>12:05</span></h5>*/}
-                        {/*</li>*/}
-                        {/*<li>*/}
-                        {/*    <h5>Git: A beginner's guide, <span>12:05</span></h5>*/}
-                        {/*</li>*/}
-                        {/*<li>*/}
-                        {/*    <h5>What is JavaScript?, <span>12:05</span></h5>*/}
-                        {/*</li>*/}
-                        {/*<li>*/}
-                        {/*    <h5>Backend and frontend, <span>12:05</span></h5>*/}
-                        {/*</li>*/}
             </div>
         </div>
     );

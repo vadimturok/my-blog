@@ -22,9 +22,9 @@ const Sidebar: FC = () => {
     const navigate = useNavigate()
     const dispatch = useDispatch()
     const [showModal, setShowModal] = useState<boolean>(false)
-    const handleClick = () => {
+    const handleClick = (path: string) => {
         if(isAuth){
-            return navigate('/create')
+            return navigate(`/${path}`)
         }else{
             setShowModal(true)
         }
@@ -66,11 +66,11 @@ const Sidebar: FC = () => {
                         <HomeIcon className={'sidebarIcon'}/>
                         <span>Home</span>
                     </li>
-                    <li>
+                    <li onClick={() => handleClick('profile')}>
                         <PersonIcon className={'sidebarIcon'}/>
                         <span>Profile</span>
                     </li>
-                    <li onClick={handleClick}>
+                    <li onClick={() => handleClick('create')}>
                         <CreateIcon className={'sidebarIcon'}/>
                         <span>Make Post</span>
                     </li>

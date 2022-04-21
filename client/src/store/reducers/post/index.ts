@@ -1,4 +1,5 @@
 import {PostActionsEnum, PostsAction, PostSortActions, PostState} from "./types";
+import PostService from "../../../services/post-service";
 
 const initialState: PostState = {
     error: '',
@@ -11,6 +12,10 @@ const initialState: PostState = {
 
 export default function postsReducer(state = initialState, action: PostsAction): PostState{
     switch(action.type){
+        case PostActionsEnum.UPDATE_COMMENTS:
+            return {...state, posts: PostService.updatePostByComment(action.payload, state.posts)}
+        case PostActionsEnum.UPDATE_POSTS:
+            return {...state, posts: PostService.updatePostsById(action.payload, state.posts)}
         case PostActionsEnum.ADD_POST:
             return {...state, posts: state.posts.concat(action.payload)}
         case PostActionsEnum.SET_STATUS:

@@ -10,7 +10,7 @@ interface CommentProps{
 const Comment: FC<CommentProps> = ({comment}) => {
     return (
         <div className={'comment'}>
-            <img src={`zz`} alt="avatar"/>
+            <img src={comment.user.profilePicture} alt="avatar"/>
             <div className={'commentAuthor'}>
                 <span className={'commentAuthorName'}>{comment.user.firstName} {comment.user.lastName} • <span className={'commentDate'}>{formatDate(comment.dateAndTimePublish)}</span></span>
                 <div className={'commentText'}>{comment.text}</div>

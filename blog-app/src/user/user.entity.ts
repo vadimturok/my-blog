@@ -27,6 +27,9 @@ export class User{
     @Column()
     password: string;
 
+    @Column({default: 'https://firebasestorage.googleapis.com/v0/b/post-images-storage.appspot.com/o/%2Fposts%2Fsquare_avatar.png?alt=media&token=1bf5a1c9-9691-45dc-bd26-b2d1753f7c53'})
+    profilePicture: string;
+
     @Column({type: "enum", enum: UserRole, default: UserRole.USER})
     role: UserRole
 

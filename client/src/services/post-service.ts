@@ -2,6 +2,7 @@ import api from "../http";
 import {IPost} from "../types/post-type";
 import {AxiosResponse} from "axios";
 import {IComment} from "../types/comment-type";
+import {IUser} from "../types/user-type";
 
 export default class PostService{
     static async createPost(picture: any, title: string, text: string, userId: number){
@@ -26,5 +27,25 @@ export default class PostService{
 
     static async getTodayPosts(quantity: number): Promise<AxiosResponse<IPost[]>>{
         return api.get<IPost[]>(`/posts/today?quantity=${quantity}`)
+    }
+
+    static updatePostsById(user: IUser, posts: IPost[]): IPost[]{
+        return posts.map(post => {
+            if(post.user.id === user.id){
+                post.user = user
+                return post
+            }
+            return post
+        })
+    }
+
+    static updatePostByComment(comment: IComment, posts: IPost[]): IPost[]{
+        return posts.map(post => {
+            if(post.id === comment.post.id){
+                post.comments.push(comment)
+                return post
+            }
+            return post
+        })
     }
 }

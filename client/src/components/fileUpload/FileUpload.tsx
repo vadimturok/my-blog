@@ -4,9 +4,10 @@ import FileUploadIcon from '@mui/icons-material/FileUpload';
 
 interface FileUploadProps{
     handleFile: (file: File | undefined) => void;
+    displayImage?: boolean;
 }
 
-const FileUpload: FC<FileUploadProps> = ({handleFile}) => {
+const FileUpload: FC<FileUploadProps> = ({handleFile, displayImage}) => {
     const [imageUrl, setImageUrl] = useState<string>('')
     const hiddenFileInput = useRef<HTMLInputElement>(null)
 
@@ -24,7 +25,6 @@ const FileUpload: FC<FileUploadProps> = ({handleFile}) => {
     return (
         <div className={'imageUpload'}>
             <div className={'uploadFile'}>
-                <FileUploadIcon className={'uploadFileIcon'}/>
                 <button onClick={handleClick}>Upload image</button>
             </div>
             <input
@@ -33,9 +33,9 @@ const FileUpload: FC<FileUploadProps> = ({handleFile}) => {
                 style={{display: 'none'}}
                 onChange={handleChange}
             />
-            <div className={'imagePreview'}>
+            {displayImage && <div className={'imagePreview'}>
                 {imageUrl && <img src={imageUrl} alt="postPicture"/>}
-            </div>
+            </div>}
         </div>
     );
 };

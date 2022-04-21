@@ -5,9 +5,9 @@ import {
     Get,
     HttpException,
     HttpStatus,
-    Post,
+    Post, Put,
     Req,
-    Res, UseGuards,
+    Res, UploadedFiles, UseGuards, UseInterceptors,
     UsePipes,
     ValidationPipe
 } from "@nestjs/common";
@@ -15,10 +15,14 @@ import {SecurityService} from "./security.service";
 import {UserDto} from "../user/dto/user.dto";
 import {LoginUserDto} from "../user/dto/login.user.dto";
 import {AuthGuard} from "../authorization/auth.guard";
+import {UpdateUserDto} from "../user/dto/update-user.dto";
+import {FileFieldsInterceptor} from "@nestjs/platform-express";
+import {UserService} from "../user/user.service";
 
 @Controller('auth')
 export class SecurityController{
-    constructor(private securityService: SecurityService) {
+    constructor(private securityService: SecurityService,
+                private userService: UserService) {
     }
 
     @UsePipes(ValidationPipe)
@@ -53,9 +57,18 @@ export class SecurityController{
     @Get('/refresh')
     async refresh(@Req() req, @Res() res){
         const {refreshToken} = req.cookies
+        console.log(refreshToken)
         const userData = await this.securityService.refresh(refreshToken)
         res.cookie('refreshToken', userData.refreshToken, {maxAge: 30 * 24 * 60 * 60 * 1000, httpOnly: true})
         res.json(userData)
+    }
+
+    @Put('/update')
+    @UseInterceptors(FileFieldsInterceptor([
+        {name: 'picture', maxCount: 1}
+    ]))
+    async updateUser(@UploadedFiles() files, @Body() user: UpdateUserDto){
+        return this.userService.updateUser(user, files)
     }
 
 }

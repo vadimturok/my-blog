@@ -4,11 +4,13 @@ import {Token} from "./token.entity";
 import {Repository} from "typeorm";
 import {User} from "../user/user.entity";
 import {JwtService} from "@nestjs/jwt";
+import {UserService} from "../user/user.service";
 
 @Injectable()
 export class TokenService{
     constructor(@InjectRepository(Token) private tokenRepository: Repository<Token>,
-                private jwtService: JwtService) {
+                private jwtService: JwtService,
+                private userService: UserService) {
     }
 
      generateTokens(user: User){
@@ -22,13 +24,14 @@ export class TokenService{
     }
 
     async saveToken(userId: number, refreshToken: string){
-        const tokenData = await this.tokenRepository.findOne({user: userId})
+        const userWithToken = await this.userService.getById(userId)
+        const tokenData = await this.tokenRepository.findOne({user: userWithToken})
         if(tokenData){
             tokenData.refreshToken = refreshToken;
             return this.tokenRepository.save(tokenData)
         }
         const token = new Token()
-        token.user = userId;
+        token.user = userWithToken;
         token.refreshToken = refreshToken
         await this.tokenRepository.save(token)
         return token
@@ -56,7 +59,7 @@ export class TokenService{
     }
 
     async findToken(refreshToken: string){
-        const tokenData = await this.tokenRepository.findOne({refreshToken: refreshToken})
+        const tokenData = await this.tokenRepository.findOne({refreshToken: refreshToken}, {relations: ['user']})
         return tokenData
     }
 }

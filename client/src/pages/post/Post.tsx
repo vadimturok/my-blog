@@ -11,7 +11,6 @@ import {fetchPostById} from "../../store/reducers/currentPost/action-creators";
 import NotFound from "../404/NotFound";
 import Loader from "../../components/loader/Loader";
 import {useAppSelector} from "../../hooks";
-import {API_URL} from "../../http";
 import {formatDate} from "../../helpers";
 
 const Post = () => {
@@ -27,7 +26,7 @@ const Post = () => {
         return <NotFound/>
     }
 
-    if(Object.keys(post).length === 0){
+    if(Object.keys(post).length === 0 || post.id !== Number(postId)){
         return <Loader/>
     }
 
@@ -44,7 +43,7 @@ const Post = () => {
                         </Link>
                         <div className={'postInfo'}>
                             <div className={'author'}>
-                                <img src={`${post?.postImage}`} alt="postPicture"/>
+                                <img src={post?.user?.profilePicture} alt="postPicture"/>
                                 <div className={'authorDetails'}>
                                     <span className={'name'}>{post?.user?.firstName} {post?.user?.lastName}</span>
                                     <span className={'date'}>{formatDate(post?.dateAndTimePublish)}</span>

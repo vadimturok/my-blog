@@ -13,6 +13,7 @@ import {useForm} from "react-hook-form";
 import PostService from "../../services/post-service";
 import {useNavigate} from "react-router-dom";
 import {fetchTodayPosts, setAddPost} from "../../store/reducers/post/action-creators";
+import {CircularProgress} from "@mui/material";
 
 
 
@@ -22,21 +23,27 @@ const CreatePost: FC = () => {
     const [file, setFile] = useState<any>(null)
     const {user} = useSelector((state: RootState) => state.auth)
     const [isError, setIsError] = useState<string>('')
+    const [isLoading, setIsLoading] = useState<boolean>(false)
     const dispatch = useDispatch()
     const navigate = useNavigate()
 
 
-    const onSubmit = (data: any) => {
+    const onSubmit = async (data: any) => {
         const stringFromHtml = draftToHtml(convertToRaw(editorState.getCurrentContent()))
-        PostService.createPost(file, data['Title'], stringFromHtml, user.id).then(response => {
+        setIsLoading(true)
+        try{
+            const response = await PostService.createPost(file, data['Title'], stringFromHtml, user.id)
             dispatch(setAddPost(response.data))
             dispatch(fetchTodayPosts(5))
             navigate(`/posts/${response.data.id}`)
-        }, (e: any) => {
+        }catch(e: any){
             const response = e.response.data.message
             if(Array.isArray(response))setIsError(response[0])
             else setIsError(response)
-        })
+            console.log(e.response)
+        }finally {
+            setIsLoading(false)
+        }
     }
 
 
@@ -44,7 +51,7 @@ const CreatePost: FC = () => {
         <div className={'createPost'}>
             <div className={'postInner'}>
                 <h2>Create New Post</h2>
-                    <FileUpload  handleFile={(file: File | undefined) => setFile(file)}/>
+                    <FileUpload displayImage={true}  handleFile={(file: File | undefined) => setFile(file)}/>
                     <FormGroup
                         fieldName={'Title'}
                         register={register}
@@ -62,7 +69,11 @@ const CreatePost: FC = () => {
                         />
                     </div>
                     <div className={'createButton'}>
-                        <Button handleClick={handleSubmit(onSubmit)}  text={'Create'}/>
+                        <Button
+                            handleClick={handleSubmit(onSubmit)}
+                            text={'Create'}
+                            progress={isLoading && <CircularProgress style={{color: 'white'}} size={20}/>}
+                        />
                     </div>
                 {isError && <div className={'alert danger'}>{isError}</div>}
             </div>

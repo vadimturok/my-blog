@@ -1,21 +1,18 @@
 import React, {FC, useEffect} from 'react';
-import {useDispatch, useSelector} from "react-redux";
+import {useDispatch} from "react-redux";
 import {checkAuth} from "./store/reducers/auth/action-creators";
 import AppRoutes from "./components/routes/AppRoutes";
 import {fetchAllPosts, fetchTodayPosts} from "./store/reducers/post/action-creators";
-import {RootState} from "./store";
+import {PostSortActions} from "./store/reducers/post/types";
 
 
 const App: FC = () => {
-  const {sortType, posts} = useSelector((state: RootState) => state.posts)
-  const {post} = useSelector((state: RootState) => state.currentPost)
   const dispatch = useDispatch()
 
-
   useEffect(() => {
-    dispatch(fetchAllPosts(sortType))
+    dispatch(fetchAllPosts(PostSortActions.SORT_BY_TIME))
     dispatch(fetchTodayPosts(5))
-  }, [])
+  }, [dispatch])
 
   useEffect(() => {
     if(localStorage.getItem('token')){

@@ -8,10 +8,14 @@ import {
     SetPosts,
     SetStatus,
     SetTodayPosts,
+    UpdateComments,
+    UpdatePosts
 } from "./types";
 import {IPost} from "../../../types/post-type";
 import {AppDispatch} from "../../index";
 import PostService from "../../../services/post-service";
+import {IUser} from "../../../types/user-type";
+import {IComment} from "../../../types/comment-type";
 
 
 export const setSort = (sortType: PostSortActions): PostsAction => {
@@ -22,6 +26,7 @@ export const setSort = (sortType: PostSortActions): PostsAction => {
     else
         return {type: PostSortActions.SORT_BY_TIME}
 }
+
 
 export const setTodayPosts = (posts: IPost[]): SetTodayPosts => {
     return {type: PostActionsEnum.SET_TODAY_POSTS, payload: posts}
@@ -47,6 +52,13 @@ export const setAddPost = (post: IPost): SetAddPost => {
     return {type: PostActionsEnum.ADD_POST, payload: post}
 }
 
+export const setUpdatePosts = (user: IUser): UpdatePosts => {
+    return {type: PostActionsEnum.UPDATE_POSTS, payload: user}
+}
+
+export const updateComments = (comment: IComment): UpdateComments => {
+    return {type: PostActionsEnum.UPDATE_COMMENTS, payload: comment}
+}
 
 export const fetchAllPosts = (sortType: PostSortActions) => async(dispatch: AppDispatch) => {
     dispatch(setStatus('loading'))

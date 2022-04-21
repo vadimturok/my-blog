@@ -1,4 +1,6 @@
 import {IPost} from "../../../types/post-type";
+import {IUser} from "../../../types/user-type";
+import {IComment} from "../../../types/comment-type";
 
 export interface PostState{
     isLoading: boolean;
@@ -6,7 +8,7 @@ export interface PostState{
     posts: IPost[];
     sortType: PostSortActions;
     status: 'idle' | 'loading' | 'succeeded' | 'failed';
-    todayPosts: IPost[]
+    todayPosts: IPost[];
 }
 
 
@@ -22,8 +24,16 @@ export enum PostActionsEnum{
     SET_POSTS = 'SET_POSTS',
     ADD_POST = 'ADD_POST',
     SET_STATUS = 'SET_STATUS',
-    SET_TODAY_POSTS = 'SET_TODAY_POSTS'
+    SET_TODAY_POSTS = 'SET_TODAY_POSTS',
+    UPDATE_POSTS = 'UPDATE_POSTS',
+    UPDATE_COMMENTS = 'UPDATE_COMMENTS'
 }
+
+export interface UpdatePosts{
+    type: PostActionsEnum.UPDATE_POSTS,
+    payload: IUser
+}
+
 
 export interface SetTodayPosts{
     type: PostActionsEnum.SET_TODAY_POSTS,
@@ -57,4 +67,18 @@ export interface SetPosts{
     payload: IPost[]
 }
 
-export type PostsAction = SetIsLoading | SetError | SetPosts | SetSort | SetAddPost | SetStatus | SetTodayPosts
+export interface UpdateComments{
+    type: PostActionsEnum.UPDATE_COMMENTS,
+    payload: IComment
+}
+
+export type PostsAction =
+    SetIsLoading |
+    SetError |
+    SetPosts |
+    SetSort |
+    SetAddPost |
+    SetStatus |
+    SetTodayPosts |
+    UpdatePosts |
+    UpdateComments

@@ -17,15 +17,22 @@ export class SecurityService{
             throw new HttpException(`User with email: ${userDto.email} already exists`, HttpStatus.BAD_REQUEST)
         }
         const hashedPassword = await bcrypt.hash(userDto.password, 5);
-        const newUser = await this.userService.createUser({...userDto, password: hashedPassword})
+        const user = await this.userService.createUser({...userDto, password: hashedPassword})
+        const newUser = await this.userService.getById(user.id)
         console.log('USER: ', newUser)
-        const tokens =  this.tokenService.generateTokens(newUser);
+        const tokens =  this.tokenService.generateTokens(user);
         await this.tokenService.saveToken(newUser.id, tokens.refreshToken)
+        console.log('POSTS: ', newUser.posts)
         return{
             ...tokens,
             user: {
-                ...userDto,
-                id: newUser.id
+                id: newUser.id,
+                firstName: newUser.firstName,
+                lastName: newUser.lastName,
+                email: newUser.email,
+                role: newUser.role,
+                profilePicture: newUser.profilePicture,
+                posts: newUser.posts
             }
         }
     }
@@ -44,7 +51,15 @@ export class SecurityService{
 
         return{
             ...tokens,
-            user: {id: user.id, firstName: user.firstName, lastName: user.lastName, email: user.email, role: user.role}
+            user: {
+                id: user.id,
+                firstName: user.firstName,
+                lastName: user.lastName,
+                email: user.email,
+                role: user.role,
+                profilePicture: user.profilePicture,
+                posts: user.posts
+            }
         }
     }
 
@@ -61,13 +76,21 @@ export class SecurityService{
         if(!userData || !tokenFromDb){
             throw new HttpException('Token is invalid', HttpStatus.UNAUTHORIZED)
         }
-        const user = await this.userService.getById(tokenFromDb.user)
+        const user = await this.userService.getById(tokenFromDb.user.id)
         const tokens =  this.tokenService.generateTokens(user);
         await this.tokenService.saveToken(user.id, tokens.refreshToken)
 
         return{
             ...tokens,
-            user: userData
+            user: {
+                id: user.id,
+                firstName: user.firstName,
+                lastName: user.lastName,
+                email: user.email,
+                role: user.role,
+                profilePicture: user.profilePicture,
+                posts: user.posts
+            }
         }
     }
 }
