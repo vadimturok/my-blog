@@ -50,7 +50,7 @@ Main features of the app:
 
 
 ## Screenshots
-![Example screenshot](./img/screenshot.png)
+![Example screenshot](./demoImages/demo_img_1.png)
 <!-- If you have screenshots you'd like to share, include them here. -->
 
 
