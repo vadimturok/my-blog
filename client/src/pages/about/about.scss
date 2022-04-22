@@ -1,0 +1,126 @@
+.aboutWrapper{
+  padding-bottom: 20px;
+  .about{
+    width: 70%;
+    margin: 20px auto 0 auto;
+    background-color: white;
+    border: 1px solid rgba(211, 211, 211, 0.51);
+    border-radius: 5px;
+    padding: 20px;
+
+
+    h1{
+      text-align: center;
+    }
+    p{
+      text-align: center;
+      font-size: 18px;
+      font-weight: 500;
+    }
+
+    .aboutInfo{
+      h3{
+        margin-top: 10px;
+        text-align: center;
+      }
+
+      .aboutSocials{
+        margin-top: 15px;
+        display: flex;
+        justify-content: space-around;
+
+        .aboutSocialsItem{
+          display: flex;
+          align-items: center;
+          gap: 5px;
+
+          .socialItemSpan{
+            font-size: 17px;
+            font-weight: 600;
+          }
+
+          .socialItemLink{
+            text-decoration: none;
+            font-size: 17px;
+            color: inherit;
+            font-weight: 600;
+            transition: 0.3s;
+
+            &:hover{
+              color: #7451f8;
+            }
+          }
+
+          .socialIcon{
+            font-size: 30px;
+
+          }
+          &:nth-child(2){
+            .socialIcon{
+              color: #333;
+            }
+          }
+          &:last-child{
+            .socialIcon{
+              color: #1DA1F2;
+            }
+          }
+        }
+      }
+
+      .aboutStack{
+        font-size: 17px;
+        text-align: center;
+        margin-bottom: 10px;
+      }
+      .aboutFeatures{
+        display: flex;
+        margin: 16px 0 10px 0;
+        justify-content: space-around;
+        .aboutFeaturesLeft{
+          h4{
+            font-size: 17px;
+            margin-bottom: 10px;
+          }
+          ul {
+            margin: 0;
+          }
+          ul.dashed {
+            list-style-type: none;
+          }
+          ul.dashed > li {
+            text-indent: -5px;
+            margin-bottom: 5px;
+          }
+          ul.dashed > li:before {
+            content: "-";
+            text-indent: -5px;
+            margin-right: 5px;
+          }
+        }
+        .aboutFeaturesRight{
+          h4{
+            font-size: 17px;
+            margin-bottom: 10px;
+          }
+          ul {
+            margin: 0;
+          }
+          ul.dashed {
+            list-style-type: none;
+          }
+          ul.dashed > li {
+            text-indent: -5px;
+            margin-bottom: 5px;
+          }
+          ul.dashed > li:before {
+            content: "-";
+            text-indent: -5px;
+            margin-right: 5px;
+          }
+        }
+      }
+    }
+
+  }
+}

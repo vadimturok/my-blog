@@ -9,7 +9,7 @@ import CreateIcon from '@mui/icons-material/Create';
 import InfoIcon from '@mui/icons-material/Info';
 import VideoLibraryIcon from '@mui/icons-material/VideoLibrary';
 import MailIcon from '@mui/icons-material/Mail';
-import {useNavigate} from "react-router-dom";
+import {Link, useNavigate} from "react-router-dom";
 import {useDispatch, useSelector} from "react-redux";
 import {RootState} from "../../store";
 import ModalWindow from "../modalWindow/ModalWindow";
@@ -62,10 +62,12 @@ const Sidebar: FC = () => {
             <div className={'menu bottom'}>
                 <h4>Navigation</h4>
                 <ul>
-                    <li>
-                        <HomeIcon className={'sidebarIcon'}/>
-                        <span>Home</span>
-                    </li>
+                    <Link to={'/'} className={'link'}>
+                        <li>
+                            <HomeIcon className={'sidebarIcon'}/>
+                            <span>Home</span>
+                        </li>
+                    </Link>
                     <li onClick={() => handleClick('profile')}>
                         <PersonIcon className={'sidebarIcon'}/>
                         <span>Profile</span>
@@ -74,18 +76,25 @@ const Sidebar: FC = () => {
                         <CreateIcon className={'sidebarIcon'}/>
                         <span>Make Post</span>
                     </li>
-                    <li>
-                        <InfoIcon className={'sidebarIcon'}/>
-                        <span>About</span>
-                    </li>
-                    <li>
-                        <VideoLibraryIcon className={'sidebarIcon'}/>
-                        <span>Videos</span>
-                    </li>
-                    <li>
-                        <MailIcon className={'sidebarIcon'}/>
-                        <span>Contact</span>
-                    </li>
+                    <Link to={'about'} className={'link'}>
+                        <li>
+                            <InfoIcon className={'sidebarIcon'}/>
+                            <span>About</span>
+                        </li>
+                    </Link>
+                    <Link to={'videos'} className={'link'}>
+                        <li>
+                            <VideoLibraryIcon className={'sidebarIcon'}/>
+                            <span>Videos</span>
+                        </li>
+                    </Link>
+                    <Link to={'contact'} className={'link'}>
+                        <li>
+                            <MailIcon className={'sidebarIcon'}/>
+                            <span>Contact</span>
+                        </li>
+                    </Link>
+
                 </ul>
             </div>
         </div>

@@ -86,7 +86,6 @@ export const checkAuth = () => async (dispatch: AppDispatch) => {
     dispatch(setIsLoading(true))
     try{
         const response = await axios.get<AuthResponse>(`${API_URL}/auth/refresh`, {withCredentials: true})
-        console.log('user: ', response)
         localStorage.setItem('token', response.data.accessToken)
         dispatch(setIsAuth(true))
         dispatch(setUser(response.data.user))

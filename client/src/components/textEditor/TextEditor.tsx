@@ -1,10 +1,10 @@
 import React, {FC, useState} from 'react';
 import {Editor} from "react-draft-wysiwyg";
-import draftToHtml from "draftjs-to-html";
-import {convertToRaw, EditorState} from "draft-js";
+import {EditorState} from "draft-js";
 import "react-draft-wysiwyg/dist/react-draft-wysiwyg.css";
 import './texteditor.scss'
 import Button from "../common/button/Button";
+import {convertToHTML} from "draft-convert"
 
 interface TextEditorProps{
     getStringFromHtml: (s: string) => void
@@ -18,7 +18,7 @@ const TextEditor: FC<TextEditorProps> = ({getStringFromHtml}) => {
     }
 
     const convertToString = () => {
-        const stringFromHtml = draftToHtml(convertToRaw(editorState.getCurrentContent()))
+        const stringFromHtml = convertToHTML(editorState.getCurrentContent())
         getStringFromHtml(stringFromHtml)
     }
 
@@ -30,6 +30,7 @@ const TextEditor: FC<TextEditorProps> = ({getStringFromHtml}) => {
                 wrapperClassName={'wrapperClassName'}
                 editorClassName={'editorClassName'}
                 onEditorStateChange={onEditorStateChange}
+
             />
             <Button handleClick={convertToString} text={'Send'}/>
         </div>

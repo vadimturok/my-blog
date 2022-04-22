@@ -7,13 +7,14 @@ import {useDispatch} from "react-redux";
 import {registration, setError} from "../../store/reducers/auth/action-creators";
 import {Navigate} from "react-router-dom";
 import {CircularProgress} from "@mui/material";
-import {useAppSelector} from "../../hooks";
+import {useAppSelector, useTitle} from "../../hooks";
 import {useForm} from "react-hook-form";
 
 const Register: FC  = () => {
     const {isLoading, error, isAuth} = useAppSelector(state => state.auth)
     const {register, handleSubmit, formState: {errors}} = useForm()
     const dispatch = useDispatch()
+    useTitle('Register')
 
     useEffect(() => {
         dispatch(setError(''))

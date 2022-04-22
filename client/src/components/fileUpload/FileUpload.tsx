@@ -1,6 +1,5 @@
 import React, {FC, useRef, useState} from 'react';
 import './fileupload.scss'
-import FileUploadIcon from '@mui/icons-material/FileUpload';
 
 interface FileUploadProps{
     handleFile: (file: File | undefined) => void;

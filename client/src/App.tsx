@@ -21,7 +21,7 @@ const App: FC = () => {
   }, [dispatch])
 
   return (
-    <AppRoutes/>
+        <AppRoutes/>
   );
 };
 

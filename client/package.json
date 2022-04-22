@@ -25,10 +25,12 @@
     "draft-convert": "^2.1.12",
     "draft-js": "^0.11.7",
     "draftjs-to-html": "^0.9.1",
+    "framer-motion": "^6.3.1",
     "moment": "^2.29.3",
     "react": "^18.0.0",
     "react-dom": "^18.0.0",
     "react-draft-wysiwyg": "^1.14.7",
+    "react-favicon": "^1.0.0",
     "react-hook-form": "^7.30.0",
     "react-redux": "^7.2.8",
     "react-router-dom": "^6.3.0",
@@ -63,5 +65,8 @@
       "last 1 firefox version",
       "last 1 safari version"
     ]
+  },
+  "devDependencies": {
+    "@types/draft-convert": "^2.1.4"
   }
 }

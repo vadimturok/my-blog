@@ -11,6 +11,8 @@
       border: 1px solid lightgray;
       border-radius: 5px;
       width: 100%;
+      position: relative;
+
 
       .back{
         margin: 20px 0 20px 50px;
@@ -83,6 +85,7 @@
 
       .postText{
         padding: 0 50px 20px 50px;
+        font-size: 10px;
       }
 
       .postLike{

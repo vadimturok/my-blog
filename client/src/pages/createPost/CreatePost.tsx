@@ -14,7 +14,7 @@ import PostService from "../../services/post-service";
 import {useNavigate} from "react-router-dom";
 import {fetchTodayPosts, setAddPost} from "../../store/reducers/post/action-creators";
 import {CircularProgress} from "@mui/material";
-
+import {useTitle} from "../../hooks";
 
 
 const CreatePost: FC = () => {
@@ -26,6 +26,7 @@ const CreatePost: FC = () => {
     const [isLoading, setIsLoading] = useState<boolean>(false)
     const dispatch = useDispatch()
     const navigate = useNavigate()
+    useTitle('Create new')
 
 
     const onSubmit = async (data: any) => {

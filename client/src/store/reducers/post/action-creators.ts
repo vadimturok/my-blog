@@ -64,9 +64,9 @@ export const fetchAllPosts = (sortType: PostSortActions) => async(dispatch: AppD
     dispatch(setStatus('loading'))
     try{
         const response = await PostService.getAll()
+        dispatch(setStatus('succeeded'))
         dispatch(setPosts(response.data))
         dispatch(setSort(sortType))
-        dispatch(setStatus('succeeded'))
     }catch(e: any){
         dispatch(setError(e.response.data.message))
         dispatch(setStatus('failed'))
