@@ -1,11 +1,12 @@
 import {
     Body,
     Controller,
-    Get, HttpException,
+    Get,
     HttpStatus,
     Param,
     ParseIntPipe,
-    Post, Query,
+    Post,
+    Query,
     UploadedFiles,
     UseGuards,
     UseInterceptors,
@@ -29,17 +30,11 @@ export class PostController{
         {name: 'picture', maxCount: 1}
     ]))
     create(@UploadedFiles() files ,@Body() postDto: PostDto){
-        console.log('CREATE')
-        console.log('DTO:', postDto)
-        const {picture} = files
-        if(!picture){
-            throw new HttpException('Image not provided', HttpStatus.BAD_REQUEST)
-        }
-        return this.postService.createPost(postDto, picture[0])
+        return this.postService.createPost(postDto, files)
     }
 
     @Get('/post/:postId')
-    getPostById(@Param('postId', new ParseIntPipe({errorHttpStatusCode: HttpStatus.BAD_REQUEST})) postId: number){
+    getPostById(@Param('postId', new ParseIntPipe()) postId: number){
         return this.postService.getPostById(postId)
     }
 
@@ -51,17 +46,6 @@ export class PostController{
     @Get('/today?')
     getTodayPosts(@Query('quantity') quantity: number){
         return this.postService.getTodayPosts(quantity)
-    }
-
-    @Get('/:userId')
-    getPostsByUserId(@Param('userId') userId: number){
-        return this.postService.getAllPostsByUserId(userId)
-    }
-
-    @UseGuards(AuthGuard)
-    @Post('/:postId')
-    likePost(@Param('postId') postId: number){
-        return this.postService.likePost(postId);
     }
 
 }

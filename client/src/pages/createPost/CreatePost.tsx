@@ -52,7 +52,10 @@ const CreatePost: FC = () => {
         <div className={'createPost'}>
             <div className={'postInner'}>
                 <h2>Create New Post</h2>
-                    <FileUpload displayImage={true}  handleFile={(file: File | undefined) => setFile(file)}/>
+                    <FileUpload
+                        displayImage={true}
+                        handleFile={(file: File | undefined) => setFile(file)}
+                    />
                     <FormGroup
                         fieldName={'Title'}
                         register={register}

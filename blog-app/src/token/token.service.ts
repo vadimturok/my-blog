@@ -41,14 +41,6 @@ export class TokenService{
         await this.tokenRepository.delete({refreshToken: refreshToken})
     }
 
-    validateAccessToken(token: string){
-        try{
-            const userData = this.jwtService.verify(token, {secret: process.env.ACCESS_SECRET})
-            return userData
-        }catch(e){
-            return null
-        }
-    }
 
     validateRefreshToken(token: string){
         try{
@@ -59,7 +51,6 @@ export class TokenService{
     }
 
     async findToken(refreshToken: string){
-        const tokenData = await this.tokenRepository.findOne({refreshToken: refreshToken}, {relations: ['user']})
-        return tokenData
+        return await this.tokenRepository.findOne({refreshToken: refreshToken}, {relations: ['user']})
     }
 }

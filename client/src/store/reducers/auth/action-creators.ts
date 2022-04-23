@@ -28,26 +28,14 @@ export const setIsLoading = (isLoading: boolean): SetIsLoading => {
     return {type: AuthActionsEnum.SET_IS_LOADING, payload: isLoading}
 }
 
+
 export const login = (email: string, password: string) => async (dispatch: AppDispatch) => {
     dispatch(setIsLoading(true))
     try{
         const response = await AuthService.login(email, password);
-        console.log('logged: ', response.data)
-        localStorage.setItem('token', response.data.accessToken)
-        console.log(response.data.user)
-        dispatch(setIsAuth(true))
-        dispatch(setUser(response.data.user))
-        dispatch(setIsLoading(false))
-        dispatch(setError(''))
+        AuthService.authorizeUser(dispatch, response)
     }catch(e: any){
-        if(e.response){
-            if(Array.isArray(e.response.data.message)){
-                dispatch(setError(e.response.data.message[0]))
-            }else{
-                dispatch(setError(e.response.data.message))
-            }
-            dispatch(setIsLoading(false))
-        }
+        AuthService.catchAuthorizationError(dispatch, e)
     }
 }
 
@@ -55,20 +43,9 @@ export const registration = (firstName: string, lastName: string, email: string,
     dispatch(setIsLoading(true))
     try{
         const response = await AuthService.registration(firstName, lastName, email, password)
-        localStorage.setItem('token', response.data.accessToken);
-        dispatch(setIsAuth(true))
-        dispatch(setUser(response.data.user))
-        dispatch(setIsLoading(false))
-        dispatch(setError(''))
+        AuthService.authorizeUser(dispatch, response)
     }catch(e: any){
-        if(e.response){
-            if(Array.isArray(e.response.data.message)){
-                dispatch(setError(e.response.data.message[0]))
-            }else{
-                dispatch(setError(e.response.data.message))
-            }
-            dispatch(setIsLoading(false))
-        }
+        AuthService.catchAuthorizationError(dispatch, e)
     }
 }
 
@@ -86,10 +63,7 @@ export const checkAuth = () => async (dispatch: AppDispatch) => {
     dispatch(setIsLoading(true))
     try{
         const response = await axios.get<AuthResponse>(`${API_URL}/auth/refresh`, {withCredentials: true})
-        localStorage.setItem('token', response.data.accessToken)
-        dispatch(setIsAuth(true))
-        dispatch(setUser(response.data.user))
-        dispatch(setIsLoading(false))
+        AuthService.authorizeUser(dispatch, response)
     }catch(e){
         dispatch(setIsLoading(false))
     }

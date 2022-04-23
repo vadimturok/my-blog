@@ -12,17 +12,12 @@ const App: FC = () => {
   useEffect(() => {
     dispatch(fetchAllPosts(PostSortActions.SORT_BY_TIME))
     dispatch(fetchTodayPosts(5))
-  }, [dispatch])
-
-  useEffect(() => {
     if(localStorage.getItem('token')){
         dispatch(checkAuth())
     }
   }, [dispatch])
 
-  return (
-        <AppRoutes/>
-  );
+  return <AppRoutes/>
 };
 
 export default App;

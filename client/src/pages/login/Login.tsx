@@ -50,7 +50,12 @@ const Login: FC = () => {
                         isRequired={true}
                         type={'password'}
                     />
-                    <Button type={'submit'} progress={isLoading ? <CircularProgress style={{color: 'white'}} size={20}/> : null}  text={'Continue'}/>
+                    <Button
+                        type={'submit'}
+                        progress={isLoading ?
+                            <CircularProgress style={{color: 'white'}} size={20}/> : null}
+                        text={'Continue'}
+                    />
                 </form>
             </div>
         </div>

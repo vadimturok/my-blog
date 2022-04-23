@@ -14,8 +14,7 @@ export class UserService{
     }
 
     async createUser(userDto: UserDto): Promise<User>{
-        const user = await this.usersRepository.save(userDto);
-        return user
+        return await this.usersRepository.save(userDto)
     }
 
     async updateUser(updateUserDto: UpdateUserDto, file){
@@ -37,25 +36,18 @@ export class UserService{
     }
 
     async getAllUsers(){
-        const users = await this.usersRepository.find({
-            relations: ['posts','comments']
+        return await this.usersRepository.find({
+            relations: ['posts', 'comments']
         });
-        return users;
     }
 
-    async getById(userId: number): Promise<User | null>{
-        const user = await this.usersRepository.findOne(userId, {
+    async getById(userId: number){
+        return await this.usersRepository.findOne(userId, {
             relations: ['posts']
         })
-        return user
     }
 
-    async getByEmail(email: string): Promise<User | null>{
-        const user = await this.usersRepository.findOne({email: email}, {relations: ['posts']})
-        if(user){
-            return user
-        }else{
-            return null
-        }
+    async getByEmail(email: string){
+        return await this.usersRepository.findOne({email: email}, {relations: ['posts']})
     }
 }

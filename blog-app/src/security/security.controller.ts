@@ -53,11 +53,10 @@ export class SecurityController{
         res.sendStatus(HttpStatus.OK)
     }
 
-    //@UseGuards(AuthGuard)
+
     @Get('/refresh')
     async refresh(@Req() req, @Res() res){
         const {refreshToken} = req.cookies
-        console.log(refreshToken)
         const userData = await this.securityService.refresh(refreshToken)
         res.cookie('refreshToken', userData.refreshToken, {maxAge: 30 * 24 * 60 * 60 * 1000, httpOnly: true})
         res.json(userData)

@@ -18,22 +18,12 @@ export class SecurityService{
         }
         const hashedPassword = await bcrypt.hash(userDto.password, 5);
         const user = await this.userService.createUser({...userDto, password: hashedPassword})
-        const newUser = await this.userService.getById(user.id)
-        console.log('USER: ', newUser)
         const tokens =  this.tokenService.generateTokens(user);
-        await this.tokenService.saveToken(newUser.id, tokens.refreshToken)
-        console.log('POSTS: ', newUser.posts)
+        await this.tokenService.saveToken(user.id, tokens.refreshToken)
+
         return{
             ...tokens,
-            user: {
-                id: newUser.id,
-                firstName: newUser.firstName,
-                lastName: newUser.lastName,
-                email: newUser.email,
-                role: newUser.role,
-                profilePicture: newUser.profilePicture,
-                posts: newUser.posts
-            }
+            user
         }
     }
 
@@ -48,18 +38,9 @@ export class SecurityService{
         }
         const tokens =  this.tokenService.generateTokens(user);
         await this.tokenService.saveToken(user.id, tokens.refreshToken)
-
         return{
             ...tokens,
-            user: {
-                id: user.id,
-                firstName: user.firstName,
-                lastName: user.lastName,
-                email: user.email,
-                role: user.role,
-                profilePicture: user.profilePicture,
-                posts: user.posts
-            }
+            user
         }
     }
 
@@ -82,15 +63,7 @@ export class SecurityService{
 
         return{
             ...tokens,
-            user: {
-                id: user.id,
-                firstName: user.firstName,
-                lastName: user.lastName,
-                email: user.email,
-                role: user.role,
-                profilePicture: user.profilePicture,
-                posts: user.posts
-            }
+            user
         }
     }
 }

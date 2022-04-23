@@ -22,11 +22,4 @@ export class CommentService{
             relations: ['user', 'post']
         })
     }
-
-    async getAllComments(): Promise<Comment[]>{
-        const posts = await this.commentRepository.find({
-            relations: ['user', 'post']
-        })
-        return posts
-    }
 }

@@ -5,7 +5,7 @@ import * as firebaseAdmin from 'firebase-admin'
 import * as serviceAccount from '../post-images-storage-firebase-adminsdk-7r152-efa03de64d.json'
 
 
-const admin = firebaseAdmin.initializeApp({
+export const admin = firebaseAdmin.initializeApp({
   // @ts-ignore
   credential: firebaseAdmin.credential.cert(serviceAccount)
 })
@@ -16,13 +16,6 @@ async function bootstrap() {
   const app = await NestFactory.create(AppModule);
   app.use(cookieParser());
   app.enableCors({credentials: true, origin: process.env.CLIENT_URL});
-
-
-  console.log(process.env.NODE_ENV)
-  console.log(process.env.PORT)
-  console.log(process.env.DB_HOST)
-  console.log(process.env.DB_PORT)
-
 
   await app.listen(PORT, () => console.log(`Server running om port: ${PORT}`));
 }

@@ -15,8 +15,4 @@ export class CommentController{
         return this.commentService.createComment(commentDto)
     }
 
-    @Get()
-    getAllComments(){
-        return this.commentService.getAllComments()
-    }
 }
