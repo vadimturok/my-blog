@@ -17,6 +17,7 @@ import {LoginUserDto} from "../user/dto/login.user.dto";
 import {UpdateUserDto} from "../user/dto/update-user.dto";
 import {FileFieldsInterceptor} from "@nestjs/platform-express";
 import {UserService} from "../user/user.service";
+import { AuthGuard } from "../authorization/auth.guard";
 
 @Controller('auth')
 export class SecurityController{
@@ -40,7 +41,7 @@ export class SecurityController{
         res.json(userData)
     }
 
-    //@UseGuards(AuthGuard)
+    @UseGuards(AuthGuard)
     @Delete('/logout')
     async logout(@Req() req, @Res() res){
         const {refreshToken} = req.cookies
@@ -52,7 +53,7 @@ export class SecurityController{
         res.sendStatus(HttpStatus.OK)
     }
 
-
+    @UseGuards(AuthGuard)
     @Get('/refresh')
     async refresh(@Req() req, @Res() res){
         const {refreshToken} = req.cookies
