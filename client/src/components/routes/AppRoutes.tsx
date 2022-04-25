@@ -8,11 +8,10 @@ import RequireAuth from "./RequireAuth";
 import CreatePost from "../../pages/createPost/CreatePost";
 import Profile from "../../pages/profile/Profile";
 import Post from "../../pages/post/Post";
-import {motion} from "framer-motion";
 import About from "../../pages/about/About";
 import Videos from "../../pages/videos/Videos";
 import Contact from "../../pages/contact/Contact";
-
+import {motion} from "framer-motion";
 
 const AppRoutes: FC = () => {
     const {pathname} = useLocation()

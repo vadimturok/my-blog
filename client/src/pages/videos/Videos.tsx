@@ -4,6 +4,7 @@ import {useTitle} from "../../hooks";
 
 const Videos: FC = () => {
     useTitle('Videos')
+
     return (
         <div className={'videos'}>
             <h2>In development...</h2>

@@ -6,6 +6,7 @@ import {Link, useParams} from "react-router-dom";
 import Comment from "../../components/comment/Comment";
 import CommentForm from "../../components/commentForm/CommentForm";
 import FavoriteBorderIcon from '@mui/icons-material/FavoriteBorder';
+import ChatBubbleOutlineIcon from '@mui/icons-material/ChatBubbleOutline';
 import {useDispatch} from "react-redux";
 import {fetchPostById} from "../../store/reducers/currentPost/action-creators";
 import NotFound from "../404/NotFound";
@@ -54,10 +55,17 @@ const Post = () => {
                             <h1>{post.title}</h1>
                         </div>
                         <div className={'postText'} dangerouslySetInnerHTML={{__html: post.text.replace(/\n/g,"<br />")}}/>
-                        <div className={'postLike'}>
-                            <FavoriteBorderIcon className={'likeIcon'}/>
-                            <span>Like post</span>
+                        <div className={'postActionsInfo'}>
+                            <div className={'postLike'}>
+                                <FavoriteBorderIcon className={'postActionsIcon like'}/>
+                                <span>{post.likes}</span>
+                            </div>
+                            <div className={'postLike'}>
+                                <ChatBubbleOutlineIcon className={'postActionsIcon'}/>
+                                <span>{post.comments.length}</span>
+                            </div>
                         </div>
+
                     </div>
                     <div className={'postComments'}>
                         <h2>Comments</h2>

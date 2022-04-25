@@ -85,29 +85,44 @@
 
       .postText{
         padding: 0 50px 20px 50px;
-        font-size: 10px;
+        ul{
+          li{
+            margin-left: 17px;
+          }
+        }
       }
 
-      .postLike{
+      .postActionsInfo{
         padding: 0 50px 50px 50px;
         display: flex;
-        align-items: center;
-        gap: 10px;
+        gap: 20px;
 
-        .likeIcon{
-          cursor: pointer;
-          padding: 5px;
-          border-radius: 50%;
-          transition: 0.1s;
-
-          &.liked{
-            background-color: rgba(255, 0, 0, 0.18);
-            color: red;
+        .postLike{
+          display: flex;
+          align-items: center;
+          gap: 4px;
+          span{
+            font-size: 15px;
           }
 
-          &:hover{
-            background-color: rgba(255, 0, 0, 0.18);
-            color: red;
+          .postActionsIcon{
+            padding: 5px;
+
+            &.like{
+              cursor: pointer;
+              border-radius: 50%;
+              transition: 0.1s;
+
+              &.liked{
+                background-color: rgba(255, 0, 0, 0.18);
+                color: red;
+              }
+
+              &:hover{
+                background-color: rgba(255, 0, 0, 0.18);
+                color: red;
+              }
+            }
           }
         }
       }

@@ -10,7 +10,7 @@ import {AuthorizationModule} from "../authorization/authorization.module";
         UserModule,
         TokenModule,
         AuthorizationModule,
-        UserModule
+        UserModule,
     ],
     providers: [SecurityService],
     controllers: [SecurityController]

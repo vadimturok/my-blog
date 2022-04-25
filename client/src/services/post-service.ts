@@ -48,4 +48,18 @@ export default class PostService{
             return post
         })
     }
+
+    static orderByLikes(posts: IPost[]): IPost[]{
+        return posts.sort((a,b) =>
+            b.likes - a.likes)
+    }
+    static orderByComments(posts: IPost[]): IPost[]{
+        return posts.sort((a, b) =>
+            b.comments.length - a.comments.length);
+    }
+    static orderByTime(posts: IPost[]): IPost[]{
+        return posts.sort((a, b) =>
+            new Date(b.dateAndTimePublish).getTime() -
+            new Date(a.dateAndTimePublish).getTime())
+    }
 }

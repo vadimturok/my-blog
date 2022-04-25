@@ -33,7 +33,7 @@ const FileUpload: FC<FileUploadProps> = ({handleFile, displayImage}) => {
                 onChange={handleChange}
             />
             {displayImage && <div className={'imagePreview'}>
-                {imageUrl && <img src={imageUrl} alt="postPicture"/>}
+                {imageUrl && <img width={300} height={300} src={imageUrl} alt="postPicture"/>}
             </div>}
         </div>
     );

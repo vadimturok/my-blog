@@ -1,9 +1,11 @@
-import {HttpException, HttpStatus, Injectable} from "@nestjs/common";
+import {HttpException, HttpStatus, Injectable, UnauthorizedException} from "@nestjs/common";
 import {TokenService} from "../token/token.service";
 import {UserDto} from "../user/dto/user.dto";
 import {UserService} from "../user/user.service";
 import * as bcrypt from 'bcryptjs'
+import * as uuid from 'uuid'
 import {LoginUserDto} from "../user/dto/login.user.dto";
+import {User} from "../user/user.entity";
 
 @Injectable()
 export class SecurityService{
@@ -66,4 +68,5 @@ export class SecurityService{
             user
         }
     }
+
 }

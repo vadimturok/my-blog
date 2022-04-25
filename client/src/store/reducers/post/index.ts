@@ -27,12 +27,11 @@ export default function postsReducer(state = initialState, action: PostsAction):
         case PostActionsEnum.SET_POSTS:
             return {...state, posts: action.payload}
         case PostSortActions.SORT_BY_TIME:
-            return {...state, sortType: PostSortActions.SORT_BY_TIME, posts: state.posts.sort((a, b) =>
-                    new Date(b.dateAndTimePublish).getTime() - new Date(a.dateAndTimePublish).getTime())}
+            return {...state, sortType: PostSortActions.SORT_BY_TIME, posts: PostService.orderByTime(state.posts)}
         case PostSortActions.SORT_BY_LIKES:
-            return {...state, sortType: PostSortActions.SORT_BY_LIKES ,posts: state.posts.sort((a,b) => b.likes - a.likes)}
+            return {...state, sortType: PostSortActions.SORT_BY_LIKES ,posts: PostService.orderByLikes(state.posts)}
         case PostSortActions.SORT_BY_COMMENTS:
-            return {...state, sortType: PostSortActions.SORT_BY_COMMENTS, posts: state.posts.sort((a, b) => b.comments.length - a.comments.length)}
+            return {...state, sortType: PostSortActions.SORT_BY_COMMENTS, posts: PostService.orderByComments(state.posts)}
         case PostActionsEnum.SET_TODAY_POSTS:
             return {...state, todayPosts: action.payload}
         default:

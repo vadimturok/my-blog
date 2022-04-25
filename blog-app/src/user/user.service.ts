@@ -13,7 +13,7 @@ export class UserService{
                 private fileService: FileService) {
     }
 
-    async createUser(userDto: UserDto): Promise<User>{
+    async createUser(userDto: UserDto | User): Promise<User>{
         return await this.usersRepository.save(userDto)
     }
 

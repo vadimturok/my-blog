@@ -15,7 +15,7 @@ const PostItem: FC<PostItemProps> = ({post, displayImage}) => {
 
     return (
         <div className={'postItem'}>
-            {displayImage && <img className={'postImg'} src={`${post.postImage}`} alt="postPicture"/>}
+            {displayImage && <img width={700} height={270} className={'postImg'} src={`${post.postImage}`} alt="postPicture"/>}
             <div className={'previewInfo'}>
                 <div className={'authorInfo'}>
                     <img src={post.user.profilePicture} alt="avatar"/>

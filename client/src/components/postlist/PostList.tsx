@@ -13,12 +13,10 @@ const PostList: FC = () => {
     return (
         <div className={'postList'}>
             {status !== 'succeeded'  ? <Loader/> : posts.length === 0 ? <div className={'noPosts'}>No posts yet</div> :
-                posts.map(post => <motion.div
-                    key={post.id}
-                    initial={{opacity: 0}}
-                    animate={{opacity: 1}}>
-                    <PostItem displayImage={true} post={post}/>
-                </motion.div>)
+                posts.map(post =>
+                    <motion.div key={post.id} initial={{opacity: 0}} animate={{opacity: 1}}>
+                        <PostItem displayImage={true} post={post}/>
+                    </motion.div>)
             }
         </div>
     );

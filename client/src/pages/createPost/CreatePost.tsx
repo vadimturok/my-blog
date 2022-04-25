@@ -72,14 +72,16 @@ const CreatePost: FC = () => {
                             onEditorStateChange={(state: any) => setEditorState(state)}
                         />
                     </div>
-                    <div className={'createButton'}>
-                        <Button
-                            handleClick={handleSubmit(onSubmit)}
-                            text={'Create'}
-                            progress={isLoading && <CircularProgress style={{color: 'white'}} size={20}/>}
-                        />
+                    <div className={'createBottom'}>
+                        <div className={'createButton'}>
+                            <Button
+                                handleClick={handleSubmit(onSubmit)}
+                                text={'Create'}
+                                progress={isLoading && <CircularProgress style={{color: 'white'}} size={20}/>}
+                            />
+                        </div>
+                        {isError && <div className={'alert danger'}>{isError}</div>}
                     </div>
-                {isError && <div className={'alert danger'}>{isError}</div>}
             </div>
         </div>
     );
