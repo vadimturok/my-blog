@@ -1,4 +1,4 @@
-import React, {useEffect} from 'react';
+import React, {useEffect, useState} from 'react';
 import './post.scss'
 import LatestList from "../../components/latestlist/LatestList";
 import KeyboardBackspaceIcon from '@mui/icons-material/KeyboardBackspace';
@@ -8,21 +8,26 @@ import CommentForm from "../../components/commentForm/CommentForm";
 import FavoriteBorderIcon from '@mui/icons-material/FavoriteBorder';
 import ChatBubbleOutlineIcon from '@mui/icons-material/ChatBubbleOutline';
 import {useDispatch} from "react-redux";
-import {fetchPostById} from "../../store/reducers/currentPost/action-creators";
+import {fetchPostById, likePost, setIsLiked} from "../../store/reducers/currentPost/action-creators";
 import NotFound from "../404/NotFound";
 import Loader from "../../components/loader/Loader";
 import {useAppSelector, useTitle} from "../../hooks";
 import {formatDate} from "../../helpers";
+import FavoriteIcon from '@mui/icons-material/Favorite';
+import ModalWindow from "../../components/modalWindow/ModalWindow";
 
 const Post = () => {
     const {postId} = useParams()
     const dispatch = useDispatch()
-    const {post, error} = useAppSelector(state => state.currentPost)
+    const {post, error, isLiked} = useAppSelector(state => state.currentPost)
+    const {user, isAuth} = useAppSelector(state => state.auth)
+    const [showModal, setShowModal] = useState<boolean>(false)
     useTitle(post.title)
 
     useEffect(() => {
+        dispatch(setIsLiked(false))
         dispatch(fetchPostById(Number(postId)))
-    }, [postId, dispatch])
+    }, [postId, dispatch, user])
 
     if(error){
         return <NotFound/>
@@ -32,9 +37,18 @@ const Post = () => {
         return <Loader/>
     }
 
+    const addLike = () => {
+        if(!isAuth){
+            setShowModal(true)
+        }else if(!isLiked) {
+            dispatch(likePost(Number(postId)))
+        }
+    }
+
 
     return (
             <div className={'postWrapper'}>
+                <ModalWindow showModal={showModal} setShowModal={setShowModal}/>
                 <div className={'postInner'}>
                     <div className={'postDescription'}>
                         <img src={`${post.postImage}`} alt="postPicture"/>
@@ -57,8 +71,10 @@ const Post = () => {
                         <div className={'postText'} dangerouslySetInnerHTML={{__html: post.text.replace(/\n/g,"<br />")}}/>
                         <div className={'postActionsInfo'}>
                             <div className={'postLike'}>
-                                <FavoriteBorderIcon className={'postActionsIcon like'}/>
-                                <span>{post.likes}</span>
+                                {isLiked ? <FavoriteIcon className={'liked'}/> :
+                                    <FavoriteBorderIcon onClick={addLike} className={'postActionsIcon like'}/>
+                                }
+                                <span>{post.userLikes.length}</span>
                             </div>
                             <div className={'postLike'}>
                                 <ChatBubbleOutlineIcon className={'postActionsIcon'}/>

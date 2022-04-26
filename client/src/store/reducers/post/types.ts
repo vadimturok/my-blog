@@ -1,6 +1,7 @@
 import {IPost} from "../../../types/post-type";
 import {IUser} from "../../../types/user-type";
 import {IComment} from "../../../types/comment-type";
+import {ILike} from "../../../types/like-type";
 
 export interface PostState{
     isLoading: boolean;
@@ -26,7 +27,13 @@ export enum PostActionsEnum{
     SET_STATUS = 'SET_STATUS',
     SET_TODAY_POSTS = 'SET_TODAY_POSTS',
     UPDATE_POSTS = 'UPDATE_POSTS',
-    UPDATE_COMMENTS = 'UPDATE_COMMENTS'
+    UPDATE_COMMENTS = 'UPDATE_COMMENTS',
+    UPDATE_LIKES = 'UPDATE_LIKES'
+}
+
+export interface UpdateLikes{
+    type: PostActionsEnum.UPDATE_LIKES,
+    payload: ILike
 }
 
 export interface UpdatePosts{
@@ -81,4 +88,5 @@ export type PostsAction =
     SetStatus |
     SetTodayPosts |
     UpdatePosts |
-    UpdateComments
+    UpdateComments |
+    UpdateLikes

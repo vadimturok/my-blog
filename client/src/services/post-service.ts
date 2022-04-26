@@ -3,6 +3,7 @@ import {IPost} from "../types/post-type";
 import {AxiosResponse} from "axios";
 import {IComment} from "../types/comment-type";
 import {IUser} from "../types/user-type";
+import {ILike} from "../types/like-type";
 
 export default class PostService{
     static async createPost(picture: any, title: string, text: string, userId: number){
@@ -28,6 +29,10 @@ export default class PostService{
     static async getTodayPosts(quantity: number): Promise<AxiosResponse<IPost[]>>{
         return api.get<IPost[]>(`/posts/today?quantity=${quantity}`)
     }
+    
+    static async likePost(userId: number, postId: number): Promise<AxiosResponse<ILike>>{
+        return api.post<ILike>('/likes', {userId, postId})
+    }
 
     static updatePostsById(user: IUser, posts: IPost[]): IPost[]{
         return posts.map(post => {
@@ -49,9 +54,19 @@ export default class PostService{
         })
     }
 
+    static updatePostByLike(like: ILike, posts: IPost[]): IPost[]{
+        return posts.map(post => {
+            if(post.id === like.post.id){
+                post.userLikes.push(like)
+                return post
+            }
+            return post
+        })
+    }
+
     static orderByLikes(posts: IPost[]): IPost[]{
         return posts.sort((a,b) =>
-            b.likes - a.likes)
+            b.userLikes.length - a.userLikes.length)
     }
     static orderByComments(posts: IPost[]): IPost[]{
         return posts.sort((a, b) =>

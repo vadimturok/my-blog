@@ -4,11 +4,14 @@ import {IPost} from "../../../types/post-type";
 const initialState: CurrentPostState = {
     error: '',
     post: {} as IPost,
-    addCommentStatus: 'default'
+    addCommentStatus: 'default',
+    isLiked: false
 }
 
 export default function currentPostReducer(state = initialState, action: CurrentPostAction): CurrentPostState{
     switch (action.type){
+        case CurrentPostEnum.SET_IS_LIKED:
+            return {...state, isLiked: action.payload}
         case CurrentPostEnum.SET_ERROR:
             return {...state, error: action.payload}
         case CurrentPostEnum.SET_POST:

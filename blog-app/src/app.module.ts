@@ -12,6 +12,7 @@ import { TokenModule } from './token/token.module';
 import { AuthorizationModule } from './authorization/authorization.module';
 import { FileModule } from './file/file.module';
 import {ServeStaticModule} from "@nestjs/serve-static";
+import { LikeModule } from './like/like.module';
 import * as path from "path";
 
 
@@ -41,7 +42,8 @@ import * as path from "path";
       FileModule,
       ServeStaticModule.forRoot({
           rootPath: path.resolve(__dirname, 'static')
-      })
+      }),
+      LikeModule
   ],
   controllers: [],
   providers: [],

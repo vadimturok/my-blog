@@ -12,6 +12,8 @@ const initialState: PostState = {
 
 export default function postsReducer(state = initialState, action: PostsAction): PostState{
     switch(action.type){
+        case PostActionsEnum.UPDATE_LIKES:
+            return {...state, posts: PostService.updatePostByLike(action.payload, state.posts)}
         case PostActionsEnum.UPDATE_COMMENTS:
             return {...state, posts: PostService.updatePostByComment(action.payload, state.posts)}
         case PostActionsEnum.UPDATE_POSTS:

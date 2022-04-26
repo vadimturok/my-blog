@@ -1,10 +1,9 @@
-import {CurrentPostEnum, SetAddComment, SetError, SetPost} from "./types";
+import {CurrentPostEnum, SetAddComment, SetCommentStatus, SetError, SetIsLiked, SetPost} from "./types";
 import {IPost} from "../../../types/post-type";
-import {AppDispatch} from "../../index";
+import {AppDispatch, RootState} from "../../index";
 import PostService from "../../../services/post-service";
 import {IComment} from "../../../types/comment-type";
-import {SetCommentStatus} from "./types";
-import {updateComments} from "../post/action-creators";
+import {updateComments, updateLikes} from "../post/action-creators";
 
 export const setError = (error: string): SetError => {
     return {type: CurrentPostEnum.SET_ERROR, payload: error}
@@ -21,12 +20,21 @@ export const setPost = (post: IPost): SetPost => {
     return {type: CurrentPostEnum.SET_POST, payload: post}
 }
 
-export const fetchPostById = (postId: number) => async (dispatch: AppDispatch) => {
+export const setIsLiked = (isLiked: boolean): SetIsLiked => {
+    return {type: CurrentPostEnum.SET_IS_LIKED, payload: isLiked}
+}
+
+export const fetchPostById = (postId: number) => async (dispatch: AppDispatch, getState: () => RootState) => {
     dispatch(setError(''))
     try{
+        const user = getState().auth.user
         const response = await PostService.getById(postId)
+        const isLiked = response.data.userLikes.find(like => like.user.id === user.id)
         if(response.data){
             dispatch(setPost(response.data))
+            if(isLiked){
+                dispatch(setIsLiked(true))
+            }
         }else{
             dispatch(setError('Error'))
         }
@@ -49,5 +57,19 @@ export const createComment = (text: string, postId: number, userId: number) => a
         if(e.response){
             dispatch(setCommentStatus('failed'))
         }
+    }
+}
+
+export const likePost = (postId: number) => async(dispatch: AppDispatch, getState: () => RootState) => {
+    try{
+        const currentPost = getState().currentPost.post
+        const user = getState().auth.user
+        const response =  await PostService.likePost(user.id, postId)
+        currentPost.userLikes.push(response.data)
+        dispatch(setPost(currentPost))
+        dispatch(updateLikes(response.data))
+        dispatch(setIsLiked(true))
+    }catch(e: any){
+        console.log('error response: ', e.response)
     }
 }

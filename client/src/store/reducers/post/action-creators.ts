@@ -9,6 +9,7 @@ import {
     SetStatus,
     SetTodayPosts,
     UpdateComments,
+    UpdateLikes,
     UpdatePosts
 } from "./types";
 import {IPost} from "../../../types/post-type";
@@ -16,6 +17,7 @@ import {AppDispatch} from "../../index";
 import PostService from "../../../services/post-service";
 import {IUser} from "../../../types/user-type";
 import {IComment} from "../../../types/comment-type";
+import {ILike} from "../../../types/like-type";
 
 
 export const setSort = (sortType: PostSortActions): PostsAction => {
@@ -58,6 +60,9 @@ export const setUpdatePosts = (user: IUser): UpdatePosts => {
 
 export const updateComments = (comment: IComment): UpdateComments => {
     return {type: PostActionsEnum.UPDATE_COMMENTS, payload: comment}
+}
+export const updateLikes = (like: ILike): UpdateLikes => {
+    return {type: PostActionsEnum.UPDATE_LIKES, payload: like}
 }
 
 export const fetchAllPosts = (sortType: PostSortActions) => async(dispatch: AppDispatch) => {

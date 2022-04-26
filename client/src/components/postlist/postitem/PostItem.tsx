@@ -37,7 +37,7 @@ const PostItem: FC<PostItemProps> = ({post, displayImage}) => {
             <div className={'postReactions'}>
                 <div className={'postReactionsInfo'}>
                     <FavoriteBorderIcon className={'postReactionsIcon'}/>
-                    <span>{post.likes} Likes</span>
+                    <span>{post.userLikes.length} Likes</span>
                 </div>
                 <div className={'postReactionsInfo'}>
                     <ChatBubbleOutlineIcon className={'postReactionsIcon'}/>

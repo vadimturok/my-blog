@@ -5,6 +5,7 @@ import {Repository} from "typeorm";
 import {PostDto} from "./dto/post.dto";
 import {UserService} from "../user/user.service";
 import {FileService} from "../file/file.service";
+import {Like} from "../like/like.entity";
 
 @Injectable()
 export class PostService{
@@ -31,13 +32,13 @@ export class PostService{
 
     async getAllPosts(): Promise<Post[]>{
         return await this.postRepository.find({
-            relations: ['comments']
+            relations: ['comments', 'userLikes']
         })
     }
 
     async getPostById(postId: number): Promise<Post>{
         const post = await this.postRepository.findOne(postId, {
-            relations: ['comments']
+            relations: ['comments', 'userLikes']
         })
         if(post){
             return post

@@ -1,6 +1,7 @@
 import {Column, Entity, ManyToOne, OneToMany, PrimaryGeneratedColumn} from "typeorm";
 import {User} from "../user/user.entity";
 import {Comment} from "../comment/commnet.entity";
+import {Like} from "../like/like.entity";
 
 @Entity({name: 'posts'})
 export class Post{
@@ -17,8 +18,8 @@ export class Post{
     @Column()
     dateAndTimePublish: Date
 
-    @Column({default: 0})
-    likes: number
+    @OneToMany(() => Like, (like) => like.post)
+    userLikes: Like[]
 
     @Column()
     postImage: string;
@@ -28,4 +29,6 @@ export class Post{
 
     @OneToMany(() => Comment, (comment) => comment.post, {eager: true})
     comments: Comment[]
+
+
 }

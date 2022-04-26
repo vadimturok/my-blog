@@ -1,6 +1,7 @@
 import {Column, Entity, OneToMany, PrimaryGeneratedColumn} from "typeorm";
 import {Post} from "../post/post.entity";
 import {Comment} from "../comment/commnet.entity";
+import {Like} from "../like/like.entity";
 
 
 export enum UserRole{
@@ -38,4 +39,7 @@ export class User{
 
     @OneToMany(() => Comment, (comment) => comment.user)
     comments: Comment[]
+
+    @OneToMany(() => Like, (like) => like.user)
+    likedPosts: Like[]
 }

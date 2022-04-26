@@ -105,6 +105,10 @@
             font-size: 15px;
           }
 
+          .liked{
+            color: red;
+          }
+
           .postActionsIcon{
             padding: 5px;
 
@@ -112,11 +116,6 @@
               cursor: pointer;
               border-radius: 50%;
               transition: 0.1s;
-
-              &.liked{
-                background-color: rgba(255, 0, 0, 0.18);
-                color: red;
-              }
 
               &:hover{
                 background-color: rgba(255, 0, 0, 0.18);

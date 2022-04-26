@@ -53,7 +53,7 @@ export class SecurityController{
         res.sendStatus(HttpStatus.OK)
     }
 
-    @UseGuards(AuthGuard)
+
     @Get('/refresh')
     async refresh(@Req() req, @Res() res){
         const {refreshToken} = req.cookies
