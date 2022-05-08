@@ -5,7 +5,6 @@
 >  [_here_](https://deploy-nest-react-blog-app.herokuapp.com/). <!-- If you have the project hosted somewhere, include the link here. -->
 
 ## Table of Contents
-* [General Info](#general-information)
 * [Technologies Used](#technologies-used)
 * [Features](#features)
 * [Screenshots](#screenshots)
@@ -13,13 +12,6 @@
 * [Project Status](#project-status)
 * [Contact](#contact)
 <!-- * [License](#license) -->
-
-
-## General Information
-- Simple blog application
-- Helps people to share their thoughts
-- Good works on smaller displays
-- Cool design
 
 
 ## Technologies Used
@@ -76,7 +68,7 @@ npm start
 
 
 ## Project Status
-Project is: _in progress_
+Project is: _completed_
 
 
 ## Contact
