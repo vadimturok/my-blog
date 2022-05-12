@@ -39,6 +39,7 @@ Main features of the app:
 - Authorization & authentication system
 - Editing user info
 - Viewing own posts
+- Liking posts
 
 
 ## Screenshots
@@ -72,7 +73,7 @@ Project is: _completed_
 
 
 ## Contact
-Contact with me via e-mail: turokvadim2510@gmail.com or on Twitter: [Vadim Turok](https://twitter.com/stefanio228)
+Contact with me via e-mail: turokvadim2510@gmail.com
 
 
 <!-- Optional -->
