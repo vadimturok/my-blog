@@ -39,7 +39,7 @@ const CreatePost: FC = () => {
         try{
             const response = await PostService.createPost(file, data['Title'], stringFromHtml, user.id)
             if(paginationInfo.currentPage === 1){
-                dispatch(fetchAllPostsByQuery(1, 3))
+                dispatch(fetchAllPostsByQuery(1, 4))
             }
             dispatch(fetchTodayPosts(5))
             navigate(`/posts/${response.data.id}`)
