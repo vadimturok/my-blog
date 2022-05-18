@@ -9,7 +9,8 @@ import {fetchAllPostsByQuery} from "../../store/reducers/post/action-creators";
 
 
 const PostList: FC = () => {
-    const {posts, status, currentPage, totalPages, todayPosts} = useSelector((state: RootState) => state.posts)
+    const {posts, status} = useSelector((state: RootState) => state.posts)
+    const {currentPage, totalPages} = useSelector((state: RootState) => state.posts.paginationInfo)
     const dispatch = useDispatch()
 
     const handleNext = () => {

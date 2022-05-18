@@ -2,17 +2,12 @@ import {
     PostActionsEnum,
     PostsAction,
     PostSortActions,
-    SetAddPost,
-    SetCurrentPage,
     SetError,
     SetIsLoading,
-    SetItemCount,
-    SetItemsPerPage,
+    SetPaginationInfo,
     SetPosts,
     SetStatus,
     SetTodayPosts,
-    SetTotalPages,
-    SetTotalPosts,
     UpdateComments,
     UpdateLikes,
     UpdatePosts
@@ -23,6 +18,7 @@ import PostService from "../../../services/post-service";
 import {IUser} from "../../../types/user-type";
 import {IComment} from "../../../types/comment-type";
 import {ILike} from "../../../types/like-type";
+import {PaginationMeta} from "../../../types/post-pagination-response";
 
 
 export const setSort = (sortType: PostSortActions): PostsAction => {
@@ -47,20 +43,6 @@ export const setIsLoading = (isLoading: boolean): SetIsLoading => {
     return {type: PostActionsEnum.SET_IS_LOADING, payload: isLoading}
 }
 
-export const setCurrentPage = (page: number): SetCurrentPage => {
-    return {type: PostActionsEnum.SET_CURRENT_PAGE, payload: page}
-}
-export const setTotalPages = (totalPages: number): SetTotalPages => {
-    return {type: PostActionsEnum.SET_TOTAL_PAGES, payload: totalPages}
-}
-
-export const setItemsPerPage = (items: number): SetItemsPerPage => {
-    return {type: PostActionsEnum.SET_ITEMS_PER_PAGE, payload: items}
-}
-export const setTotalPosts = (totalPosts: number): SetTotalPosts => {
-    return {type: PostActionsEnum.SET_TOTAL_POSTS, payload: totalPosts}
-}
-
 export const setPosts = (posts: IPost[]): SetPosts => {
     return {type: PostActionsEnum.SET_POSTS, payload: posts}
 }
@@ -69,12 +51,8 @@ export const setStatus = (status: 'idle' | 'loading' | 'succeeded' | 'failed'): 
     return {type: PostActionsEnum.SET_STATUS, payload: status}
 }
 
-export const setAddPost = (post: IPost): SetAddPost => {
-    return {type: PostActionsEnum.ADD_POST, payload: post}
-}
-
-export const setItemCount = (count: number): SetItemCount => {
-    return {type: PostActionsEnum.SET_ITEM_COUNT, payload: count}
+export const setPaginationInfo = (info: PaginationMeta): SetPaginationInfo => {
+    return {type: PostActionsEnum.SET_PAGINATION_INFO, payload: info}
 }
 
 export const setUpdatePosts = (user: IUser): UpdatePosts => {
@@ -88,30 +66,13 @@ export const updateLikes = (like: ILike): UpdateLikes => {
     return {type: PostActionsEnum.UPDATE_LIKES, payload: like}
 }
 
-export const fetchAllPosts = (sortType: PostSortActions) => async(dispatch: AppDispatch) => {
-    dispatch(setStatus('loading'))
-    try{
-        const response = await PostService.getAll()
-        dispatch(setStatus('succeeded'))
-        dispatch(setPosts(response.data))
-        dispatch(setSort(sortType))
-    }catch(e: any){
-        dispatch(setError(e.response.data.message))
-        dispatch(setStatus('failed'))
-    }
-}
-
 export const fetchAllPostsByQuery = (page: number, limit: number) => async (dispatch: AppDispatch) => {
     dispatch(setStatus('loading'))
     try{
         const response = await PostService.getAllByQuery(page, limit)
         dispatch(setStatus('succeeded'))
         dispatch(setPosts(response.data.items))
-        dispatch(setCurrentPage(response.data.meta.currentPage))
-        dispatch(setTotalPages(response.data.meta.totalPages))
-        dispatch(setTotalPosts(response.data.meta.totalItems))
-        dispatch(setItemCount(response.data.meta.itemCount))
-        dispatch(setItemsPerPage(response.data.meta.itemsPerPage))
+        dispatch(setPaginationInfo(response.data.meta))
         dispatch(setSort(PostSortActions.SORT_BY_TIME))
     }catch(e: any){
         dispatch(setError(e.response.data.message))

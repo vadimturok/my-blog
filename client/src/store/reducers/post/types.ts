@@ -2,6 +2,7 @@ import {IPost} from "../../../types/post-type";
 import {IUser} from "../../../types/user-type";
 import {IComment} from "../../../types/comment-type";
 import {ILike} from "../../../types/like-type";
+import {PaginationMeta} from "../../../types/post-pagination-response";
 
 export interface PostState{
     isLoading: boolean;
@@ -10,11 +11,7 @@ export interface PostState{
     sortType: PostSortActions;
     status: 'idle' | 'loading' | 'succeeded' | 'failed';
     todayPosts: IPost[];
-    totalPosts: number;
-    totalPages: number;
-    currentPage: number;
-    itemCount: number;
-    itemsPerPage: number;
+    paginationInfo: PaginationMeta
 }
 
 
@@ -28,42 +25,18 @@ export enum PostActionsEnum{
     SET_IS_LOADING = 'SET_IS_LOADING',
     SET_ERROR = 'SET_ERROR',
     SET_POSTS = 'SET_POSTS',
-    ADD_POST = 'ADD_POST',
     SET_STATUS = 'SET_STATUS',
     SET_TODAY_POSTS = 'SET_TODAY_POSTS',
     UPDATE_POSTS = 'UPDATE_POSTS',
     UPDATE_COMMENTS = 'UPDATE_COMMENTS',
     UPDATE_LIKES = 'UPDATE_LIKES',
-    SET_CURRENT_PAGE = 'SET_CURRENT_PAGE',
-    SET_TOTAL_POSTS = 'SET_TOTAL_POSTS',
-    SET_TOTAL_PAGES = 'SET_TOTAL_PAGES',
-    SET_ITEM_COUNT = 'SET_ITEM_COUNT',
-    SET_ITEMS_PER_PAGE = 'SET_ITEMS_PER_PAGE'
+    SET_PAGINATION_INFO = 'SET_PAGINATION_INFO'
 }
 
-export interface SetItemsPerPage{
-    type: PostActionsEnum.SET_ITEMS_PER_PAGE,
-    payload: number
+export interface SetPaginationInfo{
+    type: PostActionsEnum.SET_PAGINATION_INFO,
+    payload: PaginationMeta
 }
-
-export interface SetItemCount{
-    type: PostActionsEnum.SET_ITEM_COUNT,
-    payload: number
-}
-export interface SetCurrentPage{
-    type: PostActionsEnum.SET_CURRENT_PAGE,
-    payload: number
-}
-
-export interface SetTotalPosts{
-    type: PostActionsEnum.SET_TOTAL_POSTS,
-    payload: number
-}
-export interface SetTotalPages{
-    type: PostActionsEnum.SET_TOTAL_PAGES,
-    payload: number
-}
-
 export interface UpdateLikes{
     type: PostActionsEnum.UPDATE_LIKES,
     payload: ILike
@@ -83,11 +56,6 @@ export interface SetTodayPosts{
 export interface SetStatus{
     type: PostActionsEnum.SET_STATUS,
     payload: 'idle' | 'loading' | 'succeeded' | 'failed';
-}
-
-export interface SetAddPost{
-    type: PostActionsEnum.ADD_POST;
-    payload: IPost;
 }
 
 export interface SetSort{
@@ -117,14 +85,9 @@ export type PostsAction =
     SetError |
     SetPosts |
     SetSort |
-    SetAddPost |
     SetStatus |
     SetTodayPosts |
     UpdatePosts |
     UpdateComments |
     UpdateLikes |
-    SetTotalPages |
-    SetTotalPosts |
-    SetCurrentPage |
-    SetItemCount |
-    SetItemsPerPage
+    SetPaginationInfo
