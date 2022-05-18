@@ -15,12 +15,12 @@ const PostList: FC = () => {
 
     const handleNext = () => {
         if(currentPage !== totalPages){
-            dispatch(fetchAllPostsByQuery(currentPage + 1, 3))
+            dispatch(fetchAllPostsByQuery(currentPage + 1, 4))
         }
     }
     const handlePrevious = () => {
         if(currentPage !== 1){
-            dispatch(fetchAllPostsByQuery(currentPage - 1, 3))
+            dispatch(fetchAllPostsByQuery(currentPage - 1, 4))
         }
     }
 

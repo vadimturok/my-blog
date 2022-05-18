@@ -70,6 +70,7 @@ export const fetchAllPostsByQuery = (page: number, limit: number) => async (disp
     dispatch(setStatus('loading'))
     try{
         const response = await PostService.getAllByQuery(page, limit)
+        console.log(response)
         dispatch(setStatus('succeeded'))
         dispatch(setPosts(response.data.items))
         dispatch(setPaginationInfo(response.data.meta))

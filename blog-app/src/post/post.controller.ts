@@ -49,7 +49,7 @@ export class PostController{
     }
 
     @Get('/postsQuery?')
-    getPaginatedPosts(@Query('page') page: number = 1, @Query('limit') limit: number = 4){
+    getPaginatedPosts(@Query('page') page, @Query('limit') limit){
         return this.postService.paginate({page, limit})
     }
 

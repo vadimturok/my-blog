@@ -14,7 +14,7 @@ const App: FC = () => {
 
 
   useEffect(() => {
-    dispatch(fetchAllPostsByQuery(1, 3))
+    dispatch(fetchAllPostsByQuery(1, 4))
     dispatch(fetchTodayPosts(5))
     if(localStorage.getItem('token')){
         dispatch(checkAuth())

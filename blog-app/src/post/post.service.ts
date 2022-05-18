@@ -5,8 +5,7 @@ import {Repository} from "typeorm";
 import {PostDto} from "./dto/post.dto";
 import {UserService} from "../user/user.service";
 import {FileService} from "../file/file.service";
-import {Like} from "../like/like.entity";
-import {IPaginationOptions, paginate, Pagination} from "nestjs-typeorm-paginate";
+import {IPaginationOptions, paginate, paginateRaw, paginateRawAndEntities, Pagination} from "nestjs-typeorm-paginate";
 
 @Injectable()
 export class PostService{
@@ -56,6 +55,14 @@ export class PostService{
     }
 
     async paginate(options: IPaginationOptions): Promise<Pagination<Post>>{
+        // const queryBuilder = this.postRepository.createQueryBuilder('c')
+        //     .orderBy('c.dateAndTimePublish', 'DESC')
+        //     .leftJoinAndSelect('c.user', 'user')
+        //     .leftJoinAndSelect('c.userLikes', 'userLikes')
+        //     .leftJoinAndSelect('c.comments', 'comments')
+        //
+        // const [pagination] = await paginateRawAndEntities<Post>(queryBuilder, options)
+        // return pagination
         return paginate<Post>(this.postRepository, options)
     }
 }
