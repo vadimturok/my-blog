@@ -40,6 +40,7 @@ Main features of the app:
 - Editing user info
 - Viewing own posts
 - Liking posts
+- Posts pagination
 
 
 ## Screenshots
