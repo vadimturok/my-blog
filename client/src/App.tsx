@@ -2,7 +2,7 @@ import React, {FC, useEffect} from 'react';
 import {useDispatch} from "react-redux";
 import {checkAuth} from "./store/reducers/auth/action-creators";
 import AppRoutes from "./components/routes/AppRoutes";
-import {fetchAllPosts, fetchTodayPosts} from "./store/reducers/post/action-creators";
+import {fetchAllPosts, fetchAllPostsByQuery, fetchTodayPosts} from "./store/reducers/post/action-creators";
 import {PostSortActions} from "./store/reducers/post/types";
 import FallbackComponent from "./components/errorFallback/FallbackComponent";
 import {ErrorBoundary} from "react-error-boundary";
@@ -15,7 +15,7 @@ const App: FC = () => {
 
 
   useEffect(() => {
-    dispatch(fetchAllPosts(PostSortActions.SORT_BY_TIME))
+    dispatch(fetchAllPostsByQuery(1, 3))
     dispatch(fetchTodayPosts(5))
     if(localStorage.getItem('token')){
         dispatch(checkAuth())

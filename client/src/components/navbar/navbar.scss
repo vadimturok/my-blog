@@ -25,7 +25,15 @@
 
   .right{
     display: flex;
+    align-items: center;
     gap: 10px;
+
+    .gitHubIcon{
+      display: flex;
+      gap: 10px;
+      margin-top: 5px;
+
+    }
 
     .loginButton{
       padding: 5px 10px;

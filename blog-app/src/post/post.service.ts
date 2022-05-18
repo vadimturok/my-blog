@@ -6,6 +6,7 @@ import {PostDto} from "./dto/post.dto";
 import {UserService} from "../user/user.service";
 import {FileService} from "../file/file.service";
 import {Like} from "../like/like.entity";
+import {IPaginationOptions, paginate, Pagination} from "nestjs-typeorm-paginate";
 
 @Injectable()
 export class PostService{
@@ -52,5 +53,9 @@ export class PostService{
             order: {dateAndTimePublish: 'DESC'},
             take: quantity
         })
+    }
+
+    async paginate(options: IPaginationOptions): Promise<Pagination<Post>>{
+        return paginate<Post>(this.postRepository, options)
     }
 }

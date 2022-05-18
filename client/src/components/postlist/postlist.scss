@@ -8,6 +8,27 @@
     color: gray;
     text-align: center;
   }
+  .pagination{
+    margin-bottom: 20px;
+    display: flex;
+    justify-content: center;
+    gap: 20px;
+
+    .paginationBtn{
+      padding: 5px 10px;
+      color: white;
+      font-weight: 600;
+      border-radius: 5px;
+      background-color: #7451f8;
+      border: none;
+      cursor: pointer;
+
+      &:disabled{
+        background-color: rgba(116, 81, 248, 0.62);
+        cursor: default;
+      }
+    }
+  }
 }
 
 .listLoader{

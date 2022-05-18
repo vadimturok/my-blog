@@ -32,6 +32,7 @@
     "react-draft-wysiwyg": "^1.14.7",
     "react-error-boundary": "^3.1.4",
     "react-favicon": "^1.0.0",
+    "react-github-btn": "^1.2.2",
     "react-hook-form": "^7.30.0",
     "react-redux": "^7.2.8",
     "react-router-dom": "^6.3.0",

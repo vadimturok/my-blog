@@ -18,7 +18,7 @@ export class Post{
     @Column()
     dateAndTimePublish: Date
 
-    @OneToMany(() => Like, (like) => like.post)
+    @OneToMany(() => Like, (like) => like.post, {eager: true})
     userLikes: Like[]
 
     @Column()

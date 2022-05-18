@@ -11,6 +11,6 @@ export class Like{
     @ManyToOne(() => User, (user) => user.likedPosts, {eager: true})
     user: number;
 
-    @ManyToOne(() => Post, (post) => post.userLikes, {eager: true})
+    @ManyToOne(() => Post, (post) => post.userLikes)
     post: number;
 }

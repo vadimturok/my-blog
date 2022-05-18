@@ -4,6 +4,7 @@ import {AxiosResponse} from "axios";
 import {IComment} from "../types/comment-type";
 import {IUser} from "../types/user-type";
 import {ILike} from "../types/like-type";
+import {PostPaginationResponse} from "../types/post-pagination-response";
 
 export default class PostService{
     static async createPost(picture: any, title: string, text: string, userId: number){
@@ -16,6 +17,10 @@ export default class PostService{
     }
     static async getAll(): Promise<AxiosResponse<IPost[]>>{
         return api.get<IPost[]>('/posts')
+    }
+
+    static async getAllByQuery(page: number, limit: number): Promise<AxiosResponse<PostPaginationResponse>>{
+        return api.get<PostPaginationResponse>(`/posts/postsQuery?page=${page}&limit=${limit}`)
     }
 
     static async getById(postId: number): Promise<AxiosResponse<IPost>>{

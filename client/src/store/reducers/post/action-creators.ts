@@ -3,11 +3,16 @@ import {
     PostsAction,
     PostSortActions,
     SetAddPost,
+    SetCurrentPage,
     SetError,
     SetIsLoading,
+    SetItemCount,
+    SetItemsPerPage,
     SetPosts,
     SetStatus,
     SetTodayPosts,
+    SetTotalPages,
+    SetTotalPosts,
     UpdateComments,
     UpdateLikes,
     UpdatePosts
@@ -42,6 +47,20 @@ export const setIsLoading = (isLoading: boolean): SetIsLoading => {
     return {type: PostActionsEnum.SET_IS_LOADING, payload: isLoading}
 }
 
+export const setCurrentPage = (page: number): SetCurrentPage => {
+    return {type: PostActionsEnum.SET_CURRENT_PAGE, payload: page}
+}
+export const setTotalPages = (totalPages: number): SetTotalPages => {
+    return {type: PostActionsEnum.SET_TOTAL_PAGES, payload: totalPages}
+}
+
+export const setItemsPerPage = (items: number): SetItemsPerPage => {
+    return {type: PostActionsEnum.SET_ITEMS_PER_PAGE, payload: items}
+}
+export const setTotalPosts = (totalPosts: number): SetTotalPosts => {
+    return {type: PostActionsEnum.SET_TOTAL_POSTS, payload: totalPosts}
+}
+
 export const setPosts = (posts: IPost[]): SetPosts => {
     return {type: PostActionsEnum.SET_POSTS, payload: posts}
 }
@@ -52,6 +71,10 @@ export const setStatus = (status: 'idle' | 'loading' | 'succeeded' | 'failed'): 
 
 export const setAddPost = (post: IPost): SetAddPost => {
     return {type: PostActionsEnum.ADD_POST, payload: post}
+}
+
+export const setItemCount = (count: number): SetItemCount => {
+    return {type: PostActionsEnum.SET_ITEM_COUNT, payload: count}
 }
 
 export const setUpdatePosts = (user: IUser): UpdatePosts => {
@@ -72,6 +95,24 @@ export const fetchAllPosts = (sortType: PostSortActions) => async(dispatch: AppD
         dispatch(setStatus('succeeded'))
         dispatch(setPosts(response.data))
         dispatch(setSort(sortType))
+    }catch(e: any){
+        dispatch(setError(e.response.data.message))
+        dispatch(setStatus('failed'))
+    }
+}
+
+export const fetchAllPostsByQuery = (page: number, limit: number) => async (dispatch: AppDispatch) => {
+    dispatch(setStatus('loading'))
+    try{
+        const response = await PostService.getAllByQuery(page, limit)
+        dispatch(setStatus('succeeded'))
+        dispatch(setPosts(response.data.items))
+        dispatch(setCurrentPage(response.data.meta.currentPage))
+        dispatch(setTotalPages(response.data.meta.totalPages))
+        dispatch(setTotalPosts(response.data.meta.totalItems))
+        dispatch(setItemCount(response.data.meta.itemCount))
+        dispatch(setItemsPerPage(response.data.meta.itemsPerPage))
+        dispatch(setSort(PostSortActions.SORT_BY_TIME))
     }catch(e: any){
         dispatch(setError(e.response.data.message))
         dispatch(setStatus('failed'))

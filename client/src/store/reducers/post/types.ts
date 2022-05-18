@@ -10,6 +10,11 @@ export interface PostState{
     sortType: PostSortActions;
     status: 'idle' | 'loading' | 'succeeded' | 'failed';
     todayPosts: IPost[];
+    totalPosts: number;
+    totalPages: number;
+    currentPage: number;
+    itemCount: number;
+    itemsPerPage: number;
 }
 
 
@@ -28,7 +33,35 @@ export enum PostActionsEnum{
     SET_TODAY_POSTS = 'SET_TODAY_POSTS',
     UPDATE_POSTS = 'UPDATE_POSTS',
     UPDATE_COMMENTS = 'UPDATE_COMMENTS',
-    UPDATE_LIKES = 'UPDATE_LIKES'
+    UPDATE_LIKES = 'UPDATE_LIKES',
+    SET_CURRENT_PAGE = 'SET_CURRENT_PAGE',
+    SET_TOTAL_POSTS = 'SET_TOTAL_POSTS',
+    SET_TOTAL_PAGES = 'SET_TOTAL_PAGES',
+    SET_ITEM_COUNT = 'SET_ITEM_COUNT',
+    SET_ITEMS_PER_PAGE = 'SET_ITEMS_PER_PAGE'
+}
+
+export interface SetItemsPerPage{
+    type: PostActionsEnum.SET_ITEMS_PER_PAGE,
+    payload: number
+}
+
+export interface SetItemCount{
+    type: PostActionsEnum.SET_ITEM_COUNT,
+    payload: number
+}
+export interface SetCurrentPage{
+    type: PostActionsEnum.SET_CURRENT_PAGE,
+    payload: number
+}
+
+export interface SetTotalPosts{
+    type: PostActionsEnum.SET_TOTAL_POSTS,
+    payload: number
+}
+export interface SetTotalPages{
+    type: PostActionsEnum.SET_TOTAL_PAGES,
+    payload: number
 }
 
 export interface UpdateLikes{
@@ -89,4 +122,9 @@ export type PostsAction =
     SetTodayPosts |
     UpdatePosts |
     UpdateComments |
-    UpdateLikes
+    UpdateLikes |
+    SetTotalPages |
+    SetTotalPosts |
+    SetCurrentPage |
+    SetItemCount |
+    SetItemsPerPage

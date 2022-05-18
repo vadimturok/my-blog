@@ -19,6 +19,6 @@ export class LikeService{
         like.user = likeDto.userId
         like.post = likeDto.postId
         const newLike =  await this.likeRepository.save(like)
-        return await this.likeRepository.findOne(newLike.id)
+        return await this.likeRepository.findOne(newLike.id, {relations: ['post']})
     }
 }

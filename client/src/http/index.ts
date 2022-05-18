@@ -1,8 +1,8 @@
 import axios from "axios";
 import {AuthResponse} from "../types/auth-response";
 
-//export const API_URL = 'https://deploy-nest-react-blog-app.herokuapp.com'
-export const API_URL = 'http://localhost:5000'
+export const API_URL = 'https://deploy-nest-react-blog-app.herokuapp.com'
+//export const API_URL = 'http://localhost:5000'
 
 const api = axios.create({
     withCredentials: true,

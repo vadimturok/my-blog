@@ -5,6 +5,7 @@ import {Link, useNavigate} from 'react-router-dom'
 import {useDispatch} from "react-redux";
 import {logout, setIsAuth} from "../../store/reducers/auth/action-creators";
 import {useAppSelector} from "../../hooks";
+import GitHubButton from 'react-github-btn'
 
 const Navbar: FC = () => {
     const navigate = useNavigate()
@@ -26,6 +27,21 @@ const Navbar: FC = () => {
                 </Link>
             </div>
             <div className={'right'}>
+                <div className={'gitHubIcon'}>
+                    <GitHubButton
+                        href={'https://github.com/vadimturok/my-blog'}
+                        data-icon={'octicon-star'}
+                        data-show-count={true}
+                        data-size={'large'}
+                        data-text={'Star'}
+                    />
+                    <GitHubButton
+                        href={'https://github.com/vadimturok'}
+                        data-size={'large'}
+                        data-text={'Follow @vadimturok'}
+                    />
+                </div>
+
                 {isAuth ?
                         <button onClick={handleClick} className={'signupButton'}>Log out</button>
                     :

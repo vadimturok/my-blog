@@ -12,12 +12,19 @@ import {RootState} from "../../store";
 import {useForm} from "react-hook-form";
 import PostService from "../../services/post-service";
 import {useNavigate} from "react-router-dom";
-import {fetchTodayPosts, setAddPost} from "../../store/reducers/post/action-creators";
+import {
+    fetchTodayPosts,
+    setAddPost,
+    setItemCount,
+    setTotalPages,
+    setTotalPosts
+} from "../../store/reducers/post/action-creators";
 import {CircularProgress} from "@mui/material";
-import {useTitle} from "../../hooks";
+import {useAppSelector, useTitle} from "../../hooks";
 
 
 const CreatePost: FC = () => {
+    const {currentPage, totalPages, itemCount, totalPosts, itemsPerPage} = useAppSelector(state => state.posts)
     const [editorState, setEditorState] = useState(() => EditorState.createEmpty())
     const {register, handleSubmit, formState: {errors}} = useForm()
     const [file, setFile] = useState<any>(null)
@@ -34,7 +41,14 @@ const CreatePost: FC = () => {
         setIsLoading(true)
         try{
             const response = await PostService.createPost(file, data['Title'], stringFromHtml, user.id)
-            dispatch(setAddPost(response.data))
+            if(currentPage === totalPages && itemCount === itemsPerPage){
+                dispatch(setTotalPages(totalPages + 1))
+            }else if(currentPage === totalPages && itemCount < itemsPerPage){
+                dispatch(setAddPost(response.data))
+                dispatch(setItemCount(itemCount + 1))
+            }else{
+                dispatch(setItemCount(itemCount + 1))
+            }
             dispatch(fetchTodayPosts(5))
             navigate(`/posts/${response.data.id}`)
         }catch(e: any){
