@@ -5,7 +5,6 @@
 >  [_here_](https://deploy-nest-react-blog-app.herokuapp.com/). <!-- If you have the project hosted somewhere, include the link here. -->
 
 ## Table of Contents
-* [General Info](#general-information)
 * [Technologies Used](#technologies-used)
 * [Features](#features)
 * [Screenshots](#screenshots)
@@ -13,13 +12,6 @@
 * [Project Status](#project-status)
 * [Contact](#contact)
 <!-- * [License](#license) -->
-
-
-## General Information
-- Simple blog application
-- Helps people to share their thoughts
-- Good works on smaller displays
-- Cool design
 
 
 ## Technologies Used
@@ -47,6 +39,7 @@ Main features of the app:
 - Authorization & authentication system
 - Editing user info
 - Viewing own posts
+- Liking posts
 
 
 ## Screenshots
@@ -76,11 +69,11 @@ npm start
 
 
 ## Project Status
-Project is: _in progress_
+Project is: _completed_
 
 
 ## Contact
-Contact me via e-mail: turokvadim2510@gmail.com or on Twitter: [Vadim Turok](https://twitter.com/stefanio228)
+Contact with me via e-mail: turokvadim2510@gmail.com
 
 
 <!-- Optional -->
