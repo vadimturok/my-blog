@@ -1,14 +1,14 @@
-.sidebar{
+.sidebar {
   flex-basis: 20%;
   margin-top: 20px;
   margin-right: 20px;
 
-  .menu{
-    h4{
+  .menu {
+    h4 {
       margin-bottom: 15px;
     }
 
-    li{
+    li {
       margin-bottom: 10px;
       display: flex;
       gap: 5px;
@@ -18,17 +18,16 @@
       border-radius: 7px;
       transition: 0.1s;
 
-      &:hover{
+      &:hover {
         color: #7451f8;
       }
     }
-    .sidebarItem{
+    .sidebarItem {
       background-color: rgba(116, 81, 248, 0.42);
     }
 
-    &.bottom{
+    &.bottom {
       margin-top: 50px;
     }
   }
-
 }

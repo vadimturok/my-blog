@@ -1,58 +1,69 @@
-.latestList{
+.latestList {
   flex-basis: 25%;
   height: fit-content;
   margin-top: 20px;
   background-color: #fdfdfd;
   border-radius: 5px;
   border: 1px solid rgba(211, 211, 211, 0.51);
-
-  .latestTitle{
+  .latestTitle {
     padding: 10px;
     //border-bottom: 1px solid lightgray;
     color: gray;
   }
 
-
-  .latestItems{
-
-    ul{
+  .latestItems {
+    ul {
       list-style: none;
-
-      li{
+      li {
         display: flex;
         align-items: center;
         gap: 2px;
         justify-content: space-between;
         border-top: 1px solid lightgray;
         padding: 10px 7px 10px 7px;
+        .latestPostReactions {
+          display: flex;
+          gap: 5px;
+          .latestPostReactionItem {
+            display: flex;
+            align-items: center;
 
-        span{
+            .latestPostReactionIconComment {
+              font-size: 20px;
+              color: #7551f887;
+            }
+            .latestPostReactionIconLike {
+              font-size: 20px;
+              color: rgba(255, 0, 0, 0.514);
+            }
+          }
+        }
+
+        span {
           flex: 1;
           font-size: 12px;
           color: gray;
         }
 
-        &:last-child{
+        &:last-child {
           border-bottom: none;
         }
 
-        .latestLink{
+        .latestLink {
           text-decoration: none;
           color: inherit;
           flex: 4;
 
-          h5{
+          h5 {
             word-break: break-word;
             cursor: pointer;
             font-size: 13px;
             transition: 0.2s;
 
-            &:hover{
+            &:hover {
               color: #7451f8;
             }
           }
-
-
         }
       }
     }

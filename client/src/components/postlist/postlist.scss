@@ -1,20 +1,20 @@
-.postList{
+.postList {
   flex-basis: 55%;
   margin-top: 20px;
   margin-right: 20px;
 
-  .noPosts{
+  .noPosts {
     font-size: 25px;
     color: gray;
     text-align: center;
   }
-  .pagination{
+  .pagination {
     margin-bottom: 20px;
     display: flex;
     justify-content: center;
     gap: 20px;
 
-    .paginationBtn{
+    .paginationBtn {
       padding: 5px 10px;
       color: white;
       font-weight: 600;
@@ -23,7 +23,7 @@
       border: none;
       cursor: pointer;
 
-      &:disabled{
+      &:disabled {
         background-color: rgba(116, 81, 248, 0.62);
         cursor: default;
       }
@@ -31,7 +31,7 @@
   }
 }
 
-.listLoader{
+.listLoader {
   position: absolute;
   top: 50%;
 }
