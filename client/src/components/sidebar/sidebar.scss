@@ -1,8 +1,5 @@
 .sidebar {
-  flex-basis: 20%;
-  margin-top: 20px;
-  margin-right: 20px;
-
+  position: fixed;
   .menu {
     h4 {
       margin-bottom: 15px;
@@ -16,7 +13,6 @@
       cursor: pointer;
       padding: 5px 0 5px 5px;
       border-radius: 7px;
-      transition: 0.1s;
 
       &:hover {
         color: #7451f8;

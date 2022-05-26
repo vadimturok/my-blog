@@ -4,7 +4,6 @@ import { useAppSelector } from "../../hooks";
 import { formatTime } from "../../helpers";
 import { Link } from "react-router-dom";
 import FavoriteBorderIcon from "@mui/icons-material/FavoriteBorder";
-import ChatBubbleOutlineIcon from "@mui/icons-material/ChatBubbleOutline";
 
 const LatestList: FC = () => {
   const { todayPosts } = useAppSelector((state) => state.posts);
@@ -27,10 +26,6 @@ const LatestList: FC = () => {
                   <div className="latestPostReactionItem">
                     <FavoriteBorderIcon className="latestPostReactionIconLike" />
                     <span>{post.userLikes.length}</span>
-                  </div>
-                  <div className="latestPostReactionItem">
-                    <ChatBubbleOutlineIcon className="latestPostReactionIconComment" />
-                    <span>{post.comments.length}</span>
                   </div>
                 </div>
               </li>

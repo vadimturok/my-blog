@@ -1,8 +1,6 @@
 .postList {
-  flex-basis: 55%;
-  margin-top: 20px;
-  margin-right: 20px;
-
+  width: 55%;
+  margin-left: calc(17%);
   .noPosts {
     font-size: 25px;
     color: gray;

@@ -1,11 +1,11 @@
-.postItem{
+.postItem {
   width: 100%;
   background-color: white;
   border: 1px solid lightgray;
   border-radius: 5px;
   margin-bottom: 20px;
 
-  img{
+  img {
     width: inherit;
     border-top-right-radius: 5px;
     border-top-left-radius: 5px;
@@ -13,51 +13,49 @@
     object-fit: cover;
   }
 
-  .previewInfo{
+  .previewInfo {
     display: flex;
     flex-direction: column;
     gap: 7px;
     padding: 20px 20px 0 20px;
 
-    .authorInfo{
+    .authorInfo {
       display: flex;
       gap: 10px;
-      img{
+      img {
         width: 50px;
         height: 50px;
         border-radius: 50%;
       }
 
-      .authorDescription{
+      .authorDescription {
         display: flex;
         flex-direction: column;
 
-        .authorName{
+        .authorName {
           font-size: 14px;
           font-weight: 600;
         }
 
-        .postDate{
+        .postDate {
           font-size: 13px;
           color: #7c7b7b;
         }
       }
     }
 
-    .postInfoTitle{
+    .postInfoTitle {
       word-break: break-word;
-      h2{
+      h2 {
         cursor: pointer;
-        transition: 0.2s;
-        &:hover{
+        &:hover {
           color: #7451f8;
         }
       }
     }
-
   }
 
-  .postReactions{
+  .postReactions {
     padding: 0 20px 20px 20px;
     display: flex;
     margin-top: 10px;
@@ -65,12 +63,12 @@
     font-size: 13px;
     color: gray;
 
-    .postReactionsInfo{
+    .postReactionsInfo {
       display: flex;
       align-items: center;
       gap: 5px;
 
-      .postReactionsIcon{
+      .postReactionsIcon {
         font-size: 17px;
         color: black;
       }

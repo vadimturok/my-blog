@@ -1,65 +1,70 @@
-.navbar{
-  display: flex;
-  width: 80%;
-  margin: 0 auto;
+.navbar {
+  width: 100%;
   align-items: center;
-  justify-content: space-between;
   height: 50px;
+  position: fixed;
+  background-color: white;
+  border-bottom: 1px solid lightgray;
+  z-index: 1;
 
-  .left{
+  .navbarInner {
     display: flex;
+    justify-content: space-between;
     align-items: center;
-    gap: 10px;
+    width: 80%;
+    margin: 0 auto;
 
-
-    .icon{
-      color: #7451f8;
-      font-size: 40px;
-    }
-  }
-
-  .right{
-    display: flex;
-    align-items: center;
-    gap: 10px;
-
-    .gitHubIcon{
+    .left {
       display: flex;
+      align-items: center;
       gap: 10px;
-      margin-top: 5px;
 
-    }
-
-    .loginButton{
-      padding: 5px 10px;
-      border: none;
-      font-size: 17px;
-      color: gray;
-      border-radius: 5px;
-      background: none;
-      cursor: pointer;
-      transition: 0.2s;
-
-      &:hover{
+      .icon {
         color: #7451f8;
-        background-color: rgba(236, 232, 255, 0.63);
+        font-size: 40px;
       }
     }
 
-    .signupButton{
-      border: 1px solid #7451f8;
-      border-radius: 5px;
-      background: none;
-      padding: 5px 10px;
-      font-size: 17px;
-      color: #7451f8;
-      font-weight: 500;
-      cursor: pointer;
-      transition: 0.2s;
+    .right {
+      display: flex;
+      align-items: center;
+      gap: 10px;
 
-      &:hover{
-        background-color: #7451f8;
-        color: white;
+      .gitHubIcon {
+        display: flex;
+        gap: 10px;
+        margin-top: 5px;
+      }
+
+      .loginButton {
+        padding: 5px 10px;
+        border: none;
+        font-size: 17px;
+        color: gray;
+        border-radius: 5px;
+        background: none;
+        cursor: pointer;
+
+        &:hover {
+          color: #7451f8;
+          background-color: rgba(236, 232, 255, 0.63);
+        }
+      }
+
+      .signupButton {
+        border: 1px solid #7451f8;
+        border-radius: 5px;
+        background: none;
+        padding: 5px 10px;
+        font-size: 17px;
+        color: #7451f8;
+        font-weight: 500;
+        cursor: pointer;
+
+        &:hover {
+          background-color: #7451f8;
+          color: white;
+        }
       }
     }
   }

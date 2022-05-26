@@ -1,13 +1,14 @@
 .latestList {
-  flex-basis: 25%;
   height: fit-content;
-  margin-top: 20px;
   background-color: #fdfdfd;
   border-radius: 5px;
+  width: 28%;
+  position: -webkit-sticky;
+  position: sticky;
+  top: 70px;
   border: 1px solid rgba(211, 211, 211, 0.51);
   .latestTitle {
     padding: 10px;
-    //border-bottom: 1px solid lightgray;
     color: gray;
   }
 
@@ -27,14 +28,15 @@
           .latestPostReactionItem {
             display: flex;
             align-items: center;
+            gap: 3px;
 
-            .latestPostReactionIconComment {
-              font-size: 20px;
-              color: #7551f887;
+            span {
+              color: black;
+              font-size: 12px;
             }
             .latestPostReactionIconLike {
-              font-size: 20px;
-              color: rgba(255, 0, 0, 0.514);
+              font-size: 15px;
+              color: rgb(255, 0, 0);
             }
           }
         }
@@ -58,7 +60,6 @@
             word-break: break-word;
             cursor: pointer;
             font-size: 13px;
-            transition: 0.2s;
 
             &:hover {
               color: #7451f8;

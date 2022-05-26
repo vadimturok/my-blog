@@ -1,12 +1,11 @@
-.layout{
+.layout {
   max-width: 100%;
-  //position: relative;
-  .main{
+  .main {
+    padding-top: 50px;
     background-color: #f9f9f9;
-    border-top: 1px solid lightgray;
     min-height: calc(100vh - 101px);
 
-    .mainWrapper{
+    .mainWrapper {
       width: 80%;
       margin: 0 auto;
     }

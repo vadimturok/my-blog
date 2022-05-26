@@ -4,7 +4,6 @@ import PostItem from "./postitem/PostItem";
 import { useDispatch, useSelector } from "react-redux";
 import { RootState } from "../../store";
 import Loader from "../loader/Loader";
-import { motion } from "framer-motion";
 import { fetchAllPostsByQuery } from "../../store/reducers/post/action-creators";
 
 const PostList: FC = () => {
@@ -33,13 +32,11 @@ const PostList: FC = () => {
         <div className={"noPosts"}>No posts yet</div>
       ) : (
         posts.map((post, index) => (
-          <motion.div
+          <PostItem
             key={post.id}
-            initial={{ opacity: 0 }}
-            animate={{ opacity: 1 }}
-          >
-            <PostItem displayImage={index === 0 ? true : false} post={post} />
-          </motion.div>
+            displayImage={index === 0 ? true : false}
+            post={post}
+          />
         ))
       )}
       <div className={"pagination"}>
