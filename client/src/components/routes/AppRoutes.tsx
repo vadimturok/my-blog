@@ -1,7 +1,6 @@
-import React, { FC, lazy, Suspense, useEffect } from "react";
+import React, { FC, lazy, useEffect } from "react";
 import { Route, Routes, useLocation } from "react-router-dom";
 import RequireAuth from "./RequireAuth";
-import Loader from "../loader/Loader";
 
 const Home = lazy(() => import("../../pages/home/Home"));
 const Login = lazy(() => import("../../pages/login/Login"));
@@ -20,24 +19,22 @@ const AppRoutes: FC = () => {
     window.scrollTo(0, 0);
   }, [pathname]);
   return (
-    <Suspense fallback={<Loader />}>
-      <Routes>
-        <Route path={"/"}>
-          <Route index element={<Home />} />
-          <Route path={"login"} element={<Login />} />
-          <Route path={"register"} element={<Register />} />
-          <Route path={"posts/:postId"} element={<Post />} />
-          <Route path={"about"} element={<About />} />
-          <Route path={"videos"} element={<Videos />} />
-          <Route path={"contact"} element={<Contact />} />
-          <Route element={<RequireAuth />}>
-            <Route path={"create"} element={<CreatePost />} />
-            <Route path={"profile"} element={<Profile />} />
-          </Route>
-          <Route path={"*"} element={<NotFound />} />
+    <Routes>
+      <Route path={"/"}>
+        <Route index element={<Home />} />
+        <Route path={"login"} element={<Login />} />
+        <Route path={"register"} element={<Register />} />
+        <Route path={"posts/:postId"} element={<Post />} />
+        <Route path={"about"} element={<About />} />
+        <Route path={"videos"} element={<Videos />} />
+        <Route path={"contact"} element={<Contact />} />
+        <Route element={<RequireAuth />}>
+          <Route path={"create"} element={<CreatePost />} />
+          <Route path={"profile"} element={<Profile />} />
         </Route>
-      </Routes>
-    </Suspense>
+        <Route path={"*"} element={<NotFound />} />
+      </Route>
+    </Routes>
   );
 };
 
