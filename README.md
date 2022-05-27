@@ -1,5 +1,5 @@
 # 📝MyBlog - blog application
-> MyBlog is a simple blog application where users
+> MyBlog is a blog application where users
 > are able to create their own posts, react to other's posts and many more.
 > Live demo
 >  [_here_](https://deploy-nest-react-blog-app.herokuapp.com/). <!-- If you have the project hosted somewhere, include the link here. -->
