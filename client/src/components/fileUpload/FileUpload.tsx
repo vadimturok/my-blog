@@ -1,5 +1,6 @@
 import React, {FC, useRef, useState} from 'react';
 import './fileupload.scss'
+import Compressor from 'compressorjs'
 
 interface FileUploadProps{
     handleFile: (file: File | undefined) => void;
@@ -17,9 +18,14 @@ const FileUpload: FC<FileUploadProps> = ({handleFile, displayImage}) => {
     const handleChange = (event: React.ChangeEvent<HTMLInputElement>) => {
         const fileUploaded = event.target.files?.[0]
         if(fileUploaded){
+            new Compressor(fileUploaded, {
+                quality: 0.8,
+                success: (compressedResult) => {
+                    handleFile(fileUploaded)
+                },
+            });
             setImageUrl(URL.createObjectURL(fileUploaded))
         }
-        handleFile(fileUploaded)
     }
     return (
         <div className={'imageUpload'}>

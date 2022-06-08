@@ -1,5 +1,8 @@
 .sidebar {
   position: fixed;
+  @media (max-width: 415px){
+    display: none;
+  }
   .menu {
     h4 {
       margin-bottom: 15px;

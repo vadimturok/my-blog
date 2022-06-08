@@ -3,6 +3,11 @@
   h1{
     font-weight: 800;
     text-align: center;
+    @media (max-width: 415px) {
+      margin-bottom: 30px;
+      font-weight: 700;
+      font-size: 25px;
+    }
   }
   .profile{
     width: 70%;
@@ -11,10 +16,18 @@
     background-color: white;
     border-radius: 5px;
     border: 1px solid rgba(211, 211, 211, 0.51);
+    @media (max-width: 415px) {
+      width: auto;
+      padding: 10px;
+    }
 
     .profileInfo{
       display: flex;
       margin-top: 40px;
+      @media (max-width: 415px) {
+        display: block;
+        margin-top: 10px;
+      }
 
       .profileLeft{
         flex: 1;
@@ -22,7 +35,9 @@
         flex-direction: column;
         gap: 30px;
         align-self: center;
+        @media (max-width: 415px) {
 
+        }
 
         .profileImage{
           width: 120px;
@@ -57,10 +72,17 @@
     background-color: white;
     border-radius: 5px;
     border: 1px solid rgba(211, 211, 211, 0.51);
+    @media (max-width: 415px) {
+      width: auto;
+      padding: 10px;
+    }
 
     h3{
       text-align: center;
       margin-bottom: 40px;
+      @media (max-width: 415px) {
+        margin-bottom: 20px;
+      }
     }
   }
 }

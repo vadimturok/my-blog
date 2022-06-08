@@ -13,6 +13,9 @@
     align-items: center;
     width: 80%;
     margin: 0 auto;
+    @media (max-width: 415px){
+      justify-content: space-around;
+    }
 
     .left {
       display: flex;
@@ -30,7 +33,26 @@
       align-items: center;
       gap: 10px;
 
+
+      .burgerMenu{
+        display: none;
+        @media (max-width: 415px){
+          display: flex;
+          flex-direction: column;
+          gap: 7px;
+        }
+
+        .burgerMenuItem{
+          width: 50px;
+          height: 1px;
+          background-color: black;
+          color: black;
+        }
+      }
       .gitHubIcon {
+        @media (max-width: 415px){
+          display: none;
+        }
         display: flex;
         gap: 10px;
         margin-top: 5px;
@@ -44,6 +66,9 @@
         border-radius: 5px;
         background: none;
         cursor: pointer;
+        @media (max-width: 415px){
+          display: none;
+        }
 
         &:hover {
           color: #7451f8;
@@ -60,6 +85,9 @@
         color: #7451f8;
         font-weight: 500;
         cursor: pointer;
+        @media (max-width: 415px){
+          display: none;
+        }
 
         &:hover {
           background-color: #7451f8;

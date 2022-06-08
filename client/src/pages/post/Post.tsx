@@ -20,6 +20,7 @@ import { formatDate } from "../../helpers";
 import FavoriteIcon from "@mui/icons-material/Favorite";
 import ModalWindow from "../../components/modalWindow/ModalWindow";
 import LazyLoad from "react-lazyload";
+import {Skeleton} from "@mui/material";
 
 const Post = () => {
   const { postId } = useParams();
@@ -27,6 +28,7 @@ const Post = () => {
   const { post, error, isLiked } = useAppSelector((state) => state.currentPost);
   const { user, isAuth } = useAppSelector((state) => state.auth);
   const [showModal, setShowModal] = useState<boolean>(false);
+  const [loadingImage, setLoadingImage] = useState(true)
   useTitle(post.title);
 
   useEffect(() => {
@@ -55,7 +57,13 @@ const Post = () => {
       <ModalWindow showModal={showModal} setShowModal={setShowModal} />
       <div className={"postInner"}>
         <div className={"postDescription"}>
-          <img src={`${post.postImage}`} alt="postPicture" />
+          <img
+              onLoad={() => setLoadingImage(false)}
+              style={{display: loadingImage ? 'none' : 'unset'}}
+              src={`${post.postImage}`}
+              alt="postPicture"
+          />
+          {loadingImage && <div className={'imgLoader'}/>}
           <Link to={"/"} className={"link"}>
             <button className={"back"}>
               <KeyboardBackspaceIcon className={"backIcon"} />

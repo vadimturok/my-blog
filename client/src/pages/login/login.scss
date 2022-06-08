@@ -1,7 +1,9 @@
 .login {
+  @media (max-width: 415px) {
+    width: 300px;
+  }
   width: 500px;
   background-color: white;
-  //margin: 30px auto;
   padding: 30px;
   border-radius: 5px;
   border: 1px solid rgba(211, 211, 211, 0.51);

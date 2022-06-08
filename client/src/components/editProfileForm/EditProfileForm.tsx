@@ -39,11 +39,11 @@ const EditProfileForm: FC<EditProfileFormProps> = ({file, setFile}) => {
     }
     return (
         <form className={'editProfileForm'}>
-            <label className="field field_v1">
+            <label className="field field_v2">
                 <input
                     name={'firstName'}
                     value={userInfo.firstName}
-                    onChange={(e) => onChange(e)}
+                    onChange={onChange}
                     className="field__input"
                 />
                 <span className="field__label-wrap">

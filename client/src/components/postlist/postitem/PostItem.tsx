@@ -1,4 +1,4 @@
-import React, { FC } from "react";
+import React, {FC, useState} from "react";
 import "./postitem.scss";
 import FavoriteBorderIcon from "@mui/icons-material/FavoriteBorder";
 import ChatBubbleOutlineIcon from "@mui/icons-material/ChatBubbleOutline";
@@ -6,6 +6,7 @@ import { Link } from "react-router-dom";
 import { IPost } from "../../../types/post-type";
 import { formatDate } from "../../../helpers";
 import LazyLoad from "react-lazyload";
+import {Skeleton} from "@mui/material";
 
 interface PostItemProps {
   post: IPost;
@@ -13,17 +14,23 @@ interface PostItemProps {
 }
 
 const PostItem: FC<PostItemProps> = ({ post, displayImage }) => {
+  const [loadingImage, setLoadingImage] = useState(true)
   return (
     <div className={"postItem"}>
       {displayImage && (
         <img
+            style={{
+              display: loadingImage ? 'none' : 'unset'
+            }}
           width={700}
           height={270}
           className={"postImg"}
           src={`${post.postImage}`}
           alt="postPicture"
+          onLoad={() => setLoadingImage(false)}
         />
       )}
+      {loadingImage && displayImage && <div className={'imgSkeleton'}/>}
       <div className={"previewInfo"}>
         <div className={"authorInfo"}>
           <LazyLoad>
