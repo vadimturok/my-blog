@@ -1,5 +1,6 @@
 .navbar {
   width: 100%;
+  display: flex;
   align-items: center;
   height: 50px;
   position: fixed;
@@ -32,7 +33,6 @@
       display: flex;
       align-items: center;
       gap: 10px;
-
 
       .burgerMenu{
         display: none;

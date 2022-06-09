@@ -18,6 +18,7 @@ import {
 } from "../../store/reducers/post/action-creators";
 import {CircularProgress} from "@mui/material";
 import {useAppSelector, useTitle} from "../../hooks";
+import {AddNewPost} from "../../store/reducers/auth/action-creators";
 
 
 const CreatePost: FC = () => {
@@ -38,6 +39,7 @@ const CreatePost: FC = () => {
         setIsLoading(true)
         try{
             const response = await PostService.createPost(file, data['Title'], stringFromHtml, user.id)
+            dispatch(AddNewPost(response.data))
             if(paginationInfo.currentPage === 1){
                 dispatch(fetchAllPostsByQuery(1, 4))
             }

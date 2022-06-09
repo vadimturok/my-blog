@@ -1,4 +1,5 @@
 import {IUser} from "../../../types/user-type";
+import {IPost} from "../../../types/post-type";
 
 export interface AuthState{
     user: IUser;
@@ -13,7 +14,13 @@ export enum AuthActionsEnum{
     SET_IS_AUTH = 'SET_IS_AUTH',
     SET_IS_LOADING = "SET_IS_LOADING",
     SET_ERROR = 'SET_ERROR',
-    SET_IS_SUCCESS = 'SET_IS_SUCCESS'
+    SET_IS_SUCCESS = 'SET_IS_SUCCESS',
+    ADD_POST = 'ADD_POST'
+}
+
+export interface AddPost{
+    type: AuthActionsEnum.ADD_POST;
+    payload: IPost
 }
 
 export interface SetIsSuccess{
@@ -41,4 +48,4 @@ export interface SetIsLoading{
     payload: boolean;
 }
 
-export type AuthAction = SetUserAction | SetIsAuth | SetIsLoading | SetError | SetIsSuccess
+export type AuthAction = SetUserAction | SetIsAuth | SetIsLoading | SetError | SetIsSuccess | AddPost

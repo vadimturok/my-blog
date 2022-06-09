@@ -1,5 +1,5 @@
 import {IUser} from "../../../types/user-type";
-import {AuthActionsEnum, SetError, SetIsAuth, SetIsLoading, SetIsSuccess, SetUserAction} from "./types";
+import {AddPost, AuthActionsEnum, SetError, SetIsAuth, SetIsLoading, SetIsSuccess, SetUserAction} from "./types";
 import {AppDispatch} from "../../index";
 import AuthService from "../../../services/auth-service";
 import axios from "axios";
@@ -7,6 +7,7 @@ import {AuthResponse} from "../../../types/auth-response";
 import {API_URL} from "../../../http";
 import UserService from "../../../services/user-service";
 import {setUpdatePosts} from "../post/action-creators";
+import {IPost} from "../../../types/post-type";
 
 export const setUser = (user: IUser): SetUserAction => {
     return {type: AuthActionsEnum.SET_USER, payload: user}
@@ -22,6 +23,9 @@ export const setError = (error: string): SetError => {
 
 export const setIsAuth = (auth: boolean): SetIsAuth => {
     return {type: AuthActionsEnum.SET_IS_AUTH, payload: auth}
+}
+export const AddNewPost = (post: IPost): AddPost => {
+    return {type: AuthActionsEnum.ADD_POST, payload: post}
 }
 
 export const setIsLoading = (isLoading: boolean): SetIsLoading => {
@@ -85,3 +89,4 @@ export const updateUser =
         dispatch(setError(e.response.data.message))
     }
 }
+

@@ -11,6 +11,8 @@ const initialState: AuthState = {
 
 export default function authReducer(state = initialState, action: AuthAction): AuthState{
     switch(action.type){
+        case AuthActionsEnum.ADD_POST:
+            return {...state, user: {...state.user, posts: state.user.posts.concat([action.payload])}}
         case AuthActionsEnum.SET_IS_SUCCESS:
             return {...state, isSuccess: action.payload}
         case AuthActionsEnum.SET_USER:
