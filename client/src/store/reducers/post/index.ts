@@ -1,6 +1,7 @@
 import {PostActionsEnum, PostsAction, PostSortActions, PostState} from "./types";
 import PostService from "../../../services/post-service";
 import {PaginationMeta} from "../../../types/post-pagination-response";
+import {IPost} from "../../../types/post-type";
 
 const initialState: PostState = {
     error: '',
@@ -9,11 +10,14 @@ const initialState: PostState = {
     sortType: PostSortActions.SORT_BY_TIME,
     status: 'idle',
     todayPosts: [],
-    paginationInfo: {} as PaginationMeta
+    paginationInfo: {} as PaginationMeta,
+    fetchedAllPosts: false
 }
 
 export default function postsReducer(state = initialState, action: PostsAction): PostState{
     switch(action.type){
+        case PostActionsEnum.SET_FETCHED_ALL_POSTS:
+            return {...state, fetchedAllPosts: action.payload}
         case PostActionsEnum.SET_PAGINATION_INFO:
             return {...state, paginationInfo: action.payload}
         case PostActionsEnum.UPDATE_LIKES:

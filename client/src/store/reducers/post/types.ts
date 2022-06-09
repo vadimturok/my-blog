@@ -11,7 +11,8 @@ export interface PostState{
     sortType: PostSortActions;
     status: 'idle' | 'loading' | 'succeeded' | 'failed';
     todayPosts: IPost[];
-    paginationInfo: PaginationMeta
+    paginationInfo: PaginationMeta;
+    fetchedAllPosts: boolean
 }
 
 
@@ -30,7 +31,13 @@ export enum PostActionsEnum{
     UPDATE_POSTS = 'UPDATE_POSTS',
     UPDATE_COMMENTS = 'UPDATE_COMMENTS',
     UPDATE_LIKES = 'UPDATE_LIKES',
-    SET_PAGINATION_INFO = 'SET_PAGINATION_INFO'
+    SET_PAGINATION_INFO = 'SET_PAGINATION_INFO',
+    SET_FETCHED_ALL_POSTS = 'SET_FETCHED_ALL_POSTS'
+}
+
+export interface SetFetchedAllPosts{
+    type: PostActionsEnum.SET_FETCHED_ALL_POSTS,
+    payload: boolean
 }
 
 export interface SetPaginationInfo{
@@ -90,4 +97,5 @@ export type PostsAction =
     UpdatePosts |
     UpdateComments |
     UpdateLikes |
-    SetPaginationInfo
+    SetPaginationInfo |
+    SetFetchedAllPosts

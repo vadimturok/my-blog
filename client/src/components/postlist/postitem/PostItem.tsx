@@ -2,7 +2,7 @@ import React, {FC, useState} from "react";
 import "./postitem.scss";
 import FavoriteBorderIcon from "@mui/icons-material/FavoriteBorder";
 import ChatBubbleOutlineIcon from "@mui/icons-material/ChatBubbleOutline";
-import { Link } from "react-router-dom";
+import {Link, useNavigate} from "react-router-dom";
 import { IPost } from "../../../types/post-type";
 import { formatDate } from "../../../helpers";
 import LazyLoad from "react-lazyload";
@@ -15,8 +15,9 @@ interface PostItemProps {
 
 const PostItem: FC<PostItemProps> = ({ post, displayImage }) => {
   const [loadingImage, setLoadingImage] = useState(true)
+  const navigate = useNavigate()
   return (
-    <div className={"postItem"}>
+    <div onClick={() => navigate(`/posts/${post.id}`)} className={"postItem"}>
       {displayImage && (
         <img
             style={{
@@ -46,11 +47,9 @@ const PostItem: FC<PostItemProps> = ({ post, displayImage }) => {
             </span>
           </div>
         </div>
-        <Link to={`/posts/${post.id}`} className={"link"}>
-          <div className={"postInfoTitle"}>
-            <h2>{post.title}</h2>
-          </div>
-        </Link>
+        <div className={"postInfoTitle"}>
+          <h2>{post.title}</h2>
+        </div>
       </div>
       <div className={"postReactions"}>
         <div className={"postReactionsInfo"}>

@@ -5,6 +5,9 @@
     width: 100%;
     margin: 0;
   }
+  @media (max-width: 1100px) {
+    width: auto;
+  }
   .noPosts {
     font-size: 25px;
     color: gray;

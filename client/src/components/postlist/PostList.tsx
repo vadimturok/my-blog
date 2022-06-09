@@ -1,60 +1,58 @@
-import React, { FC } from "react";
+import React, {FC, useEffect, useState} from "react";
 import "./postlist.scss";
 import PostItem from "./postitem/PostItem";
-import { useDispatch, useSelector } from "react-redux";
-import { RootState } from "../../store";
-import Loader from "../loader/Loader";
-import { fetchAllPostsByQuery } from "../../store/reducers/post/action-creators";
+import { useDispatch } from "react-redux";
+import {setFetchedAll, setPosts} from "../../store/reducers/post/action-creators";
+import PostService from "../../services/post-service";
+import {useAppSelector} from "../../hooks";
 
 const PostList: FC = () => {
-  const { posts, status } = useSelector((state: RootState) => state.posts);
-  const { currentPage, totalPages } = useSelector(
-    (state: RootState) => state.posts.paginationInfo
-  );
-  const dispatch = useDispatch();
+  const {posts, fetchedAllPosts} = useAppSelector(state => state.posts)
+  const [page, setPage] = useState(1)
+  const [fetching, setFetching] = useState(true)
+  const dispatch = useDispatch()
 
-  const handleNext = () => {
-    if (currentPage !== totalPages) {
-      dispatch(fetchAllPostsByQuery(currentPage + 1, 4));
+  useEffect(() => {
+    if(fetching && !fetchedAllPosts){
+      try{
+        PostService.getAllByQuery(page, 3).then(response => {
+          if(response.data.items.length === 0){
+            dispatch(setFetchedAll(true))
+          }else{
+            dispatch(setPosts([...posts, ...response.data.items]))
+            setPage(prev => prev + 1)
+          }
+        }).finally(() => setFetching(false))
+      }catch(e: any){
+        console.log(e)
+      }
     }
-  };
-  const handlePrevious = () => {
-    if (currentPage !== 1) {
-      dispatch(fetchAllPostsByQuery(currentPage - 1, 4));
+  }, [fetching])
+
+  useEffect(() => {
+    document.addEventListener('scroll', scrollHandler)
+      return function(){
+        document.removeEventListener('scroll', scrollHandler)
+      }
+  }, [])
+
+  const scrollHandler = async (e: any) => {
+    if ((window.innerHeight + document.documentElement.scrollTop) >= document.body.offsetHeight) {
+      setFetching(true)
     }
-  };
+  }
 
   return (
     <div className={"postList"}>
-      {status !== "succeeded" ? (
-        <Loader />
-      ) : posts.length === 0 ? (
-        <div className={"noPosts"}>No posts yet</div>
-      ) : (
-        posts.map((post, index) => (
-          <PostItem
-            key={post.id}
-            displayImage={index === 0 ? true : false}
-            post={post}
-          />
+      {
+        posts?.length > 0 && posts.map((post, index) => (
+            <PostItem
+                key={post.id}
+                displayImage={index === 0}
+                post={post}
+            />
         ))
-      )}
-      <div className={"pagination"}>
-        <button
-          disabled={currentPage === 1}
-          onClick={handlePrevious}
-          className={"paginationBtn"}
-        >
-          ⬅ Previous
-        </button>
-        <button
-          disabled={currentPage === totalPages}
-          onClick={handleNext}
-          className={"paginationBtn"}
-        >
-          Next ➡
-        </button>
-      </div>
+      }
     </div>
   );
 };

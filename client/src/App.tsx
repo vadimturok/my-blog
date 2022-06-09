@@ -15,7 +15,6 @@ const App: FC = () => {
   const navigate = useNavigate();
 
   useEffect(() => {
-    dispatch(fetchAllPostsByQuery(1, 4));
     dispatch(fetchTodayPosts(5));
     if (localStorage.getItem("token")) {
       dispatch(checkAuth());

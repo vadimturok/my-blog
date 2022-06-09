@@ -14,10 +14,6 @@ const Videos = lazy(() => import("../../pages/videos/Videos"));
 const Contact = lazy(() => import("../../pages/contact/Contact"));
 
 const AppRoutes: FC = () => {
-  const { pathname } = useLocation();
-  useEffect(() => {
-    window.scrollTo(0, 0);
-  }, [pathname]);
   return (
     <Routes>
       <Route path={"/"}>

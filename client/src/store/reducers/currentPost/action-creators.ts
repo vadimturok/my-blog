@@ -29,7 +29,6 @@ export const fetchPostById = (postId: number) => async (dispatch: AppDispatch, g
     try{
         const user = getState().auth.user
         const response = await PostService.getById(postId)
-        console.log('Post: ', response)
         const isLiked = response.data.userLikes.find(like => like.user.id === user.id)
         if(response.data){
             dispatch(setPost(response.data))

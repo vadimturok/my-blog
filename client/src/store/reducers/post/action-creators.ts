@@ -3,6 +3,7 @@ import {
     PostsAction,
     PostSortActions,
     SetError,
+    SetFetchedAllPosts,
     SetIsLoading,
     SetPaginationInfo,
     SetPosts,
@@ -64,6 +65,9 @@ export const updateComments = (comment: IComment): UpdateComments => {
 }
 export const updateLikes = (like: ILike): UpdateLikes => {
     return {type: PostActionsEnum.UPDATE_LIKES, payload: like}
+}
+export const setFetchedAll = (isAll: boolean): SetFetchedAllPosts => {
+    return {type: PostActionsEnum.SET_FETCHED_ALL_POSTS, payload: isAll}
 }
 
 export const fetchAllPostsByQuery = (page: number, limit: number) => async (dispatch: AppDispatch) => {
