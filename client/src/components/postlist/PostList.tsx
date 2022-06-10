@@ -8,14 +8,14 @@ import {useAppSelector} from "../../hooks";
 
 const PostList: FC = () => {
   const {posts, fetchedAllPosts} = useAppSelector(state => state.posts)
-  const [page, setPage] = useState(1)
-  const [fetching, setFetching] = useState(true)
+  const [page, setPage] = useState(2)
+  const [fetching, setFetching] = useState(false)
   const dispatch = useDispatch()
 
   useEffect(() => {
     if(fetching && !fetchedAllPosts){
       try{
-        PostService.getAllByQuery(page, 3).then(response => {
+        PostService.getAllByQuery(page, 4).then(response => {
           if(response.data.items.length === 0){
             dispatch(setFetchedAll(true))
           }else{

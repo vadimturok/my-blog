@@ -38,30 +38,59 @@
     gap: 7px;
     padding: 20px 20px 0 20px;
 
-    .authorInfo {
+    .previewInfoTop{
       display: flex;
-      gap: 10px;
-      img {
-        width: 50px;
-        height: 50px;
-        border-radius: 50%;
-      }
-
-      .authorDescription {
+      justify-content: space-between;
+      .postUpdateActions{
         display: flex;
-        flex-direction: column;
+        align-items: start;
+        gap: 10px;
+        .postUpdate{
+          display: flex;
+          align-items: center;
+          padding: 6px;
+          border-radius: 5px;
+          background-color: rgba(236, 232, 255, 0.63);
+          color: #7451f8;
 
-        .authorName {
-          font-size: 14px;
-          font-weight: 600;
+          &:hover{
+            background-color: rgba(208, 201, 245, 0.63);
+          }
+
+          .postUpdateIcon{
+            font-size: 20px;
+          }
+          span{
+            font-size: 15px;
+          }
+        }
+      }
+      .authorInfo {
+        display: flex;
+        gap: 10px;
+        img {
+          width: 50px;
+          height: 50px;
+          border-radius: 50%;
         }
 
-        .postDate {
-          font-size: 13px;
-          color: #7c7b7b;
+        .authorDescription {
+          display: flex;
+          flex-direction: column;
+
+          .authorName {
+            font-size: 14px;
+            font-weight: 600;
+          }
+
+          .postDate {
+            font-size: 13px;
+            color: #7c7b7b;
+          }
         }
       }
     }
+
 
     .postInfoTitle {
       word-break: break-word;

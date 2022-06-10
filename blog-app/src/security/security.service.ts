@@ -25,7 +25,7 @@ export class SecurityService{
 
         return{
             ...tokens,
-            user
+            user : {...user, posts: []}
         }
     }
 

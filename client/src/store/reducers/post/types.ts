@@ -32,7 +32,13 @@ export enum PostActionsEnum{
     UPDATE_COMMENTS = 'UPDATE_COMMENTS',
     UPDATE_LIKES = 'UPDATE_LIKES',
     SET_PAGINATION_INFO = 'SET_PAGINATION_INFO',
-    SET_FETCHED_ALL_POSTS = 'SET_FETCHED_ALL_POSTS'
+    SET_FETCHED_ALL_POSTS = 'SET_FETCHED_ALL_POSTS',
+    DELETE_POST = 'DELETE_POST'
+}
+
+export interface DeletePost{
+    type: PostActionsEnum.DELETE_POST,
+    payload: number
 }
 
 export interface SetFetchedAllPosts{
@@ -98,4 +104,5 @@ export type PostsAction =
     UpdateComments |
     UpdateLikes |
     SetPaginationInfo |
-    SetFetchedAllPosts
+    SetFetchedAllPosts |
+    DeletePost

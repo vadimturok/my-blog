@@ -15,7 +15,13 @@ export enum AuthActionsEnum{
     SET_IS_LOADING = "SET_IS_LOADING",
     SET_ERROR = 'SET_ERROR',
     SET_IS_SUCCESS = 'SET_IS_SUCCESS',
-    ADD_POST = 'ADD_POST'
+    ADD_POST = 'ADD_POST',
+    DELETE_POST = 'DELETE_POST'
+}
+
+export interface DeletePost{
+    type: AuthActionsEnum.DELETE_POST,
+    payload: IPost
 }
 
 export interface AddPost{
@@ -48,4 +54,4 @@ export interface SetIsLoading{
     payload: boolean;
 }
 
-export type AuthAction = SetUserAction | SetIsAuth | SetIsLoading | SetError | SetIsSuccess | AddPost
+export type AuthAction = SetUserAction | SetIsAuth | SetIsLoading | SetError | SetIsSuccess | AddPost | DeletePost

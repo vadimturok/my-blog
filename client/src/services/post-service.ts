@@ -19,8 +19,25 @@ export default class PostService{
         return api.get<IPost[]>('/posts')
     }
 
+    static async updatePost(title: string, text: string, postImage: string, postId: number, picture?: any): Promise<AxiosResponse<IPost>>{
+        if(picture){
+            const formData = new FormData()
+            formData.append('title', title)
+            formData.append('text', text)
+            formData.append('postImage', postImage)
+            formData.append('picture', picture)
+            formData.append('postId', postId.toString())
+            return api.put<IPost>('/posts', formData)
+        }
+        return api.put<IPost>('/posts', {title, text, postImage, postId})
+    }
+
     static async getAllByQuery(page: number, limit: number): Promise<AxiosResponse<PostPaginationResponse>>{
         return api.get<PostPaginationResponse>(`/posts/postsQuery?page=${page}&limit=${limit}`)
+    }
+
+    static async deletePost(postId: number){
+        await api.delete(`/posts/post/${postId}`)
     }
 
     static async getById(postId: number): Promise<AxiosResponse<IPost>>{

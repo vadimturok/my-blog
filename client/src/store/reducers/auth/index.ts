@@ -1,8 +1,11 @@
 import {AuthAction, AuthActionsEnum, AuthState} from "./types";
 import {IUser} from "../../../types/user-type";
+import {IPost} from "../../../types/post-type";
 
 const initialState: AuthState = {
-    user: {} as IUser,
+    user: {
+        posts: [] as IPost[]
+    } as IUser,
     isAuth: false,
     isLoading: false,
     error: '',
@@ -11,6 +14,8 @@ const initialState: AuthState = {
 
 export default function authReducer(state = initialState, action: AuthAction): AuthState{
     switch(action.type){
+        case AuthActionsEnum.DELETE_POST:
+            return {...state, user: {...state.user, posts: state.user.posts.filter(p => p.id !== action.payload.id)}}
         case AuthActionsEnum.ADD_POST:
             return {...state, user: {...state.user, posts: state.user.posts.concat([action.payload])}}
         case AuthActionsEnum.SET_IS_SUCCESS:

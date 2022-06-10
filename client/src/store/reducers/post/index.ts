@@ -1,7 +1,6 @@
 import {PostActionsEnum, PostsAction, PostSortActions, PostState} from "./types";
 import PostService from "../../../services/post-service";
 import {PaginationMeta} from "../../../types/post-pagination-response";
-import {IPost} from "../../../types/post-type";
 
 const initialState: PostState = {
     error: '',
@@ -16,6 +15,10 @@ const initialState: PostState = {
 
 export default function postsReducer(state = initialState, action: PostsAction): PostState{
     switch(action.type){
+        case PostActionsEnum.DELETE_POST:
+            return {...state,
+                posts: state.posts.filter(post => post.id !== action.payload),
+                todayPosts: state.todayPosts.filter(post => post.id !== action.payload)}
         case PostActionsEnum.SET_FETCHED_ALL_POSTS:
             return {...state, fetchedAllPosts: action.payload}
         case PostActionsEnum.SET_PAGINATION_INFO:

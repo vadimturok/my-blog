@@ -1,16 +1,22 @@
-import React, {FC, useRef, useState} from 'react';
+import React, {FC, useEffect, useRef, useState} from 'react';
 import './fileupload.scss'
 import Compressor from 'compressorjs'
 
 interface FileUploadProps{
     handleFile: (file: File | undefined) => void;
     displayImage?: boolean;
+    defaultImageURL?: string | null;
 }
 
-const FileUpload: FC<FileUploadProps> = ({handleFile, displayImage}) => {
+const FileUpload: FC<FileUploadProps> = ({handleFile, displayImage, defaultImageURL}) => {
     const [imageUrl, setImageUrl] = useState<string>('')
     const hiddenFileInput = useRef<HTMLInputElement>(null)
 
+    useEffect(() => {
+        if(defaultImageURL){
+            setImageUrl(defaultImageURL)
+        }
+    }, [defaultImageURL])
     const handleClick = () => {
         hiddenFileInput.current?.click()
     }

@@ -1,4 +1,5 @@
 import {
+    DeletePost,
     PostActionsEnum,
     PostsAction,
     PostSortActions,
@@ -69,6 +70,9 @@ export const updateLikes = (like: ILike): UpdateLikes => {
 export const setFetchedAll = (isAll: boolean): SetFetchedAllPosts => {
     return {type: PostActionsEnum.SET_FETCHED_ALL_POSTS, payload: isAll}
 }
+export const removePost = (postId: number): DeletePost => {
+    return {type: PostActionsEnum.DELETE_POST, payload: postId}
+}
 
 export const fetchAllPostsByQuery = (page: number, limit: number) => async (dispatch: AppDispatch) => {
     dispatch(setStatus('loading'))
@@ -77,7 +81,7 @@ export const fetchAllPostsByQuery = (page: number, limit: number) => async (disp
         dispatch(setStatus('succeeded'))
         dispatch(setPosts(response.data.items))
         dispatch(setPaginationInfo(response.data.meta))
-        dispatch(setSort(PostSortActions.SORT_BY_TIME))
+        // dispatch(setSort(PostSortActions.SORT_BY_TIME))
     }catch(e: any){
         dispatch(setError(e.response.data.message))
         dispatch(setStatus('failed'))

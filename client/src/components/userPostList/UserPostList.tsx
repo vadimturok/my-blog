@@ -13,7 +13,7 @@ const UserPostList: FC<UserPostListProps> = ({user }) => {
             {
                 user.posts?.length > 0 ? user.posts.map(post =>
                     <div key={post.id} className={'userPostListItem'}>
-                        <PostItem  post={post}/>
+                        <PostItem post={post}/>
                     </div>
                 ) : <div className={'noPostsCreatedByUser'}>You haven't created posts yet</div>
             }

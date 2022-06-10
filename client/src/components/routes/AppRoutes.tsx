@@ -27,6 +27,7 @@ const AppRoutes: FC = () => {
         <Route element={<RequireAuth />}>
           <Route path={"create"} element={<CreatePost />} />
           <Route path={"profile"} element={<Profile />} />
+          <Route path={'edit/:postId'} element={<CreatePost/>}/>
         </Route>
         <Route path={"*"} element={<NotFound />} />
       </Route>

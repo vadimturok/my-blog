@@ -5,7 +5,8 @@ import {Repository} from "typeorm";
 import {PostDto} from "./dto/post.dto";
 import {UserService} from "../user/user.service";
 import {FileService} from "../file/file.service";
-import {IPaginationOptions, paginate, paginateRaw, paginateRawAndEntities, Pagination} from "nestjs-typeorm-paginate";
+import {IPaginationOptions, paginate, Pagination} from "nestjs-typeorm-paginate";
+import {UpdatePostDto} from "./dto/update.post.dto";
 
 @Injectable()
 export class PostService{
@@ -28,6 +29,21 @@ export class PostService{
         post.dateAndTimePublish = new Date();
         await this.postRepository.save(post)
         return this.getPostById(post.id)
+    }
+
+    async updatePost(updatePostDto: UpdatePostDto, files){
+        const postId = updatePostDto.postId
+        let {title, text, postImage} = updatePostDto
+        if(files){
+            const {picture} = files
+            postImage = await this.fileService.createFile(picture[0])
+        }
+        await this.postRepository.update(postId, {title, text, postImage})
+        return this.getPostById(postId)
+    }
+
+    async deletePost(postId: number){
+        await this.postRepository.delete(postId)
     }
 
     async getAllPosts(): Promise<Post[]>{
@@ -55,14 +71,6 @@ export class PostService{
     }
 
     async paginate(options: IPaginationOptions): Promise<Pagination<Post>>{
-        // const queryBuilder = this.postRepository.createQueryBuilder('c')
-        //     .orderBy('c.dateAndTimePublish', 'DESC')
-        //     .leftJoinAndSelect('c.user', 'user')
-        //     .leftJoinAndSelect('c.userLikes', 'userLikes')
-        //     .leftJoinAndSelect('c.comments', 'comments')
-        //
-        // const [pagination] = await paginateRawAndEntities<Post>(queryBuilder, options)
-        // return pagination
         return paginate<Post>(this.postRepository, options)
     }
 }

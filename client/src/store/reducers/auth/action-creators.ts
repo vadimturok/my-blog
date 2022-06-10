@@ -1,5 +1,14 @@
 import {IUser} from "../../../types/user-type";
-import {AddPost, AuthActionsEnum, SetError, SetIsAuth, SetIsLoading, SetIsSuccess, SetUserAction} from "./types";
+import {
+    AddPost,
+    AuthActionsEnum,
+    DeletePost,
+    SetError,
+    SetIsAuth,
+    SetIsLoading,
+    SetIsSuccess,
+    SetUserAction
+} from "./types";
 import {AppDispatch} from "../../index";
 import AuthService from "../../../services/auth-service";
 import axios from "axios";
@@ -26,6 +35,10 @@ export const setIsAuth = (auth: boolean): SetIsAuth => {
 }
 export const AddNewPost = (post: IPost): AddPost => {
     return {type: AuthActionsEnum.ADD_POST, payload: post}
+}
+
+export const deletePost = (post: IPost): DeletePost => {
+    return {type: AuthActionsEnum.DELETE_POST, payload: post}
 }
 
 export const setIsLoading = (isLoading: boolean): SetIsLoading => {
