@@ -33,7 +33,7 @@ Main features of the app:
 - Viewing posts
 - Viewing single post
 - Viewing latest posts
-- Creating posts
+- Creating, editing and deleting posts
 - Ordering post by time, likes or comments
 - Writing comments
 - Authorization & authentication system
