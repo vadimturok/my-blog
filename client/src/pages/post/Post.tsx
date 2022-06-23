@@ -86,7 +86,7 @@ const Post = () => {
                 </span>
                 </div>
               </div>
-              {user?.id === post.user.id && <EditPostButtons post={post}/>}
+              {user?.id === post.user.id && <EditPostButtons postPage={true} post={post}/>}
             </div>
 
             <h1>{post.title}</h1>

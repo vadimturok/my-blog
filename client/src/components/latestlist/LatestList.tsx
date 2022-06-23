@@ -1,22 +1,37 @@
-import React, { FC } from "react";
+import React, {FC, useState} from "react";
 import "./latest.scss";
 import { useAppSelector } from "../../hooks";
 import { formatTime } from "../../helpers";
 import {Link, useNavigate} from "react-router-dom";
 import FavoriteBorderIcon from "@mui/icons-material/FavoriteBorder";
 import Button from "../common/button/Button";
+import ModalWindow from "../modalWindow/ModalWindow";
 
 const LatestList: FC = () => {
   const { todayPosts } = useAppSelector((state) => state.posts);
+  const {isAuth} = useAppSelector((state) => state.auth)
     const navigate = useNavigate()
+    const [showModal, setShowModal] = useState(false)
+
+    const handleCreate = () => {
+        if(!isAuth){
+            setShowModal(true)
+        }else{
+            navigate('/create')
+        }
+    }
 
   return (
       <div className={'latestWrapper'}>
+          <ModalWindow
+              showModal={showModal}
+              setShowModal={setShowModal}
+          />
           <div className={'createNewPostBtn'}>
               <Button
                   text={'Create post'}
                   type={'button'}
-                  handleClick={() => navigate('/create')}
+                  handleClick={handleCreate}
               />
           </div>
           <div className={"latestList"}>

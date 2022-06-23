@@ -9,7 +9,7 @@ import {useNavigate} from "react-router-dom";
 import {useDispatch} from "react-redux";
 import {IPost} from "../../types/post-type";
 
-const EditPostButtons: FC<{post: IPost}> = ({post}) => {
+const EditPostButtons: FC<{post: IPost, postPage?: boolean}> = ({post, postPage}) => {
     const navigate = useNavigate()
     const dispatch = useDispatch()
 
@@ -25,6 +25,9 @@ const EditPostButtons: FC<{post: IPost}> = ({post}) => {
             dispatch(deletePost(post))
         }catch(e){
             console.log(e)
+        }
+        if(postPage){
+            navigate('/')
         }
     }
     return (
