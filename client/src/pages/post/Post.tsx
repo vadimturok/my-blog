@@ -20,7 +20,7 @@ import { formatDate } from "../../helpers";
 import FavoriteIcon from "@mui/icons-material/Favorite";
 import ModalWindow from "../../components/modalWindow/ModalWindow";
 import LazyLoad from "react-lazyload";
-import {Skeleton} from "@mui/material";
+import EditPostButtons from "../../components/editPostButtonGroup/EditPostButtons";
 
 const Post = () => {
   const { postId } = useParams();
@@ -71,20 +71,24 @@ const Post = () => {
             </button>
           </Link>
           <div className={"postInfo"}>
-            <div className={"author"}>
-              <LazyLoad>
-                <img src={post?.user.profilePicture} alt="postPicture" />
-              </LazyLoad>
+            <div className={'postInfoWrapper'}>
+              <div className={"author"}>
+                <LazyLoad>
+                  <img src={post?.user.profilePicture} alt="postPicture" />
+                </LazyLoad>
 
-              <div className={"authorDetails"}>
+                <div className={"authorDetails"}>
                 <span className={"name"}>
                   {post?.user?.firstName} {post.user.lastName}
                 </span>
-                <span className={"date"}>
+                  <span className={"date"}>
                   {formatDate(post.dateAndTimePublish)}
                 </span>
+                </div>
               </div>
+              {user?.id === post.user.id && <EditPostButtons post={post}/>}
             </div>
+
             <h1>{post.title}</h1>
           </div>
           <div

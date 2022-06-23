@@ -11,6 +11,7 @@
     }
     @media (max-width: 1100px) {
       flex-basis: 100%;
+      margin-right: 0;
     }
     .postDescription{
       background-color: white;
@@ -79,33 +80,36 @@
           padding: 10px;
         }
 
-
-        .author{
+        .postInfoWrapper{
           display: flex;
-          gap: 10px;
-          margin-bottom: 10px;
-          @media (max-width: 415px){
-            margin-bottom: 5px;
-          }
-
-          img{
-            width: 50px;
-            height: 50px;
-            border-radius: 50%;
-          }
-
-          .authorDetails{
+          justify-content: space-between;
+          .author{
             display: flex;
-            flex-direction: column;
-
-            .name{
-              font-size: 14px;
-              font-weight: 600;
+            gap: 10px;
+            margin-bottom: 10px;
+            @media (max-width: 415px){
+              margin-bottom: 5px;
             }
 
-            .date{
-              font-size: 13px;
-              color: #7c7b7b;
+            img{
+              width: 50px;
+              height: 50px;
+              border-radius: 50%;
+            }
+
+            .authorDetails{
+              display: flex;
+              flex-direction: column;
+
+              .name{
+                font-size: 14px;
+                font-weight: 600;
+              }
+
+              .date{
+                font-size: 13px;
+                color: #7c7b7b;
+              }
             }
           }
         }

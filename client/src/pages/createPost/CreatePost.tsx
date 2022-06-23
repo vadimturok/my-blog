@@ -13,18 +13,17 @@ import {useForm} from "react-hook-form";
 import PostService from "../../services/post-service";
 import {useNavigate, useParams} from "react-router-dom";
 import {
-    fetchAllPostsByQuery,
     fetchTodayPosts, setPosts, setTodayPosts,
 } from "../../store/reducers/post/action-creators";
 import {CircularProgress} from "@mui/material";
 import {useAppSelector, useTitle} from "../../hooks";
 import {AddNewPost, deletePost} from "../../store/reducers/auth/action-creators";
 import {IPost} from "../../types/post-type";
+import NotFound from "../404/NotFound";
 
 
 const CreatePost: FC = () => {
     const {postId} = useParams()
-    const {paginationInfo} = useAppSelector(state => state.posts)
     const [file, setFile] = useState<any>(null)
     const {user} = useSelector((state: RootState) => state.auth)
     const {posts, todayPosts} = useAppSelector(state => state.posts)
@@ -34,6 +33,7 @@ const CreatePost: FC = () => {
     const dispatch = useDispatch()
     const navigate = useNavigate()
     const {register, handleSubmit, formState: {errors}} = useForm()
+    const [notFound, setNotFound] = useState(false)
     const [editorState, setEditorState] = useState(() => EditorState.createEmpty())
     useTitle(postId ? 'Edit' : 'Create')
 
@@ -41,12 +41,13 @@ const CreatePost: FC = () => {
         if(postId && posts?.length > 0){
             const newPost = posts.find(post => post.id === Number(postId))
             if(!newPost){
-                 PostService.getById(Number(postId)).then(response => {
+                 PostService.getById(Number(postId))
+                     .then(response => {
                      setCurrentPost(response.data)
                      setEditorState(EditorState.createWithContent(
                          ContentState.createFromBlockArray(convertFromHTML(response.data.text).contentBlocks)
                      ))
-                 })
+                 }).catch((err) => setNotFound(true))
             }else{
                 setCurrentPost(newPost)
                 setEditorState(EditorState.createWithContent(
@@ -57,6 +58,16 @@ const CreatePost: FC = () => {
         }
     }, [postId, posts.length])
 
+
+    if(Object.keys(currentPost).length === 0 && notFound){
+        return <NotFound/>
+    }
+    if(Object.keys(currentPost).length === 0 && postId){
+        return null
+    }
+    if(postId && currentPost.user.id !== user.id){
+        return <NotFound/>
+    }
 
     const onSubmit = async (data: any) => {
         let response
@@ -94,7 +105,7 @@ const CreatePost: FC = () => {
     return (
         <div className={'createPost'}>
             <div className={'postInner'}>
-                <h2>Create New Post</h2>
+                <h2>{postId ? 'Edit post' : 'Create new post'}</h2>
                     <FileUpload
                         defaultImageURL={Object.keys(currentPost).length > 0 ? currentPost.postImage : null}
                         displayImage={true}

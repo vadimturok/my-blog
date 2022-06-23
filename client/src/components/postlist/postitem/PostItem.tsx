@@ -2,17 +2,12 @@ import React, {FC, useState} from "react";
 import "./postitem.scss";
 import FavoriteBorderIcon from "@mui/icons-material/FavoriteBorder";
 import ChatBubbleOutlineIcon from "@mui/icons-material/ChatBubbleOutline";
-import {Link, useNavigate} from "react-router-dom";
+import {useNavigate} from "react-router-dom";
 import { IPost } from "../../../types/post-type";
 import { formatDate } from "../../../helpers";
 import LazyLoad from "react-lazyload";
-import DeleteIcon from '@mui/icons-material/Delete';
-import EditIcon from '@mui/icons-material/Edit';
 import {useAppSelector} from "../../../hooks";
-import PostService from "../../../services/post-service";
-import {useDispatch} from "react-redux";
-import {removePost, setPosts} from "../../../store/reducers/post/action-creators";
-import {deletePost} from "../../../store/reducers/auth/action-creators";
+import EditPostButtons from "../../editPostButtonGroup/EditPostButtons";
 
 interface PostItemProps {
   post: IPost;
@@ -23,22 +18,6 @@ const PostItem: FC<PostItemProps> = ({ post, displayImage }) => {
   const {user} = useAppSelector(state => state.auth)
   const [loadingImage, setLoadingImage] = useState(true)
   const navigate = useNavigate()
-  const dispatch = useDispatch()
-
-  const handleUpdate = (e: React.MouseEvent<HTMLElement>) => {
-    e.stopPropagation()
-    navigate(`/edit/${post.id}`)
-  }
-  const handleDelete = async (e: React.MouseEvent<HTMLElement>) => {
-    e.stopPropagation()
-    try{
-      await PostService.deletePost(post.id)
-      dispatch(removePost(post.id))
-      dispatch(deletePost(post))
-    }catch(e){
-      console.log(e)
-    }
-  }
 
   return (
     <div onClick={() => navigate(`/posts/${post.id}`)} className={"postItem"}>
@@ -71,20 +50,7 @@ const PostItem: FC<PostItemProps> = ({ post, displayImage }) => {
             </span>
             </div>
           </div>
-          {
-            user?.id === post.user.id && (
-                  <div className={'postUpdateActions'}>
-                    <div onClick={handleUpdate} className={'postUpdate edit'}>
-                      <EditIcon className={'postUpdateIcon'}/>
-                      <span>Edit</span>
-                    </div>
-                    <div onClick={handleDelete} className={'postUpdate delete'}>
-                      <DeleteIcon className={'postUpdateIcon'}/>
-                      <span>Delete</span>
-                    </div>
-                  </div>
-              )
-          }
+          {user?.id === post.user.id && <EditPostButtons post={post}/>}
         </div>
 
         <div className={"postInfoTitle"}>

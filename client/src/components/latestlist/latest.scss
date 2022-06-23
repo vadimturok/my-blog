@@ -1,75 +1,90 @@
-.latestList {
+.latestWrapper{
+  display: flex;
+  flex-direction: column;
   height: fit-content;
-  background-color: #fdfdfd;
-  border-radius: 5px;
   width: 28%;
-  position: -webkit-sticky;
   position: sticky;
   top: 70px;
-  border: 1px solid rgba(211, 211, 211, 0.51);
+  .createNewPostBtn{
+    margin-bottom: 20px;
+    @media (max-width: 1100px){
+      display: none;
+    }
+  }
+
   @media (max-width: 1100px){
-    display: none;
+    width: 0;
   }
-  .latestTitle {
-    padding: 10px;
-    color: gray;
-  }
+  .latestList {
+    background-color: #fdfdfd;
+    border-radius: 5px;
+    position: -webkit-sticky;
+    border: 1px solid rgba(211, 211, 211, 0.51);
+    @media (max-width: 1100px){
+      display: none;
+    }
+    .latestTitle {
+      padding: 10px;
+      color: gray;
+    }
 
-  .latestItems {
-    ul {
-      list-style: none;
-      li {
-        display: flex;
-        align-items: center;
-        gap: 2px;
-        justify-content: space-between;
-        border-top: 1px solid lightgray;
-        padding: 10px 7px 10px 7px;
-        .latestPostReactions {
+    .latestItems {
+      ul {
+        list-style: none;
+        li {
           display: flex;
-          gap: 5px;
-          .latestPostReactionItem {
+          align-items: center;
+          gap: 2px;
+          justify-content: space-between;
+          border-top: 1px solid lightgray;
+          padding: 10px 7px 10px 7px;
+          .latestPostReactions {
             display: flex;
-            align-items: center;
-            gap: 3px;
+            gap: 5px;
+            .latestPostReactionItem {
+              display: flex;
+              align-items: center;
+              gap: 3px;
 
-            span {
-              color: black;
-              font-size: 12px;
-            }
-            .latestPostReactionIconLike {
-              font-size: 15px;
-              color: rgb(255, 0, 0);
+              span {
+                color: black;
+                font-size: 12px;
+              }
+              .latestPostReactionIconLike {
+                font-size: 15px;
+                color: rgb(255, 0, 0);
+              }
             }
           }
-        }
 
-        span {
-          flex: 1;
-          font-size: 12px;
-          color: gray;
-        }
+          span {
+            flex: 1;
+            font-size: 12px;
+            color: gray;
+          }
 
-        &:last-child {
-          border-bottom: none;
-        }
+          &:last-child {
+            border-bottom: none;
+          }
 
-        .latestLink {
-          text-decoration: none;
-          color: inherit;
-          flex: 4;
+          .latestLink {
+            text-decoration: none;
+            color: inherit;
+            flex: 4;
 
-          h5 {
-            word-break: break-word;
-            cursor: pointer;
-            font-size: 13px;
+            h5 {
+              word-break: break-word;
+              cursor: pointer;
+              font-size: 13px;
 
-            &:hover {
-              color: #7451f8;
+              &:hover {
+                color: #7451f8;
+              }
             }
           }
         }
       }
     }
   }
+
 }
