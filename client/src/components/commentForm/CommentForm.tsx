@@ -2,20 +2,28 @@ import React, {FC, useState} from 'react';
 import './commentform.scss'
 import Button from "../common/button/Button";
 import {useAppSelector} from "../../hooks";
-import {useDispatch} from "react-redux";
-import {createComment} from "../../store/reducers/currentPost/action-creators";
+import {IComment} from "../../types/comment-type";
+import PostService from "../../services/post-service";
 
-const CommentForm: FC = () => {
+interface CommentFormProps{
+    postId: number;
+    addComment: (comment: IComment) => void;
+}
+
+const CommentForm: FC<CommentFormProps> = ({addComment, postId}) => {
     const {user, isAuth} = useAppSelector(state => state.auth)
-    const {post, addCommentStatus} = useAppSelector(state => state.currentPost)
-    const dispatch = useDispatch()
     const [text, setText] = useState<string>('')
     const [error, setError] = useState<string>('')
-    const onSubmit = () => {
+    const onSubmit = async () => {
         if(text.length > 15){
             setError('')
             setText('')
-            dispatch(createComment(text, post.id, user.id))
+            try{
+                const response = await PostService.createComment(text, postId, user.id)
+                addComment(response.data)
+            }catch(e: any){
+                setError(e.response.data.message)
+            }
         }else{
             setError('Comment must contain at least 15 characters')
         }
@@ -24,7 +32,6 @@ const CommentForm: FC = () => {
 
     return (
         <div className={'commentForm'}>
-            {addCommentStatus === 'success' && <div className={'commentValidationSuccess'}>Comment posted!</div>}
             {error && <div className={'commentValidationError'}>{error}</div>}
             <textarea
                 value={text}

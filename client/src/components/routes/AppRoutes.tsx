@@ -1,5 +1,5 @@
-import React, { FC, lazy, useEffect } from "react";
-import { Route, Routes, useLocation } from "react-router-dom";
+import React, { FC, lazy } from "react";
+import { Route, Routes } from "react-router-dom";
 import RequireAuth from "./RequireAuth";
 
 const Home = lazy(() => import("../../pages/home/Home"));

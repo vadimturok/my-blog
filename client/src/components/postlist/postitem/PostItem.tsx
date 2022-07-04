@@ -72,3 +72,4 @@ const PostItem: FC<PostItemProps> = ({ post, displayImage }) => {
 };
 
 export default PostItem;
+

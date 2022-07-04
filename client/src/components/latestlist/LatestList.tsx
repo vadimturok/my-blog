@@ -1,4 +1,4 @@
-import React, {FC, useState} from "react";
+import React, {FC, memo, useState} from "react";
 import "./latest.scss";
 import { useAppSelector } from "../../hooks";
 import { formatTime } from "../../helpers";
@@ -6,9 +6,9 @@ import {Link, useNavigate} from "react-router-dom";
 import FavoriteBorderIcon from "@mui/icons-material/FavoriteBorder";
 import Button from "../common/button/Button";
 import ModalWindow from "../modalWindow/ModalWindow";
+import {IPost} from "../../types/post-type";
 
-const LatestList: FC = () => {
-  const { todayPosts } = useAppSelector((state) => state.posts);
+const LatestList: FC<{todayPosts: IPost[]}> = memo(({todayPosts}) => {
   const {isAuth} = useAppSelector((state) => state.auth)
     const navigate = useNavigate()
     const [showModal, setShowModal] = useState(false)
@@ -60,6 +60,6 @@ const LatestList: FC = () => {
           </div>
       </div>
   );
-};
+});
 
-export default LatestList;
+export default LatestList

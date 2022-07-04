@@ -7,6 +7,7 @@ import {UserService} from "../user/user.service";
 import {FileService} from "../file/file.service";
 import {IPaginationOptions, paginate, Pagination} from "nestjs-typeorm-paginate";
 import {UpdatePostDto} from "./dto/update.post.dto";
+const _ = require('lodash');
 
 @Injectable()
 export class PostService{
@@ -46,12 +47,6 @@ export class PostService{
         await this.postRepository.delete(postId)
     }
 
-    async getAllPosts(): Promise<Post[]>{
-        return await this.postRepository.find({
-            relations: ['comments', 'userLikes']
-        })
-    }
-
     async getPostById(postId: number): Promise<Post>{
         const post = await this.postRepository.findOne(postId, {
             relations: ['comments', 'userLikes']
@@ -63,14 +58,36 @@ export class PostService{
         }
     }
 
-    async getTodayPosts(quantity: number) {
+    async getLatestPosts(){
         return this.postRepository.find({
-            order: {dateAndTimePublish: 'DESC'},
-            take: quantity
+            relations: ['comments', 'userLikes'],
+            order: {
+                dateAndTimePublish: 'DESC'
+            }
         })
     }
 
-    async paginate(options: IPaginationOptions): Promise<Pagination<Post>>{
-        return paginate<Post>(this.postRepository, options)
+    async getHotPosts(){
+        const posts = await this.postRepository.find({
+            relations: ['comments', 'userLikes'],
+        })
+        return _.orderBy(posts, post => post.comments.length, ['desc'])
+    }
+
+    async getTopPosts(){
+        const posts = await this.postRepository.find({
+            relations: ['comments', 'userLikes'],
+        })
+        return _.orderBy(posts, post => post.userLikes.length, ['desc'])
+    }
+
+    async getPostsByUserId(userId: number){
+        const posts = await this.postRepository.find({
+            relations: ['comments', 'userLikes'],
+            where: {
+                user: userId
+            }
+        })
+        return posts
     }
 }

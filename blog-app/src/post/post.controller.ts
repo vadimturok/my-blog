@@ -55,19 +55,23 @@ export class PostController{
         return this.postService.getPostById(postId)
     }
 
-    @Get()
-    getAllPosts(){
-        return this.postService.getAllPosts()
+    @Get('/latest')
+    getLatestPosts(){
+        return this.postService.getLatestPosts()
     }
 
-    @Get('/today?')
-    getTodayPosts(@Query('quantity') quantity: number){
-        return this.postService.getTodayPosts(quantity)
+    @Get('/hot')
+    getHotPosts(){
+        return this.postService.getHotPosts()
     }
 
-    @Get('/postsQuery?')
-    getPaginatedPosts(@Query('page') page, @Query('limit') limit){
-        return this.postService.paginate({page, limit})
+    @Get('/best')
+    getTopPosts(){
+        return this.postService.getTopPosts()
     }
 
+    @Get('/user/:userId')
+    getPostsByUserId(@Param('userId', new ParseIntPipe()) userId: number){
+        return this.postService.getPostsByUserId(userId)
+    }
 }

@@ -10,15 +10,14 @@ import InfoIcon from "@mui/icons-material/Info";
 import VideoLibraryIcon from "@mui/icons-material/VideoLibrary";
 import MailIcon from "@mui/icons-material/Mail";
 import { Link, useNavigate } from "react-router-dom";
-import { useDispatch, useSelector } from "react-redux";
-import { RootState } from "../../store";
+import { useDispatch } from "react-redux";
 import ModalWindow from "../modalWindow/ModalWindow";
-import { setSort } from "../../store/reducers/post/action-creators";
-import { PostSortActions } from "../../store/reducers/post/types";
+import {fetchPosts} from "../../store/reducers/posts/actionCreators";
+import {useAppSelector} from "../../hooks";
 
 const Sidebar: FC = () => {
-  const { isAuth } = useSelector((state: RootState) => state.auth);
-  const { sortType } = useSelector((state: RootState) => state.posts);
+  const { isAuth } = useAppSelector(state => state.auth)
+  const {postsType} = useAppSelector(state => state.posts)
   const navigate = useNavigate();
   const dispatch = useDispatch();
   const [showModal, setShowModal] = useState<boolean>(false);
@@ -29,6 +28,9 @@ const Sidebar: FC = () => {
       setShowModal(true);
     }
   };
+  const handleSelectPosts = (type: 'latest' | 'hot' | 'best') => {
+      dispatch(fetchPosts({type: type}))
+  }
 
   return (
     <div className={"sidebar"}>
@@ -36,30 +38,15 @@ const Sidebar: FC = () => {
       <div className={"menu"}>
         <h4>Order by</h4>
         <ul>
-          <li
-            className={
-              sortType === PostSortActions.SORT_BY_TIME ? "sidebarItem" : ""
-            }
-            onClick={() => dispatch(setSort(PostSortActions.SORT_BY_TIME))}
-          >
+          <li className={postsType === 'latest' ? 'sidebarItem' : ''} onClick={() => handleSelectPosts('latest')}>
             <AccessTimeIcon className={"sidebarIcon"} />
             <span>Latest</span>
           </li>
-          <li
-            className={
-              sortType === PostSortActions.SORT_BY_COMMENTS ? "sidebarItem" : ""
-            }
-            onClick={() => dispatch(setSort(PostSortActions.SORT_BY_COMMENTS))}
-          >
+          <li className={postsType === 'hot' ? 'sidebarItem' : ''} onClick={() => handleSelectPosts('hot')}>
             <LocalFireDepartmentIcon className={"sidebarIcon"} />
             <span>Hot</span>
           </li>
-          <li
-            className={
-              sortType === PostSortActions.SORT_BY_LIKES ? "sidebarItem" : ""
-            }
-            onClick={() => dispatch(setSort(PostSortActions.SORT_BY_LIKES))}
-          >
+          <li className={postsType === 'best' ? 'sidebarItem' : ''} onClick={() => handleSelectPosts('best')}>
             <StarIcon className={"sidebarIcon"} />
             <span>Best</span>
           </li>

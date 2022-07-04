@@ -2,25 +2,23 @@ import React, {FC, useState} from "react";
 import "./navbar.scss";
 import NewspaperIcon from "@mui/icons-material/Newspaper";
 import { Link, useNavigate } from "react-router-dom";
-import { useDispatch } from "react-redux";
-import { logout, setIsAuth } from "../../store/reducers/auth/action-creators";
-import { useAppSelector } from "../../hooks";
+import {useAppDispatch, useAppSelector} from "../../hooks";
 import GitHubButton from "react-github-btn";
 import {Box, Divider, Drawer} from "@mui/material";
+import {logoutUser} from "../../store/reducers/auth/actionCreators";
 
 const Navbar: FC = () => {
   const navigate = useNavigate();
   const { isAuth } = useAppSelector((state) => state.auth);
-  const dispatch = useDispatch();
+  const dispatch = useAppDispatch()
   const [activeMenu, setActiveMenu] = useState(false)
 
   const handleLogout = () => {
     if(activeMenu){
       setActiveMenu(false)
     }
-    dispatch(logout());
-    dispatch(setIsAuth(false));
-    navigate("/login");
+    dispatch(logoutUser())
+    navigate('/')
   };
 
   return (

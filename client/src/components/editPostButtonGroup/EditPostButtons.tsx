@@ -3,15 +3,14 @@ import EditIcon from "@mui/icons-material/Edit";
 import DeleteIcon from "@mui/icons-material/Delete";
 import './editPostButtons.scss'
 import PostService from "../../services/post-service";
-import {removePost} from "../../store/reducers/post/action-creators";
-import {deletePost} from "../../store/reducers/auth/action-creators";
 import {useNavigate} from "react-router-dom";
-import {useDispatch} from "react-redux";
 import {IPost} from "../../types/post-type";
+import {useAppDispatch} from "../../hooks";
+import {removePost} from "../../store/reducers/posts/postsSlice";
 
 const EditPostButtons: FC<{post: IPost, postPage?: boolean}> = ({post, postPage}) => {
     const navigate = useNavigate()
-    const dispatch = useDispatch()
+    const dispatch = useAppDispatch()
 
     const handleUpdate = (e: React.MouseEvent<HTMLElement>) => {
         e.stopPropagation()
@@ -21,8 +20,7 @@ const EditPostButtons: FC<{post: IPost, postPage?: boolean}> = ({post, postPage}
         e.stopPropagation()
         try{
             await PostService.deletePost(post.id)
-            dispatch(removePost(post.id))
-            dispatch(deletePost(post))
+            dispatch(removePost(post))
         }catch(e){
             console.log(e)
         }

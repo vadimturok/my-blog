@@ -5,69 +5,47 @@ import FileUpload from "../../components/fileUpload/FileUpload";
 import Button from "../../components/common/button/Button";
 import {Editor} from "react-draft-wysiwyg";
 import {ContentState, convertFromHTML, convertToRaw, EditorState} from "draft-js";
-import draftToHtml from "draftjs-to-html";
 import "react-draft-wysiwyg/dist/react-draft-wysiwyg.css";
-import {useDispatch, useSelector} from "react-redux";
-import {RootState} from "../../store";
 import {useForm} from "react-hook-form";
 import PostService from "../../services/post-service";
 import {useNavigate, useParams} from "react-router-dom";
-import {
-    fetchTodayPosts, setPosts, setTodayPosts,
-} from "../../store/reducers/post/action-creators";
 import {CircularProgress} from "@mui/material";
 import {useAppSelector, useTitle} from "../../hooks";
-import {AddNewPost, deletePost} from "../../store/reducers/auth/action-creators";
 import {IPost} from "../../types/post-type";
+import draftToHtml from "draftjs-to-html";
 import NotFound from "../404/NotFound";
 
 
 const CreatePost: FC = () => {
     const {postId} = useParams()
     const [file, setFile] = useState<any>(null)
-    const {user} = useSelector((state: RootState) => state.auth)
-    const {posts, todayPosts} = useAppSelector(state => state.posts)
-    const [isError, setIsError] = useState<string>('')
-    const [isLoading, setIsLoading] = useState<boolean>(false)
+    const {user, isAuth} = useAppSelector(state => state.auth)
     const [currentPost, setCurrentPost] = useState<IPost>({} as IPost)
-    const dispatch = useDispatch()
-    const navigate = useNavigate()
     const {register, handleSubmit, formState: {errors}} = useForm()
-    const [notFound, setNotFound] = useState(false)
     const [editorState, setEditorState] = useState(() => EditorState.createEmpty())
+    const [error, setError] = useState('')
+    const [notFound, setNotFound] = useState(false)
+    const [isLoading, setIsLoading] = useState(false)
+    const navigate = useNavigate()
     useTitle(postId ? 'Edit' : 'Create')
 
     useEffect(() => {
-        if(postId && posts?.length > 0){
-            const newPost = posts.find(post => post.id === Number(postId))
-            if(!newPost){
-                 PostService.getById(Number(postId))
-                     .then(response => {
-                     setCurrentPost(response.data)
-                     setEditorState(EditorState.createWithContent(
-                         ContentState.createFromBlockArray(convertFromHTML(response.data.text).contentBlocks)
+        if(postId){
+            PostService.getById(Number(postId))
+                .then(response => {
+                    if(isAuth && response.data.user.id !== user.id){
+                        setNotFound(true)
+                        return
+                    }
+                    setCurrentPost(response.data)
+                    setEditorState(EditorState.createWithContent(
+                        ContentState.createFromBlockArray(convertFromHTML(response.data.text).contentBlocks)
                      ))
-                 }).catch((err) => setNotFound(true))
-            }else{
-                setCurrentPost(newPost)
-                setEditorState(EditorState.createWithContent(
-                    ContentState.createFromBlockArray(convertFromHTML(newPost.text).contentBlocks)
-                ))
-            }
-
+                })
+                .catch((err) => setNotFound(true))
         }
-    }, [postId, posts.length])
+    }, [postId, user, isAuth])
 
-
-    if(Object.keys(currentPost).length === 0 && notFound){
-        return <NotFound/>
-    }
-    if(Object.keys(currentPost).length === 0 && postId){
-        return null
-    }
-    if(postId && currentPost.user.id !== user.id){
-        return <NotFound/>
-    }
 
     const onSubmit = async (data: any) => {
         let response
@@ -76,31 +54,23 @@ const CreatePost: FC = () => {
         try{
             if(postId){
                 response = await PostService.updatePost(data['Title'] === '' ? currentPost.title : data['Title'], stringFromHtml, currentPost.postImage, currentPost.id, file)
-                dispatch(setPosts([...posts.filter(p => p.id !== currentPost.id), response.data]))
-                if(todayPosts.includes(currentPost)){
-                    dispatch(setTodayPosts([response.data, ...todayPosts.filter(p => p.id !== currentPost.id)]
-                        .sort((a,b) => new Date(b.dateAndTimePublish).getTime() -
-                            new Date(a.dateAndTimePublish).getTime())))
-                }
-                dispatch(deletePost(currentPost))
-                dispatch(AddNewPost(response.data))
             }else{
                 response = await PostService.createPost(file, data['Title'], stringFromHtml, user.id)
-                dispatch(AddNewPost(response.data))
             }
-            dispatch(fetchTodayPosts(5))
             navigate(`/posts/${response.data.id}`)
         }catch(e: any){
-            console.log(e)
             const response = e.response?.data.message
-            if(Array.isArray(response))setIsError(response[0])
-            else setIsError(response)
-            console.log(e.response)
+            if(Array.isArray(response))setError(response[0])
+            else setError(response)
         }finally {
             setIsLoading(false)
         }
+
     }
 
+    if(notFound){
+        return <NotFound/>
+    }
 
     return (
         <div className={'createPost'}>
@@ -136,7 +106,7 @@ const CreatePost: FC = () => {
                                 progress={isLoading && <CircularProgress style={{color: 'white'}} size={20}/>}
                             />
                         </div>
-                        {isError && <div className={'alert danger'}>{isError}</div>}
+                        {error && <div className={'alert danger'}>{error}</div>}
                     </div>
             </div>
         </div>
