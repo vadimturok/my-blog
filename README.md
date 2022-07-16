@@ -7,7 +7,6 @@
 ## Table of Contents
 * [Technologies Used](#technologies-used)
 * [Features](#features)
-* [Screenshots](#screenshots)
 * [Setup](#setup)
 * [Project Status](#project-status)
 * [Contact](#contact)
@@ -42,10 +41,6 @@ Main features of the app:
 - Liking posts
 - Posts pagination
 
-
-## Screenshots
-![Example screenshot](./demoImages/demo_img_1.png)
-<!-- If you have screenshots you'd like to share, include them here. -->
 
 
 ## Setup
