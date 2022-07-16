@@ -1,0 +1,65 @@
+.tagPostsWrapper{
+  padding-top: 20px;
+  display: flex;
+  justify-content: space-between;
+  gap: 20px;
+
+  .tagPostsSidebar{
+    @media (max-width: 1100px) {
+      display: none;
+    }
+  }
+
+  @media (max-width: 1100px) {
+    flex-direction: column-reverse;
+  }
+
+  @media (max-width: 415px){
+    flex-direction: column-reverse;
+  }
+
+  .tagPostsInfo{
+    height: fit-content;
+    position: sticky;
+    top: 70px;
+    flex-basis: 28%;
+    background-color: white;
+    border-radius: 5px;
+    border: 1px solid lightgrey;
+    @media (max-width: 1100px) {
+      position: unset;
+    }
+    @media (max-width: 415px){
+      position: unset;
+    }
+
+    .tagPostsInfoTop{
+      text-transform: lowercase;
+      border-top-left-radius: 5px;
+      border-top-right-radius: 5px;
+      height: 50px;
+      font-size: 20px;
+      text-align: center;
+      line-height: 50px;
+      color: white;
+    }
+    .tagPostsInfoDescription{
+      padding: 20px;
+    }
+    .tagPostsInfoBottom{
+      padding: 0 20px 20px 20px;
+      font-size: 15px;
+      color: gray;
+    }
+  }
+  .tagPostsList{
+    flex-basis: 55%;
+    margin-left: calc(17%);
+    @media (max-width: 415px){
+      margin-left: 0;
+    }
+    @media (max-width: 1100px) {
+      margin-left: 0;
+    }
+  }
+}

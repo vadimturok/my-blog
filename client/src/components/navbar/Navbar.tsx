@@ -32,13 +32,20 @@ const Navbar: FC = () => {
               <Link onClick={() => setActiveMenu(false)} className={'link'} to={'/'}>
                 <h1>Home</h1>
               </Link>
-              <Link onClick={() => setActiveMenu(false)} className={'link'} to={'/profile'}>
-                <h1>Profile</h1>
+              <Link onClick={() => setActiveMenu(false)} className={'link'} to={'/tags'}>
+                <h1>Tags</h1>
               </Link>
-              <Link onClick={() => setActiveMenu(false)} className={'link'} to={'/create'}>
-                <h1>Make Post</h1>
-              </Link>
-              {isAuth ? <h1 onClick={handleLogout}>Logout</h1> :
+              {isAuth ?
+                  <>
+                    <Link onClick={() => setActiveMenu(false)} className={'link'} to={'/profile'}>
+                      <h1>Profile</h1>
+                    </Link>
+                    <Link onClick={() => setActiveMenu(false)} className={'link'} to={'/create'}>
+                      <h1>Make Post</h1>
+                    </Link>
+                    <h1 onClick={handleLogout}>Logout</h1>
+                  </>
+                   :
                   <>
                     <Link onClick={() => setActiveMenu(false)} className={'link'} to={'/login'}>
                       <h1>Sign In</h1>

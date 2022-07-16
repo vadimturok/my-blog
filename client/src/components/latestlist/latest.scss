@@ -3,16 +3,21 @@
   flex-direction: column;
   height: fit-content;
   width: 28%;
-  position: sticky;
   top: 70px;
-  .createNewPostBtn{
-    margin-bottom: 20px;
-    width: 50%;
-    align-self: center;
-    @media (max-width: 1100px){
-      display: none;
+
+  .createItemButtons{
+    display: flex;
+    gap: 20px;
+    .createNewPostBtn{
+      margin-bottom: 20px;
+      width: 50%;
+      align-self: center;
+      @media (max-width: 1100px){
+        display: none;
+      }
     }
   }
+
 
   @media (max-width: 1100px){
     width: 0;
@@ -86,6 +91,44 @@
           }
         }
       }
+    }
+  }
+
+  .tagsRecommendations{
+    @media (max-width: 1100px){
+      display: none;
+    }
+    h3{
+      margin-top: 20px;
+      margin-bottom: 20px;
+      color: gray;
+    }
+    .postTags{
+      display: flex;
+      flex-wrap: wrap;
+      gap: 10px;
+      .postItemTag{
+        text-transform: lowercase;
+        cursor: pointer;
+        padding: 4px 6px;
+        border-radius: 10px;
+        &:hover{
+          background-color: rgba(211, 211, 211, 0.35);
+        }
+      }
+    }
+  }
+
+  .updatesInfo{
+    h3{
+      margin-top: 20px;
+      margin-bottom: 14px;
+      color: gray;
+    }
+    p{
+      font-size: 15px;
+      color: gray;
+      margin-bottom: 7px;
     }
   }
 

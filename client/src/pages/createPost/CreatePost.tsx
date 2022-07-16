@@ -14,6 +14,8 @@ import {useAppSelector, useTitle} from "../../hooks";
 import {IPost} from "../../types/post-type";
 import draftToHtml from "draftjs-to-html";
 import NotFound from "../404/NotFound";
+import TagsSelect from "../../components/tagsSelect/TagsSelect";
+import {ITag} from "../../types/tag-type";
 
 
 const CreatePost: FC = () => {
@@ -26,6 +28,7 @@ const CreatePost: FC = () => {
     const [error, setError] = useState('')
     const [notFound, setNotFound] = useState(false)
     const [isLoading, setIsLoading] = useState(false)
+    const [selectedTags, setSelectedTags] = useState<ITag[]>([])
     const navigate = useNavigate()
     useTitle(postId ? 'Edit' : 'Create')
 
@@ -53,9 +56,9 @@ const CreatePost: FC = () => {
         setIsLoading(true)
         try{
             if(postId){
-                response = await PostService.updatePost(data['Title'] === '' ? currentPost.title : data['Title'], stringFromHtml, currentPost.postImage, currentPost.id, file)
+                response = await PostService.updatePost(data['Title'] === '' ? currentPost.title : data['Title'], stringFromHtml, currentPost.postImage, currentPost.id, file, selectedTags)
             }else{
-                response = await PostService.createPost(file, data['Title'], stringFromHtml, user.id)
+                response = await PostService.createPost(file, data['Title'], stringFromHtml, user.id, selectedTags)
             }
             navigate(`/posts/${response.data.id}`)
         }catch(e: any){
@@ -98,6 +101,8 @@ const CreatePost: FC = () => {
                             onEditorStateChange={(state: any) => setEditorState(state)}
                         />
                     </div>
+                {currentPost?.tags && <TagsSelect tagsEdit={currentPost.tags} setTags={setSelectedTags}/>}
+                {!postId && <TagsSelect setTags={setSelectedTags}/>}
                     <div className={'createBottom'}>
                         <div className={'createButton'}>
                             <Button

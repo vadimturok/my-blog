@@ -19,6 +19,11 @@ const PostItem: FC<PostItemProps> = ({ post, displayImage }) => {
   const [loadingImage, setLoadingImage] = useState(true)
   const navigate = useNavigate()
 
+  const handleClick = (e: React.MouseEvent<HTMLElement>, tagId: number) => {
+    e.stopPropagation()
+    navigate(`/t/${tagId}`)
+  }
+
   return (
     <div onClick={() => navigate(`/posts/${post.id}`)} className={"postItem"}>
       {displayImage && (
@@ -57,16 +62,32 @@ const PostItem: FC<PostItemProps> = ({ post, displayImage }) => {
           <h2>{post.title}</h2>
         </div>
       </div>
-      <div className={"postReactions"}>
-        <div className={"postReactionsInfo"}>
-          <FavoriteBorderIcon className={"postReactionsIcon"} />
-          <span>{post.userLikes.length} Likes</span>
+      <div className={'postBottom'}>
+        <div className={"postReactions"}>
+          <div className={"postReactionsInfo"}>
+            <FavoriteBorderIcon className={"postReactionsIcon"} />
+            <span>{post.userLikes.length} Likes</span>
+          </div>
+          <div className={"postReactionsInfo"}>
+            <ChatBubbleOutlineIcon className={"postReactionsIcon"} />
+            <span>{post.comments.length} Comments</span>
+          </div>
         </div>
-        <div className={"postReactionsInfo"}>
-          <ChatBubbleOutlineIcon className={"postReactionsIcon"} />
-          <span>{post.comments.length} Comments</span>
+        <div className={'postTags'}>
+          {post.tags.map((tag, i) => i <= 2 &&
+              <div
+                  key={tag.id}
+                  style={{border: `1px solid #${tag.color}`}}
+                  className={'postItemTag'}
+                  onClick={(e) => handleClick(e, tag.id)}
+              >
+                <span style={{color: `#${tag.color}`}}>#</span>
+                {tag.name}
+              </div>
+          )}
         </div>
       </div>
+
     </div>
   );
 };

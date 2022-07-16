@@ -1,38 +1,58 @@
-import React, {FC, memo, useState} from "react";
+import React, {FC, memo, useEffect, useState} from "react";
 import "./latest.scss";
-import { useAppSelector } from "../../hooks";
+import {useAppDispatch, useAppSelector, useAuth} from "../../hooks";
 import { formatTime } from "../../helpers";
 import {Link, useNavigate} from "react-router-dom";
 import FavoriteBorderIcon from "@mui/icons-material/FavoriteBorder";
 import Button from "../common/button/Button";
 import ModalWindow from "../modalWindow/ModalWindow";
 import {IPost} from "../../types/post-type";
+import {fetchTags} from "../../store/reducers/tags/actionCreators";
 
 const LatestList: FC<{todayPosts: IPost[]}> = memo(({todayPosts}) => {
+    const {role} = useAuth()
   const {isAuth} = useAppSelector((state) => state.auth)
+    const {tags} = useAppSelector(state => state.tags)
+    const dispatch = useAppDispatch()
     const navigate = useNavigate()
     const [showModal, setShowModal] = useState(false)
 
-    const handleCreate = () => {
+    const handleCreate = (path: string) => {
         if(!isAuth){
             setShowModal(true)
         }else{
-            navigate('/create')
+            navigate(path)
         }
     }
+    const handleClick = (e: React.MouseEvent<HTMLElement>, tagId: number) => {
+        e.stopPropagation()
+        navigate(`/t/${tagId}`)
+    }
 
+    useEffect(() => {
+        dispatch(fetchTags())
+    }, [dispatch])
   return (
       <div className={'latestWrapper'}>
           <ModalWindow
               showModal={showModal}
               setShowModal={setShowModal}
           />
-          <div className={'createNewPostBtn'}>
-              <Button
-                  text={'Create post'}
-                  type={'button'}
-                  handleClick={handleCreate}
-              />
+          <div className={'createItemButtons'}>
+              <div className={'createNewPostBtn'}>
+                  <Button
+                      text={'Create post'}
+                      type={'button'}
+                      handleClick={() => handleCreate('/create')}
+                  />
+              </div>
+              {role === 'admin' && <div className={'createNewPostBtn'}>
+                  <Button
+                      text={'Create tag'}
+                      type={'button'}
+                      handleClick={() => handleCreate('/create-tag')}
+                  />
+              </div>}
           </div>
           <div className={"latestList"}>
               <div className={"latestTitle"}>
@@ -57,6 +77,28 @@ const LatestList: FC<{todayPosts: IPost[]}> = memo(({todayPosts}) => {
                           ))}
                   </ul>
               </div>
+          </div>
+          <div className={'tagsRecommendations'}>
+              <h3>Popular tags today</h3>
+              <div className={'postTags'}>
+                  {tags?.length > 0 && tags.map(tag =>
+                      <div
+                          key={tag.id}
+                          style={{border: `1px solid #${tag.color}`}}
+                          className={'postItemTag'}
+                          onClick={(e) => handleClick(e, tag.id)}
+                      >
+                          <span style={{color: `#${tag.color}`}}>#</span>
+                          {tag.name}
+                      </div>)}
+              </div>
+          </div>
+          <div className={'updatesInfo'}>
+              <h3>What's new?</h3>
+              <p>Tags now available to choose while creating/editing posts.</p>
+              <p>Administrators are able to create new tags.</p>
+              <p>View posts by selected tag.</p>
+              <p>View all tags.</p>
           </div>
       </div>
   );

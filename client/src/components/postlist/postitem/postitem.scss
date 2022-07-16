@@ -77,22 +77,45 @@
     }
   }
 
-  .postReactions {
-    padding: 0 20px 20px 20px;
+  .postBottom{
     display: flex;
-    margin-top: 10px;
-    gap: 30px;
-    font-size: 13px;
-    color: gray;
+    align-items: center;
+    justify-content: space-between;
+    padding-right: 20px;
 
-    .postReactionsInfo {
+    .postTags{
       display: flex;
-      align-items: center;
-      gap: 5px;
+      gap: 10px;
+      @media (max-width: 1187px){
+        display: none;
+      }
+      .postItemTag{
+        text-transform: lowercase;
+        cursor: pointer;
+        padding: 4px 6px;
+        border-radius: 10px;
+        &:hover{
+          background-color: rgba(211, 211, 211, 0.35);
+        }
+      }
+    }
+    .postReactions {
+      padding: 0 20px 20px 20px;
+      display: flex;
+      margin-top: 10px;
+      gap: 30px;
+      font-size: 13px;
+      color: gray;
 
-      .postReactionsIcon {
-        font-size: 17px;
-        color: black;
+      .postReactionsInfo {
+        display: flex;
+        align-items: center;
+        gap: 5px;
+
+        .postReactionsIcon {
+          font-size: 17px;
+          color: black;
+        }
       }
     }
   }

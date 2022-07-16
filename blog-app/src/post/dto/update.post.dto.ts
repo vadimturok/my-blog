@@ -15,4 +15,6 @@ export class UpdatePostDto{
 
     @IsNotEmpty({message: 'Empty image'})
     postImage: string;
+
+    tags?: any;
 }

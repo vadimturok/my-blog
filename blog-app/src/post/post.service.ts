@@ -5,15 +5,18 @@ import {Repository} from "typeorm";
 import {PostDto} from "./dto/post.dto";
 import {UserService} from "../user/user.service";
 import {FileService} from "../file/file.service";
-import {IPaginationOptions, paginate, Pagination} from "nestjs-typeorm-paginate";
 import {UpdatePostDto} from "./dto/update.post.dto";
+import {Tag} from "../tag/tag.entity";
+import {TagService} from "../tag/tag.service";
+
 const _ = require('lodash');
 
 @Injectable()
 export class PostService{
     constructor(@InjectRepository(Post) private postRepository: Repository<Post>,
                 private usersService: UserService,
-                private fileService: FileService) {
+                private fileService: FileService,
+                private tagService: TagService) {
     }
 
     async createPost(postDto: PostDto, files): Promise<Post>{
@@ -23,6 +26,11 @@ export class PostService{
         }
         const picturePath = await this.fileService.createFile(picture[0])
         const post = new Post()
+        if(postDto.tags){
+            const tagsArray = postDto.tags.map(tag => JSON.parse(JSON.stringify(tag)))
+            const arrayTag = tagsArray.map(tag => JSON.parse(tag))
+            post.tags = arrayTag as Tag[]
+        }
         post.title = postDto.title
         post.text = postDto.text
         post.user = Number(postDto.userId)
@@ -35,11 +43,19 @@ export class PostService{
     async updatePost(updatePostDto: UpdatePostDto, files){
         const postId = updatePostDto.postId
         let {title, text, postImage} = updatePostDto
+        let arrayTag
+        const post = await this.getPostById(postId)
         if(files){
             const {picture} = files
             postImage = await this.fileService.createFile(picture[0])
+            const tagsArray = updatePostDto.tags.map(tag => JSON.parse(JSON.stringify(tag)))
+            arrayTag = tagsArray.map(tag => JSON.parse(tag))
         }
-        await this.postRepository.update(postId, {title, text, postImage})
+        post.title = title
+        post.text = text
+        post.postImage = postImage
+        post.tags = arrayTag ? arrayTag : updatePostDto.tags
+        await this.postRepository.save(post)
         return this.getPostById(postId)
     }
 
@@ -89,5 +105,10 @@ export class PostService{
             }
         })
         return posts
+    }
+
+    async getPostsByTagId(tagId: number){
+        const posts = await this.postRepository.find()
+        return posts.filter(post => post.tags.some(tag => tag.id === tagId))
     }
 }

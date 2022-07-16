@@ -3,8 +3,12 @@ import {AppDispatch, RootState} from "../store";
 import React from "react";
 
 export const useAuth = () => {
-    return !!localStorage.getItem('token');
+    return {
+        token: localStorage.getItem('token'),
+        role: localStorage.getItem('role')
+    }
 }
+
 
 export const useTitle = (title: string): void => {
     React.useEffect(() => {

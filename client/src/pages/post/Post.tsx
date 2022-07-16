@@ -2,7 +2,7 @@ import React, { useEffect, useState } from "react";
 import "./post.scss";
 import LatestList from "../../components/latestlist/LatestList";
 import KeyboardBackspaceIcon from "@mui/icons-material/KeyboardBackspace";
-import { Link, useParams } from "react-router-dom";
+import {Link, useNavigate, useParams} from "react-router-dom";
 import Comment from "../../components/comment/Comment";
 import CommentForm from "../../components/commentForm/CommentForm";
 import FavoriteBorderIcon from "@mui/icons-material/FavoriteBorder";
@@ -20,6 +20,7 @@ import Loader from "../../components/loader/Loader";
 import EditPostButtons from "../../components/editPostButtonGroup/EditPostButtons";
 
  const Post = () => {
+     const navigate = useNavigate()
      const [fetchedTodayPosts, setFetchedTodayPosts] = useState<IPost[]>([])
      const [post, setPost] = useState<IPost>({} as IPost)
      const [error, setError] = useState('')
@@ -47,6 +48,10 @@ import EditPostButtons from "../../components/editPostButtonGroup/EditPostButton
    }, [postId, todayPosts.length])
 
 
+     const handleClick = (e: React.MouseEvent<HTMLElement>, tagId: number) => {
+         e.stopPropagation()
+         navigate(`/t/${tagId}`)
+     }
 
      const addComment = (comment: IComment) => {
        setPost(prev => ({
@@ -113,6 +118,19 @@ import EditPostButtons from "../../components/editPostButtonGroup/EditPostButton
 
              <h1>{post.title}</h1>
            </div>
+             <div className={'postPageTags'}>
+                 {post.tags.map((tag, i) =>
+                     <div
+                         key={tag.id}
+                         style={{border: `1px solid #${tag.color}`}}
+                         className={'postItemTag'}
+                         onClick={(e) => handleClick(e, tag.id)}
+                     >
+                         <span style={{color: `#${tag.color}`}}>#</span>
+                         {tag.name}
+                     </div>
+                 )}
+             </div>
            <div
              className={"postText"}
              dangerouslySetInnerHTML={{

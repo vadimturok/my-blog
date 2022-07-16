@@ -17,7 +17,7 @@ const Home: FC = () => {
 
   return (
     <div className={"home"}>
-      <Sidebar />
+      <Sidebar homePage={true}/>
         <div className={'homePosts'}>
             {isLoading ? <Loader/> : <PostList error={error} posts={posts}/>}
         </div>

@@ -4,6 +4,7 @@
     display: none;
   }
   .menu {
+    margin-bottom: 50px;
     h4 {
       margin-bottom: 15px;
     }
@@ -25,8 +26,5 @@
       background-color: rgba(116, 81, 248, 0.42);
     }
 
-    &.bottom {
-      margin-top: 50px;
-    }
   }
 }

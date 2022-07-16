@@ -4,8 +4,8 @@ import {useAuth} from "../../hooks";
 
 
 const RequireAuth: FC = () => {
-    const isAuth = useAuth()
-    return isAuth ? <Outlet/> : <Navigate to={'/login'}/>
+    const {token} = useAuth()
+    return !!token ? <Outlet/> : <Navigate to={'/login'}/>
 };
 
 export default RequireAuth;

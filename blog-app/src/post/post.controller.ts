@@ -74,4 +74,9 @@ export class PostController{
     getPostsByUserId(@Param('userId', new ParseIntPipe()) userId: number){
         return this.postService.getPostsByUserId(userId)
     }
+
+    @Get('/tag/:tagId')
+    getPostsByTagId(@Param('tagId', new ParseIntPipe()) tagId: number){
+        return this.postService.getPostsByTagId(tagId)
+    }
 }

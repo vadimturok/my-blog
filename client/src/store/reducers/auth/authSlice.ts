@@ -35,6 +35,7 @@ export const authSlice = createSlice({
         },
         [authorizeUser.fulfilled.type]: (state: AuthState, action: PayloadAction<AuthResponse>) => {
             localStorage.setItem('token', action.payload.accessToken)
+            localStorage.setItem('role', action.payload.user.role)
             state.isLoading = false
             state.isAuth = true
             state.user = action.payload.user
@@ -53,6 +54,7 @@ export const authSlice = createSlice({
         },
         [logoutUser.fulfilled.type]: (state: AuthState, action) => {
             localStorage.removeItem('token')
+            localStorage.removeItem('role')
             state.user = {} as IUser
             state.isAuth = false
         },

@@ -14,8 +14,9 @@ import { useDispatch } from "react-redux";
 import ModalWindow from "../modalWindow/ModalWindow";
 import {fetchPosts} from "../../store/reducers/posts/actionCreators";
 import {useAppSelector} from "../../hooks";
+import LocalOfferIcon from '@mui/icons-material/LocalOffer';
 
-const Sidebar: FC = () => {
+const Sidebar: FC<{homePage: boolean}> = ({homePage}) => {
   const { isAuth } = useAppSelector(state => state.auth)
   const {postsType} = useAppSelector(state => state.posts)
   const navigate = useNavigate();
@@ -35,7 +36,7 @@ const Sidebar: FC = () => {
   return (
     <div className={"sidebar"}>
       <ModalWindow setShowModal={setShowModal} showModal={showModal} />
-      <div className={"menu"}>
+      {homePage && <div className={"menu"}>
         <h4>Order by</h4>
         <ul>
           <li className={postsType === 'latest' ? 'sidebarItem' : ''} onClick={() => handleSelectPosts('latest')}>
@@ -51,7 +52,7 @@ const Sidebar: FC = () => {
             <span>Best</span>
           </li>
         </ul>
-      </div>
+      </div>}
       <div className={"menu bottom"}>
         <h4>Navigation</h4>
         <ul>
@@ -65,6 +66,12 @@ const Sidebar: FC = () => {
             <PersonIcon className={"sidebarIcon"} />
             <span>Profile</span>
           </li>
+          <Link to={'/tags'} className={"link"}>
+            <li>
+              <LocalOfferIcon className={"sidebarIcon"} />
+              <span>Tags</span>
+            </li>
+          </Link>
           <li onClick={() => handleClick("create")}>
             <CreateIcon className={"sidebarIcon"} />
             <span>Make Post</span>

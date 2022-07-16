@@ -1,6 +1,10 @@
 import React, { FC, lazy } from "react";
 import { Route, Routes } from "react-router-dom";
 import RequireAuth from "./RequireAuth";
+import Tags from "../../pages/tags/Tags";
+import TagPosts from "../tagPosts/TagPosts";
+import CheckAdminRole from "./CheckAdminRole";
+import CreateTag from "../../pages/createTag/CreateTag";
 
 const Home = lazy(() => import("../../pages/home/Home"));
 const Login = lazy(() => import("../../pages/login/Login"));
@@ -24,10 +28,15 @@ const AppRoutes: FC = () => {
         <Route path={"about"} element={<About />} />
         <Route path={"videos"} element={<Videos />} />
         <Route path={"contact"} element={<Contact />} />
+        <Route path={"tags"} element={<Tags/>}/>
+        <Route path={'t/:tagId'} element={<TagPosts/>}/>
         <Route element={<RequireAuth />}>
           <Route path={"create"} element={<CreatePost />} />
           <Route path={"profile"} element={<Profile />} />
           <Route path={'edit/:postId'} element={<CreatePost/>}/>
+        </Route>
+        <Route element={<CheckAdminRole/>}>
+          <Route path={'create-tag'} element={<CreateTag/>}/>
         </Route>
         <Route path={"*"} element={<NotFound />} />
       </Route>

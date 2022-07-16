@@ -140,7 +140,7 @@
       }
 
       .postActionsInfo{
-        padding: 0 50px 50px 50px;
+        padding: 0 50px 20px 50px;
         display: flex;
         gap: 10px;
         @media (max-width: 415px){
@@ -178,6 +178,21 @@
                 color: red;
               }
             }
+          }
+        }
+      }
+      .postPageTags{
+        padding: 0 50px 20px 50px;
+        display: flex;
+        flex-wrap: wrap;
+        gap: 10px;
+        .postItemTag{
+          text-transform: lowercase;
+          cursor: pointer;
+          padding: 4px 6px;
+          border-radius: 10px;
+          &:hover{
+            background-color: rgba(211, 211, 211, 0.35);
           }
         }
       }
