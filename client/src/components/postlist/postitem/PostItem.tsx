@@ -8,6 +8,7 @@ import { formatDate } from "../../../helpers";
 import LazyLoad from "react-lazyload";
 import {useAppSelector} from "../../../hooks";
 import EditPostButtons from "../../editPostButtonGroup/EditPostButtons";
+import TagChip from "../../tagChip/tagChip";
 
 interface PostItemProps {
   post: IPost;
@@ -18,11 +19,6 @@ const PostItem: FC<PostItemProps> = ({ post, displayImage }) => {
   const {user} = useAppSelector(state => state.auth)
   const [loadingImage, setLoadingImage] = useState(true)
   const navigate = useNavigate()
-
-  const handleClick = (e: React.MouseEvent<HTMLElement>, tagId: number) => {
-    e.stopPropagation()
-    navigate(`/t/${tagId}`)
-  }
 
   return (
     <div onClick={() => navigate(`/posts/${post.id}`)} className={"postItem"}>
@@ -61,6 +57,9 @@ const PostItem: FC<PostItemProps> = ({ post, displayImage }) => {
         <div className={"postInfoTitle"}>
           <h2>{post.title}</h2>
         </div>
+        <div className={'postTags'}>
+          {post.tags.map((tag, i) => i <= 3 && <TagChip key={tag.id} tag={tag}/>)}
+        </div>
       </div>
       <div className={'postBottom'}>
         <div className={"postReactions"}>
@@ -72,19 +71,6 @@ const PostItem: FC<PostItemProps> = ({ post, displayImage }) => {
             <ChatBubbleOutlineIcon className={"postReactionsIcon"} />
             <span>{post.comments.length} Comments</span>
           </div>
-        </div>
-        <div className={'postTags'}>
-          {post.tags.map((tag, i) => i <= 2 &&
-              <div
-                  key={tag.id}
-                  style={{border: `1px solid #${tag.color}`}}
-                  className={'postItemTag'}
-                  onClick={(e) => handleClick(e, tag.id)}
-              >
-                <span style={{color: `#${tag.color}`}}>#</span>
-                {tag.name}
-              </div>
-          )}
         </div>
       </div>
 

@@ -18,9 +18,9 @@ import NotFound from "../404/NotFound";
 import {IComment} from "../../types/comment-type";
 import Loader from "../../components/loader/Loader";
 import EditPostButtons from "../../components/editPostButtonGroup/EditPostButtons";
+import TagChip from "../../components/tagChip/tagChip";
 
  const Post = () => {
-     const navigate = useNavigate()
      const [fetchedTodayPosts, setFetchedTodayPosts] = useState<IPost[]>([])
      const [post, setPost] = useState<IPost>({} as IPost)
      const [error, setError] = useState('')
@@ -47,11 +47,6 @@ import EditPostButtons from "../../components/editPostButtonGroup/EditPostButton
 
    }, [postId, todayPosts.length])
 
-
-     const handleClick = (e: React.MouseEvent<HTMLElement>, tagId: number) => {
-         e.stopPropagation()
-         navigate(`/t/${tagId}`)
-     }
 
      const addComment = (comment: IComment) => {
        setPost(prev => ({
@@ -119,17 +114,7 @@ import EditPostButtons from "../../components/editPostButtonGroup/EditPostButton
              <h1>{post.title}</h1>
            </div>
              <div className={'postPageTags'}>
-                 {post.tags.map((tag, i) =>
-                     <div
-                         key={tag.id}
-                         style={{border: `1px solid #${tag.color}`}}
-                         className={'postItemTag'}
-                         onClick={(e) => handleClick(e, tag.id)}
-                     >
-                         <span style={{color: `#${tag.color}`}}>#</span>
-                         {tag.name}
-                     </div>
-                 )}
+                 {post.tags.map(tag => <TagChip key={tag.id} tag={tag}/>)}
              </div>
            <div
              className={"postText"}
@@ -169,7 +154,7 @@ import EditPostButtons from "../../components/editPostButtonGroup/EditPostButton
            </div>
          </div>
        </div>
-       <LatestList todayPosts={todayPosts.length > 0 ? todayPosts : fetchedTodayPosts}/>
+         <LatestList todayPosts={todayPosts.length > 0 ? todayPosts : fetchedTodayPosts}/>
      </div>
    );
  };

@@ -7,6 +7,7 @@
 
   .createItemButtons{
     display: flex;
+    justify-content: center;
     gap: 20px;
     .createNewPostBtn{
       margin-bottom: 20px;
@@ -107,19 +108,13 @@
       display: flex;
       flex-wrap: wrap;
       gap: 10px;
-      .postItemTag{
-        text-transform: lowercase;
-        cursor: pointer;
-        padding: 4px 6px;
-        border-radius: 10px;
-        &:hover{
-          background-color: rgba(211, 211, 211, 0.35);
-        }
-      }
     }
   }
 
   .updatesInfo{
+    @media (max-width: 1100px){
+      display: none;
+    }
     h3{
       margin-top: 20px;
       margin-bottom: 14px;

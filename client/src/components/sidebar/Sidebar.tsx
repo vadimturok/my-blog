@@ -82,12 +82,6 @@ const Sidebar: FC<{homePage: boolean}> = ({homePage}) => {
               <span>About</span>
             </li>
           </Link>
-          <Link to={"videos"} className={"link"}>
-            <li>
-              <VideoLibraryIcon className={"sidebarIcon"} />
-              <span>Videos</span>
-            </li>
-          </Link>
           <Link to={"contact"} className={"link"}>
             <li>
               <MailIcon className={"sidebarIcon"} />

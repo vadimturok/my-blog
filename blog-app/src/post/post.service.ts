@@ -48,8 +48,10 @@ export class PostService{
         if(files){
             const {picture} = files
             postImage = await this.fileService.createFile(picture[0])
-            const tagsArray = updatePostDto.tags.map(tag => JSON.parse(JSON.stringify(tag)))
-            arrayTag = tagsArray.map(tag => JSON.parse(tag))
+            if(updatePostDto.tags){
+                const tagsArray = updatePostDto.tags.map(tag => JSON.parse(JSON.stringify(tag)))
+                arrayTag = tagsArray.map(tag => JSON.parse(tag))
+            }
         }
         post.title = title
         post.text = text

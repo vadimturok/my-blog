@@ -8,6 +8,7 @@ import Button from "../common/button/Button";
 import ModalWindow from "../modalWindow/ModalWindow";
 import {IPost} from "../../types/post-type";
 import {fetchTags} from "../../store/reducers/tags/actionCreators";
+import TagChip from "../tagChip/tagChip";
 
 const LatestList: FC<{todayPosts: IPost[]}> = memo(({todayPosts}) => {
     const {role} = useAuth()
@@ -23,10 +24,6 @@ const LatestList: FC<{todayPosts: IPost[]}> = memo(({todayPosts}) => {
         }else{
             navigate(path)
         }
-    }
-    const handleClick = (e: React.MouseEvent<HTMLElement>, tagId: number) => {
-        e.stopPropagation()
-        navigate(`/t/${tagId}`)
     }
 
     useEffect(() => {
@@ -81,16 +78,7 @@ const LatestList: FC<{todayPosts: IPost[]}> = memo(({todayPosts}) => {
           <div className={'tagsRecommendations'}>
               <h3>Popular tags today</h3>
               <div className={'postTags'}>
-                  {tags?.length > 0 && tags.map(tag =>
-                      <div
-                          key={tag.id}
-                          style={{border: `1px solid #${tag.color}`}}
-                          className={'postItemTag'}
-                          onClick={(e) => handleClick(e, tag.id)}
-                      >
-                          <span style={{color: `#${tag.color}`}}>#</span>
-                          {tag.name}
-                      </div>)}
+                  {tags?.length > 0 && tags.map(tag => <TagChip key={tag.id} tag={tag}/>)}
               </div>
           </div>
           <div className={'updatesInfo'}>

@@ -41,6 +41,7 @@ const CreatePost: FC = () => {
                         return
                     }
                     setCurrentPost(response.data)
+                    setSelectedTags(response.data.tags)
                     setEditorState(EditorState.createWithContent(
                         ContentState.createFromBlockArray(convertFromHTML(response.data.text).contentBlocks)
                      ))
