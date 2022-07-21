@@ -68,18 +68,16 @@
   .userPosts{
     width: 70%;
     margin: 20px auto 0 auto;
-    padding: 40px;
-    background-color: white;
-    border-radius: 5px;
-    border: 1px solid rgba(211, 211, 211, 0.51);
     @media (max-width: 415px) {
       width: auto;
       padding: 10px;
     }
 
     h3{
+      font-size: 25px;
       text-align: center;
-      margin-bottom: 40px;
+      margin-top: 40px;
+      margin-bottom: 10px;
       @media (max-width: 415px) {
         margin-bottom: 20px;
       }

@@ -39,9 +39,7 @@ const PostItem: FC<PostItemProps> = ({ post, displayImage }) => {
       <div className={"previewInfo"}>
         <div className={'previewInfoTop'}>
           <div className={"authorInfo"}>
-            <LazyLoad>
-              <img src={post.user.profilePicture} alt="avatar" />
-            </LazyLoad>
+            <img src={post.user.profilePicture} alt="avatar" />
             <div className={"authorDescription"}>
             <span className={"authorName"}>
               {post.user.firstName + " " + post.user.lastName}
