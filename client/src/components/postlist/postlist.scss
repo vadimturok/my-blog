@@ -1,37 +1,21 @@
-.postList{
-  flex-basis: 55%;
-  margin-top: 20px;
-  margin-right: 20px;
-
-  .noPosts{
-    font-size: 25px;
-    color: gray;
-    text-align: center;
+.postList {
+  position: relative;
+  @media (max-width: 415px){
+    width: 100%;
+    margin: 0;
   }
-  .pagination{
-    margin-bottom: 20px;
-    display: flex;
-    justify-content: center;
-    gap: 20px;
-
-    .paginationBtn{
-      padding: 5px 10px;
-      color: white;
-      font-weight: 600;
-      border-radius: 5px;
-      background-color: #7451f8;
-      border: none;
-      cursor: pointer;
-
-      &:disabled{
-        background-color: rgba(116, 81, 248, 0.62);
-        cursor: default;
-      }
-    }
+  @media (max-width: 1100px) {
+    width: 100%;
+  }
+  .errorFetching{
+    background-color: rgba(255, 0, 0, 0.31);
+    color: red;
+    border-radius: 5px;
+    padding: 5px;
+    width: fit-content;
+    position: absolute;
+    left: 50%;
+    transform: translate(-50%, 0);
   }
 }
 
-.listLoader{
-  position: absolute;
-  top: 50%;
-}

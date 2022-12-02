@@ -35,7 +35,7 @@ const Profile: FC = () => {
                 </div>
             </div>
             <div className={'userPosts'}>
-                <h3>Published posts</h3>
+                <h3>Your posts</h3>
                 {Object.keys(user).length > 0 && <UserPostList user={user}/>}
             </div>
         </div>

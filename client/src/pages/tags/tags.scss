@@ -1,0 +1,17 @@
+.tagsWrapper{
+  padding-top: 20px;
+  padding-bottom: 20px;
+
+  .tagsPageList{
+    display: flex;
+    flex-wrap: wrap;
+    justify-content: space-between;
+    gap: 30px;
+    margin-top: 20px;
+
+    @media (max-width: 415px){
+      flex-wrap: unset;
+      flex-direction: column;
+    }
+  }
+}

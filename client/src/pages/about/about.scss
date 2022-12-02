@@ -53,16 +53,10 @@
 
           .socialIcon{
             font-size: 30px;
-
           }
           &:nth-child(2){
             .socialIcon{
               color: #333;
-            }
-          }
-          &:last-child{
-            .socialIcon{
-              color: #1DA1F2;
             }
           }
         }
@@ -78,24 +72,14 @@
         margin: 16px 0 10px 0;
         justify-content: space-around;
         .aboutFeaturesLeft{
+          text-align: center;
           h4{
             font-size: 17px;
             margin-bottom: 10px;
           }
           ul {
             margin: 0;
-          }
-          ul.dashed {
-            list-style-type: none;
-          }
-          ul.dashed > li {
-            text-indent: -5px;
-            margin-bottom: 5px;
-          }
-          ul.dashed > li:before {
-            content: "-";
-            text-indent: -5px;
-            margin-right: 5px;
+            list-style: none;
           }
         }
         .aboutFeaturesRight{

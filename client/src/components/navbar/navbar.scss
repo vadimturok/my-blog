@@ -1,65 +1,98 @@
-.navbar{
+.navbar {
+  width: 100%;
   display: flex;
-  width: 80%;
-  margin: 0 auto;
   align-items: center;
-  justify-content: space-between;
   height: 50px;
+  position: fixed;
+  background-color: white;
+  border-bottom: 1px solid lightgray;
+  z-index: 1;
 
-  .left{
+  .navbarInner {
     display: flex;
+    justify-content: space-between;
     align-items: center;
-    gap: 10px;
-
-
-    .icon{
-      color: #7451f8;
-      font-size: 40px;
+    width: 80%;
+    margin: 0 auto;
+    @media (max-width: 415px){
+      justify-content: space-around;
     }
-  }
 
-  .right{
-    display: flex;
-    align-items: center;
-    gap: 10px;
-
-    .gitHubIcon{
+    .left {
       display: flex;
+      align-items: center;
       gap: 10px;
-      margin-top: 5px;
 
-    }
-
-    .loginButton{
-      padding: 5px 10px;
-      border: none;
-      font-size: 17px;
-      color: gray;
-      border-radius: 5px;
-      background: none;
-      cursor: pointer;
-      transition: 0.2s;
-
-      &:hover{
+      .icon {
         color: #7451f8;
-        background-color: rgba(236, 232, 255, 0.63);
+        font-size: 40px;
       }
     }
 
-    .signupButton{
-      border: 1px solid #7451f8;
-      border-radius: 5px;
-      background: none;
-      padding: 5px 10px;
-      font-size: 17px;
-      color: #7451f8;
-      font-weight: 500;
-      cursor: pointer;
-      transition: 0.2s;
+    .right {
+      display: flex;
+      align-items: center;
+      gap: 10px;
 
-      &:hover{
-        background-color: #7451f8;
-        color: white;
+      .burgerMenu{
+        display: none;
+        @media (max-width: 415px){
+          display: flex;
+          flex-direction: column;
+          gap: 7px;
+        }
+
+        .burgerMenuItem{
+          width: 50px;
+          height: 1px;
+          background-color: black;
+          color: black;
+        }
+      }
+      .gitHubIcon {
+        @media (max-width: 415px){
+          display: none;
+        }
+        display: flex;
+        gap: 10px;
+        margin-top: 5px;
+      }
+
+      .loginButton {
+        padding: 5px 10px;
+        border: none;
+        font-size: 17px;
+        color: gray;
+        border-radius: 5px;
+        background: none;
+        cursor: pointer;
+        @media (max-width: 415px){
+          display: none;
+        }
+
+        &:hover {
+          color: #7451f8;
+          background-color: rgba(236, 232, 255, 0.63);
+        }
+      }
+
+      .signupButton {
+        border: 1px solid #7451f8;
+        border-radius: 5px;
+        background: none;
+        padding: 5px 10px;
+        font-size: 17px;
+        color: #7451f8;
+        font-weight: 500;
+        cursor: pointer;
+        @media (max-width: 415px){
+          display: none;
+        }
+
+        &:hover {
+          background-color: #7451f8;
+          color: white;
+        }
       }
     }
   }

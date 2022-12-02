@@ -1,0 +1,19 @@
+.createTagWrapper{
+  position: absolute;
+  top: 50%;
+  left: 50%;
+  transform: translate(-50%, -50%);
+  background-color: white;
+  border-radius: 5px;
+  border: 1px solid lightgrey;
+  width: 30%;
+  padding: 20px;
+  h2{
+    text-align: center;
+    margin-bottom: 30px;
+  }
+  .createTagForm{
+    width: 80%;
+    margin: 0 auto;
+  }
+}

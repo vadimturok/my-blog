@@ -1,0 +1,9 @@
+.postItemTag{
+  text-transform: lowercase;
+  cursor: pointer;
+  padding: 4px 6px;
+  border-radius: 10px;
+  &:hover{
+    background-color: rgba(211, 211, 211, 0.35);
+  }
+}

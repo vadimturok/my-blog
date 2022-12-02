@@ -1,0 +1,25 @@
+.postUpdateActions{
+  display: flex;
+  align-items: start;
+  gap: 10px;
+  .postUpdate{
+    display: flex;
+    align-items: center;
+    padding: 6px;
+    border-radius: 5px;
+    background-color: rgba(236, 232, 255, 0.63);
+    color: #7451f8;
+
+    &:hover{
+      cursor: pointer;
+      background-color: rgba(208, 201, 245, 0.63);
+    }
+
+    .postUpdateIcon{
+      font-size: 20px;
+    }
+    span{
+      font-size: 15px;
+    }
+  }
+}

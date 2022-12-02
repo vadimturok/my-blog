@@ -24,19 +24,11 @@ const About: FC = () => {
                                 <li>View list of posts</li>
                                 <li>View single post</li>
                                 <li>View latest posts</li>
-                                <li>Sorting posts by time, likes and comments</li>
-                                <li>Adding comments on posts</li>
+                                <li>Ordering posts</li>
+                                <li>Creating comments</li>
                                 <li>Validation of fields</li>
-                            </ul>
-                        </div>
-                        <div className={'aboutFeaturesRight'}>
-                            <h4>In future releases:</h4>
-                            <ul className={'dashed'}>
                                 <li>Likes system</li>
-                                <li>Searching posts</li>
-                                <li>Filtering posts</li>
-                                <li>Editing posts</li>
-                                <li>Deleting posts</li>
+                                <li>Mobile responsive</li>
                             </ul>
                         </div>
                     </div>
@@ -51,10 +43,6 @@ const About: FC = () => {
                         <div className={'aboutSocialsItem'}>
                             <GitHubIcon className={'socialIcon'}/>
                             <span><a target="_blank" rel="noreferrer" className={'socialItemLink'} href={'https://github.com/vadimturok'}>@vadimturok</a></span>
-                        </div>
-                        <div className={'aboutSocialsItem'}>
-                            <TwitterIcon className={'socialIcon'}/>
-                            <span><a target="_blank" rel="noreferrer" className={'socialItemLink'} href={'https://twitter.com/stefanio228'}>Vadim Turok</a></span>
                         </div>
                     </div>
                 </div>

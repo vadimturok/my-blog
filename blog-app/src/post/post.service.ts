@@ -5,13 +5,18 @@ import {Repository} from "typeorm";
 import {PostDto} from "./dto/post.dto";
 import {UserService} from "../user/user.service";
 import {FileService} from "../file/file.service";
-import {IPaginationOptions, paginate, paginateRaw, paginateRawAndEntities, Pagination} from "nestjs-typeorm-paginate";
+import {UpdatePostDto} from "./dto/update.post.dto";
+import {Tag} from "../tag/tag.entity";
+import {TagService} from "../tag/tag.service";
+
+const _ = require('lodash');
 
 @Injectable()
 export class PostService{
     constructor(@InjectRepository(Post) private postRepository: Repository<Post>,
                 private usersService: UserService,
-                private fileService: FileService) {
+                private fileService: FileService,
+                private tagService: TagService) {
     }
 
     async createPost(postDto: PostDto, files): Promise<Post>{
@@ -21,6 +26,11 @@ export class PostService{
         }
         const picturePath = await this.fileService.createFile(picture[0])
         const post = new Post()
+        if(postDto.tags){
+            const tagsArray = postDto.tags.map(tag => JSON.parse(JSON.stringify(tag)))
+            const arrayTag = tagsArray.map(tag => JSON.parse(tag))
+            post.tags = arrayTag as Tag[]
+        }
         post.title = postDto.title
         post.text = postDto.text
         post.user = Number(postDto.userId)
@@ -30,10 +40,29 @@ export class PostService{
         return this.getPostById(post.id)
     }
 
-    async getAllPosts(): Promise<Post[]>{
-        return await this.postRepository.find({
-            relations: ['comments', 'userLikes']
-        })
+    async updatePost(updatePostDto: UpdatePostDto, files){
+        const postId = updatePostDto.postId
+        let {title, text, postImage} = updatePostDto
+        let arrayTag
+        const post = await this.getPostById(postId)
+        if(files){
+            const {picture} = files
+            postImage = await this.fileService.createFile(picture[0])
+            if(updatePostDto.tags){
+                const tagsArray = updatePostDto.tags.map(tag => JSON.parse(JSON.stringify(tag)))
+                arrayTag = tagsArray.map(tag => JSON.parse(tag))
+            }
+        }
+        post.title = title
+        post.text = text
+        post.postImage = postImage
+        post.tags = arrayTag ? arrayTag : updatePostDto.tags
+        await this.postRepository.save(post)
+        return this.getPostById(postId)
+    }
+
+    async deletePost(postId: number){
+        await this.postRepository.delete(postId)
     }
 
     async getPostById(postId: number): Promise<Post>{
@@ -47,22 +76,41 @@ export class PostService{
         }
     }
 
-    async getTodayPosts(quantity: number) {
+    async getLatestPosts(){
         return this.postRepository.find({
-            order: {dateAndTimePublish: 'DESC'},
-            take: quantity
+            relations: ['comments', 'userLikes'],
+            order: {
+                dateAndTimePublish: 'DESC'
+            }
         })
     }
 
-    async paginate(options: IPaginationOptions): Promise<Pagination<Post>>{
-        // const queryBuilder = this.postRepository.createQueryBuilder('c')
-        //     .orderBy('c.dateAndTimePublish', 'DESC')
-        //     .leftJoinAndSelect('c.user', 'user')
-        //     .leftJoinAndSelect('c.userLikes', 'userLikes')
-        //     .leftJoinAndSelect('c.comments', 'comments')
-        //
-        // const [pagination] = await paginateRawAndEntities<Post>(queryBuilder, options)
-        // return pagination
-        return paginate<Post>(this.postRepository, options)
+    async getHotPosts(){
+        const posts = await this.postRepository.find({
+            relations: ['comments', 'userLikes'],
+        })
+        return _.orderBy(posts, post => post.comments.length, ['desc'])
+    }
+
+    async getTopPosts(){
+        const posts = await this.postRepository.find({
+            relations: ['comments', 'userLikes'],
+        })
+        return _.orderBy(posts, post => post.userLikes.length, ['desc'])
+    }
+
+    async getPostsByUserId(userId: number){
+        const posts = await this.postRepository.find({
+            relations: ['comments', 'userLikes'],
+            where: {
+                user: userId
+            }
+        })
+        return posts
+    }
+
+    async getPostsByTagId(tagId: number){
+        const posts = await this.postRepository.find()
+        return posts.filter(post => post.tags.some(tag => tag.id === tagId))
     }
 }

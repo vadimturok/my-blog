@@ -1,4 +1,7 @@
 .login{
+  @media (max-width: 415px) {
+    width: 300px;
+  }
   width: 500px;
   background-color: white;
   //margin: 30px auto;

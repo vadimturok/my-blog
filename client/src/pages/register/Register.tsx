@@ -3,17 +3,18 @@ import './register.scss'
 import FormGroup from "../../components/common/formGroup/FormGroup";
 import Button from "../../components/common/button/Button";
 import Hr from "../../components/common/hr/Hr";
-import {useDispatch} from "react-redux";
-import {registration, setError} from "../../store/reducers/auth/action-creators";
 import {Navigate} from "react-router-dom";
 import {CircularProgress} from "@mui/material";
-import {useAppSelector, useTitle} from "../../hooks";
+import {useAppDispatch, useAppSelector, useTitle} from "../../hooks";
 import {useForm} from "react-hook-form";
+import {authArgs, authorizeUser} from "../../store/reducers/auth/actionCreators";
+import {setError} from "../../store/reducers/auth/authSlice";
+import {fetchPosts} from "../../store/reducers/posts/actionCreators";
 
 const Register: FC  = () => {
     const {isLoading, error, isAuth} = useAppSelector(state => state.auth)
     const {register, handleSubmit, formState: {errors}} = useForm()
-    const dispatch = useDispatch()
+    const dispatch = useAppDispatch()
     useTitle('Register')
 
     useEffect(() => {
@@ -21,7 +22,14 @@ const Register: FC  = () => {
     }, [dispatch])
 
     const onSubmit = (data: any) => {
-        dispatch(registration(data['First Name'], data['Last Name'],data['Email'],data['Password']))
+        const args: authArgs = {
+            type: 'register',
+            firstName: data['First Name'],
+            lastName: data['Last Name'],
+            email: data['Email'],
+            password: data['Password']
+        }
+        dispatch(authorizeUser(args))
     }
 
     return (

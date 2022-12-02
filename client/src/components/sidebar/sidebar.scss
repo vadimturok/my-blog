@@ -1,14 +1,15 @@
-.sidebar{
-  flex-basis: 20%;
-  margin-top: 20px;
-  margin-right: 20px;
-
-  .menu{
-    h4{
+.sidebar {
+  position: fixed;
+  @media (max-width: 415px){
+    display: none;
+  }
+  .menu {
+    margin-bottom: 50px;
+    h4 {
       margin-bottom: 15px;
     }
 
-    li{
+    li {
       margin-bottom: 10px;
       display: flex;
       gap: 5px;
@@ -16,19 +17,14 @@
       cursor: pointer;
       padding: 5px 0 5px 5px;
       border-radius: 7px;
-      transition: 0.1s;
 
-      &:hover{
+      &:hover {
         color: #7451f8;
       }
     }
-    .sidebarItem{
+    .sidebarItem {
       background-color: rgba(116, 81, 248, 0.42);
     }
 
-    &.bottom{
-      margin-top: 50px;
-    }
   }
-
 }

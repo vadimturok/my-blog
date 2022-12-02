@@ -14,6 +14,7 @@ import { FileModule } from './file/file.module';
 import {ServeStaticModule} from "@nestjs/serve-static";
 import { LikeModule } from './like/like.module';
 import * as path from "path";
+import {TagModule} from "./tag/tag.module";
 
 
 
@@ -43,7 +44,8 @@ import * as path from "path";
       ServeStaticModule.forRoot({
           rootPath: path.resolve(__dirname, 'static')
       }),
-      LikeModule
+      LikeModule,
+      TagModule
   ],
   controllers: [],
   providers: [],

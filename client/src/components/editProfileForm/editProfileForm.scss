@@ -4,6 +4,9 @@
   display: flex;
   flex-direction: column;
   gap: 20px;
+  @media (max-width: 415px) {
+    width: 80%;
+  }
   .field__input{
     --uiFieldPlaceholderColor: var(--fieldPlaceholderColor, #767676);
 

@@ -1,10 +1,14 @@
-import {TypedUseSelectorHook, useSelector} from "react-redux";
-import {RootState} from "../store";
+import {TypedUseSelectorHook, useDispatch, useSelector} from "react-redux";
+import {AppDispatch, RootState} from "../store";
 import React from "react";
 
 export const useAuth = () => {
-    return !!localStorage.getItem('token');
+    return {
+        token: localStorage.getItem('token'),
+        role: localStorage.getItem('role')
+    }
 }
+
 
 export const useTitle = (title: string): void => {
     React.useEffect(() => {
@@ -16,4 +20,6 @@ export const useTitle = (title: string): void => {
         };
     }, [title]);
 }
+
+export const useAppDispatch: () => AppDispatch = useDispatch
 export const useAppSelector: TypedUseSelectorHook<RootState> = useSelector

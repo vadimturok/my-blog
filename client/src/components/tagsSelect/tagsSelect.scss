@@ -1,0 +1,21 @@
+.tagsList{
+  margin-top: 20px;
+  display: flex;
+  flex-wrap: wrap;
+  align-items: center;
+  gap: 20px;
+
+  button{
+    border: 1px solid #7451f8;
+    background: none;
+    color: #7451f8;
+    padding: 5px 8px;
+    font-size: 13px;
+    border-radius: 5px;
+    cursor: pointer;
+
+    &:hover{
+      background-color: rgba(236, 232, 255, 0.63);;
+    }
+  }
+}

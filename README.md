@@ -1,13 +1,12 @@
 # 📝MyBlog - blog application
-> MyBlog is a simple blog application where users
-> able to create their own posts, react to other's posts and many more.
+> MyBlog is a blog application where users
+> are able to create their own posts, react to other's posts and many more.
 > Live demo
 >  [_here_](https://deploy-nest-react-blog-app.herokuapp.com/). <!-- If you have the project hosted somewhere, include the link here. -->
 
 ## Table of Contents
 * [Technologies Used](#technologies-used)
 * [Features](#features)
-* [Screenshots](#screenshots)
 * [Setup](#setup)
 * [Project Status](#project-status)
 * [Contact](#contact)
@@ -33,7 +32,7 @@ Main features of the app:
 - Viewing posts
 - Viewing single post
 - Viewing latest posts
-- Creating posts
+- Creating, editing and deleting posts
 - Ordering post by time, likes or comments
 - Writing comments
 - Authorization & authentication system
@@ -43,13 +42,9 @@ Main features of the app:
 - Posts pagination
 
 
-## Screenshots
-![Example screenshot](./demoImages/demo_img_1.png)
-<!-- If you have screenshots you'd like to share, include them here. -->
-
 
 ## Setup
-To run back-end server: open 'blog-app' folder, create .development.env file and provide database credentials and specify port.
+To run back-end server: open 'blog-app' folder, create .development.env file, provide database credentials and specify port.
 
 Run following commands:
 
