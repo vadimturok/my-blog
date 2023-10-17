@@ -32,7 +32,8 @@ import {TagModule} from "./tag/tag.module";
           database: process.env.DB_NAME,
           entities: [],
           synchronize: true,
-          autoLoadEntities: true
+          autoLoadEntities: true,
+          logging: true
       }),
       UserModule,
       PostModule,
